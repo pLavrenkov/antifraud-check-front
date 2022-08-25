@@ -1,0 +1,26 @@
+.inn-page {
+    box-sizing: border-box;
+    max-width: 500px;
+    height: 100%;
+    margin: 0 auto;
+
+}
+
+.inn-page__content {
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 100px auto 100px;
+    justify-items: center;
+}
+
+.inn-page__title {
+    font-weight: 700;
+    align-self: center;
+}
+
+.inn-page__results {
+    align-self: center;
+    justify-self: center;
+    font-weight: 400;
+}

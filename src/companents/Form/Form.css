@@ -1,0 +1,76 @@
+.form {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto min-content min-content;
+    justify-items: center;
+    align-items: baseline;
+}
+
+.form__inputs {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    grid-auto-rows: auto;
+    align-items: baseline;
+}
+
+.form__server-message {
+    padding-top: 50px;
+    font-weight: 300;
+    font-size: 12px;
+}
+
+.form__button {
+    margin: 25px;
+    width: 120px;
+    height: 35px;
+    border: #fff solid 2px;
+    background-color: #000;
+    border-radius: 10px;
+    color: #fff;
+    font-weight: 300;
+    font-size: 12px;
+}
+
+.form__button:hover {
+    opacity: .7;
+    cursor: pointer;
+}
+
+.form__set {
+    margin: 0;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: repeat(2, min-content);
+}
+
+.form__label {
+    grid-row: 1;
+    grid-column: 1;
+    justify-self: flex-end;
+    padding-right: 10px;
+}
+
+.form__input {
+    grid-row: 1;
+    grid-column: 2;
+    border: none;
+    border-bottom: #6e6e6e solid 2px;
+    background-color: #000;
+    color: #fff;
+}
+
+.form__input:-webkit-autofill, .form__input:hover, .form__input:focus, .form__input:active {
+    background-color: #000;
+}
+
+.form__error {
+    grid-row: 2;
+    grid-column: 2;
+    font-weight: 300;
+    font-size: 9px;
+    justify-self: center;
+    padding: 5px 0 10px;
+}

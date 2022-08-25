@@ -4,19 +4,15 @@
 
 /*импорт стилей компонентов App, Header, Footer*/
 @import url(./companents/App/App.css);
+@import url(./companents/Header/Header.css);
+@import url(./companents/Footer/Footer.css);
+
+/*импорт компанента MainPage*/
+@import url(./companents/MainPage/MainPage.css);
 
 /*импорт компанента INN*/
+@import url(./companents/InnPage/InnPage.css);
 
 /*импорт компонента Form*/ 
+@import url(./companents/Form/Form.css);
 
-
-body {
-  margin: 0;
-  font-family: 'Proxima Nova', 'Helvetica Neue', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-  font-family: 'Proxima Nova', 'Helvetica Neue', sans-serif;
-}
