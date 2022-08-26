@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import Form from "../Form/Form";
 import * as InnApi from "../../utils/InnApi"
@@ -7,31 +7,43 @@ function InnPage() {
     const { register, formState: { errors }, handleSubmit, watch } = useForm();
     const buttonName = 'НАЙТИ';
     const [inn, setInn] = useState('Не найдено');
-    const [innSearchData, setInnSearchData] = useState({ c: 'find' });
+    const [innSearchData, setInnSearchData] = useState({});
 
-
-    const getJWT = (req) => {
-        InnApi.getToken(req)
-            .then((token) => {
-                if (!token) {
+    const getINN = () => {
+        const searchString = new URLSearchParams({ c: 'find', ...innSearchData }).toString();
+        InnApi.getToken(searchString)
+            .then((res) => {
+                if (!res) {
                     throw new Error('Токен не прислали');
                 } else {
-                    console.log(token);
+                    const searchInn = new URLSearchParams({
+                        c: 'get',
+                        requestId: res.requestId
+                    }).toString();
+                    return searchInn;
                 }
+            })
+            .then((reqId) => {
+                setTimeout(() => {
+                    InnApi.getInn(reqId)
+                        .then((res) => {
+                            console.log(res);
+                            setInn(res.inn);
+                        })
+                        .catch(err => console.log(err))
+                }, 3000)
+
             })
             .catch(err => console.log(err))
     }
 
     const onSubmit = (data) => {
-        console.log(data);
         setInnSearchData(data);
-        const searchString = new URLSearchParams({ c: 'find', ...innSearchData });
-        getJWT(searchString.toString());
     }
-    console.log(innSearchData);
-    const searchString = new URLSearchParams({ c: 'find', ...innSearchData });
-    console.log(searchString.toString());
 
+    useEffect(() => {
+        innSearchData.fam && getINN();
+    }, [innSearchData])
 
     return (
         <section className="inn-page">
