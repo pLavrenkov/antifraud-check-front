@@ -1,16 +1,17 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import Form from "../Form/Form";
-import * as InnApi from "../../utils/InnApi"
+import * as InnApi from "../../utils/InnApi";
+import * as makeErr from "../../utils/errors";
 
 function InnPage() {
-    const { register, formState: { errors }, handleSubmit, watch } = useForm();
+    const { register, formState: { errors }, setError, handleSubmit, watch } = useForm();
     const buttonName = 'НАЙТИ';
     const [inn, setInn] = useState('Не найдено');
     const [innSearchData, setInnSearchData] = useState({});
 
     const getINN = () => {
-        const searchString = new URLSearchParams({ c: 'find', ...innSearchData }).toString();
+        const searchString = new URLSearchParams({ c: 'find', ...innSearchData, }).toString();
         InnApi.getToken(searchString)
             .then((res) => {
                 if (!res) {
@@ -38,12 +39,22 @@ function InnPage() {
     }
 
     const onSubmit = (data) => {
-        setInnSearchData(data);
+        const options = {
+            year: 'numeric',
+            month: 'numeric',
+            day: 'numeric',
+        };
+        const bdateArr = data.bdate.toLocaleString('ru', options).split('-');
+        setInnSearchData({
+            ...data,
+            bdate: bdateArr[2] + '.' + bdateArr[1] + '.' + bdateArr[0],
+
+        });
     }
 
     useEffect(() => {
         innSearchData.fam && getINN();
-    }, [innSearchData])
+    }, [innSearchData]);
 
     return (
         <section className="inn-page">
@@ -68,7 +79,9 @@ function InnPage() {
                         </p>
                         <p className="form__set">
                             <label htmlFor="bdate" className="form__label">Дата рождения:</label>
-                            <input name="bdate" {...register("bdate", { required: true })} className="form__input" />
+                            <input name="bdate" type="date" {...register("bdate", {
+                                required: true,
+                            })} className="form__input" />
                             <span className="form__error">ошибка</span>
                         </p>
                         <p className="form__set">
@@ -78,8 +91,23 @@ function InnPage() {
                         </p>
                         <p className="form__set">
                             <label htmlFor="docno" className="form__label">Номер документа:</label>
-                            <input name="docno" {...register("docno", { required: true })} className="form__input" />
-                            <span className="form__error">ошибка</span>
+                            <input name="docno" {...register("docno", {
+                                required: true,
+                                maxLength: 12,
+                                onChange: (e) => {
+                                    const value = e.target.value.replace(/\s/g, '');
+                                    if (value.length > 4) {
+                                        e.target.value = value.slice(0, 2) + ' ' + value.slice(2, 4) + ' ' + value.slice(4, 10);
+                                    } else if (value.length > 2) {
+                                        e.target.value = value.slice(0, 2) + ' ' + value.slice(2, 4);
+
+                                    } else {
+                                        e.target.value = value;
+                                    }
+                                },
+                                pattern: /(\d\s?){10}/,
+                            })} className="form__input" />
+                            <span className="form__error">{makeErr.makeErrDocNo(errors.docno?.type)}</span>
                         </p>
                     </div>
                 </Form>
