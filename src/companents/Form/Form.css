@@ -48,7 +48,7 @@
     margin: 0;
     width: 100%;
     display: grid;
-    grid-template-columns: 1fr 2fr;
+    grid-template-columns: 1fr 2.05fr;
     grid-template-rows: repeat(2, min-content);
 }
 

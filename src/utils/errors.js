@@ -42,7 +42,7 @@ export const makeErrNam = (errType) => {
 
 export const makeErrOtch = (errType) => {
     if (errType === "pattern") {
-        return "Отчество должно быть введено кириллицей, максимум с одним пробелом";
+        return "Отчество должно быть введено кириллицей, не более одного пробела";
     } else if (errType === "minLength") {
         return "Имя должно содержать не менее 2 символов";
     } else if (errType === "required") {
