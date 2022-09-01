@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import Form from "../Form/Form";
 import * as InnApi from "../../utils/InnApi";
 import * as makeErr from "../../utils/errors";
+import * as Validation from "../../utils/validation";
 
 function InnPage() {
     const { register, formState: { errors }, setError, handleSubmit, watch } = useForm();
@@ -13,7 +14,14 @@ function InnPage() {
     const [serverResState, setServerResState] = useState(false);
 
     const getINN = () => {
-        const searchString = new URLSearchParams({ c: 'find', ...innSearchData, }).toString();
+        const searchString = new URLSearchParams({
+            c: 'find',
+            captcha: '',
+            captchaToken: '',  
+            ...innSearchData, 
+            docdt: '',
+        }).toString();
+        console.log(searchString);
         InnApi.getToken(searchString)
             .then((res) => {
                 if (!res) {
@@ -44,13 +52,21 @@ function InnPage() {
                                 setServerMessage('ИНН для лица с такими данными не обнаружен');
                                 setInn('Не найдено');
                             }
-                            
+
                         })
-                        .catch(err => setServerMessage(`Произошла ошибка ${err.code} ${err.message}`))
-                }, 3000)
+                        .catch((err) => {
+                            setServerResState(false);
+                            setServerMessage(`Произошла ошибка: ${err.message}, проверьте введенные данные`);
+                            setInn('Не найдено');
+                        })
+                }, 2000)
 
             })
-            .catch(err => setServerMessage(`Произошла ошибка ${err.code} ${err.message}`))
+            .catch((err) => {
+                setServerResState(false);
+                setServerMessage(`Произошла ошибка: ${err.message}, проверьте введенные данные`);
+                setInn('Не найдено');
+            })
     }
 
     const onSubmit = (data) => {
@@ -69,6 +85,8 @@ function InnPage() {
     useEffect(() => {
         innSearchData.fam && getINN();
     }, [innSearchData]);
+
+    console.log(watch("doctype") === "21" && "паспорт РФ")
 
     return (
         <section className="inn-page">
@@ -112,7 +130,17 @@ function InnPage() {
                         </p>
                         <p className="form__set">
                             <label htmlFor="doctype" className="form__label">Тип документа:</label>
-                            <input name="doctype" {...register("doctype", { required: true })} className="form__input" />
+                            <select name="doctype" defaultValue={"21"} {...register("doctype", { required: true })} className="form__input" >
+                                <option value='21'>паспорт гражданина РФ</option>
+                                <option value='01'>паспорт гражданина СССР</option>
+                                <option value='03'>свидетельство о рождении РФ</option>
+                                <option value='10'>паспорт иностранного гражданина</option>
+                                <option value='12'>вид на жительство в РФ</option>
+                                <option value='15'>разрешение на временное проживание в РФ</option>
+                                <option value='19'>свидетельство о предоставлении убежища</option>
+                                <option value='23'>свидетельство о рождении, выданное не в РФ</option>
+                                <option value='62'>вид на жительство иностранного гражданина</option>
+                            </select>
                             <span className="form__error">{makeErr.makeErrDoctype(errors.doctype?.type)}</span>
                         </p>
                         <p className="form__set">
@@ -120,18 +148,8 @@ function InnPage() {
                             <input name="docno" {...register("docno", {
                                 required: true,
                                 maxLength: 12,
-                                onChange: (e) => {
-                                    const value = e.target.value.replace(/\s/g, '');
-                                    if (value.length > 4) {
-                                        e.target.value = value.slice(0, 2) + ' ' + value.slice(2, 4) + ' ' + value.slice(4, 10);
-                                    } else if (value.length > 2) {
-                                        e.target.value = value.slice(0, 2) + ' ' + value.slice(2, 4);
-
-                                    } else {
-                                        e.target.value = value;
-                                    }
-                                },
-                                pattern: /(\d\s?){10}/,
+                                onChange: Validation.docNoFormat(watch("doctype")),
+                                pattern: Validation.docNoPattern(watch("doctype")),
                             })} className="form__input" />
                             <span className="form__error">{makeErr.makeErrDocNo(errors.docno?.type)}</span>
                         </p>

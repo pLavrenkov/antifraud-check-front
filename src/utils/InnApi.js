@@ -15,7 +15,7 @@ export const getToken = (request) => {
             if (res.ok) {
                 return res.json();
             } else {
-                throw new Error('Запрос токена обработан с ошибкой');
+                throw new Error('запрос токена обработан с ошибкой');
             }
         })
 }
@@ -35,7 +35,7 @@ export const getInn = (reqId) => {
                 console.log(res);
                 return res.json();
             } else {
-                throw new Error('Запрос на ИНН обработан с ошибкой');
+                throw new Error('запрос на ИНН обработан с ошибкой');
             }
         })
 }

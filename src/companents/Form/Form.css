@@ -62,6 +62,7 @@
 }
 
 .form__input {
+    max-width: 335px;
     grid-row: 1;
     grid-column: 2;
     border: none;
@@ -69,6 +70,9 @@
     background-color: #000;
     color: #fff;
     font-size: 18px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .form__input:-webkit-autofill, .form__input:hover, .form__input:focus, .form__input:active {
