@@ -9,14 +9,20 @@ function InnPage() {
     const buttonName = 'НАЙТИ';
     const [inn, setInn] = useState('Не найдено');
     const [innSearchData, setInnSearchData] = useState({});
+    const [serverMessage, setServerMessage] = useState('');
+    const [serverResState, setServerResState] = useState(false);
 
     const getINN = () => {
         const searchString = new URLSearchParams({ c: 'find', ...innSearchData, }).toString();
         InnApi.getToken(searchString)
             .then((res) => {
                 if (!res) {
+                    setServerResState(false);
+                    setServerMessage('Токен не получен');
                     throw new Error('Токен не прислали');
                 } else {
+                    setServerResState(true);
+                    setServerMessage('Токен получен');
                     const searchInn = new URLSearchParams({
                         c: 'get',
                         requestId: res.requestId
@@ -29,13 +35,22 @@ function InnPage() {
                     InnApi.getInn(reqId)
                         .then((res) => {
                             console.log(res);
-                            setInn(res.inn);
+                            if (res.state === 1) {
+                                setServerResState(true);
+                                setServerMessage('Запрос обработан успешно');
+                                setInn(res.inn);
+                            } else {
+                                setServerResState(false);
+                                setServerMessage('ИНН для лица с такими данными не обнаружен');
+                                setInn('Не найдено');
+                            }
+                            
                         })
-                        .catch(err => console.log(err))
+                        .catch(err => setServerMessage(`Произошла ошибка ${err.code} ${err.message}`))
                 }, 3000)
 
             })
-            .catch(err => console.log(err))
+            .catch(err => setServerMessage(`Произошла ошибка ${err.code} ${err.message}`))
     }
 
     const onSubmit = (data) => {
@@ -48,7 +63,6 @@ function InnPage() {
         setInnSearchData({
             ...data,
             bdate: bdateArr[2] + '.' + bdateArr[1] + '.' + bdateArr[0],
-
         });
     }
 
@@ -59,35 +73,47 @@ function InnPage() {
     return (
         <section className="inn-page">
             <div className="inn-page__content">
-                <h1 className="inn-page__title">ПОЛУЧИТЬ ИНН</h1>
-                <Form handleSubmit={handleSubmit} onSubmit={onSubmit} buttonName={buttonName} >
+                <h1 className="inn-page__title">УЗНАТЬ ИНН</h1>
+                <Form handleSubmit={handleSubmit} onSubmit={onSubmit} buttonName={buttonName} serverMessage={serverMessage} resState={serverResState} >
                     <div className="form__inputs">
                         <p className="form__set">
                             <label htmlFor="fam" className="form__label">Фамилия:</label>
-                            <input name="fam" {...register("fam", { required: true })} className="form__input" />
-                            <span className="form__error">ошибка</span>
+                            <input name="fam" {...register("fam", {
+                                required: true,
+                                minLength: 2,
+                                pattern: /^[а-яА-Я-]+$/,
+                            })} className="form__input" />
+                            <span className="form__error">{makeErr.makeErrFam(errors.fam?.type)}</span>
                         </p>
                         <p className="form__set">
                             <label htmlFor="nam" className="form__label">Имя:</label>
-                            <input name="nam" {...register("nam", { required: true })} className="form__input" />
-                            <span className="form__error">ошибка</span>
+                            <input name="nam" {...register("nam", {
+                                required: true,
+                                minLength: 2,
+                                pattern: /^[а-яА-Я-]+$/,
+                            })} className="form__input" />
+                            <span className="form__error">{makeErr.makeErrNam(errors.nam?.type)}</span>
                         </p>
                         <p className="form__set">
                             <label htmlFor="otch" className="form__label">Отчество:</label>
-                            <input name="otch" {...register("otch", { required: true })} className="form__input" />
-                            <span className="form__error">ошибка</span>
+                            <input name="otch" {...register("otch", {
+                                required: true,
+                                minLength: 2,
+                                pattern: /^[а-яА-Я-]+\s?[а-яА-Я-]*$/,
+                            })} className="form__input" />
+                            <span className="form__error">{makeErr.makeErrOtch(errors.otch?.type)}</span>
                         </p>
                         <p className="form__set">
                             <label htmlFor="bdate" className="form__label">Дата рождения:</label>
                             <input name="bdate" type="date" {...register("bdate", {
                                 required: true,
                             })} className="form__input" />
-                            <span className="form__error">ошибка</span>
+                            <span className="form__error">{makeErr.makeErrBdate(errors.bdate?.type)}</span>
                         </p>
                         <p className="form__set">
                             <label htmlFor="doctype" className="form__label">Тип документа:</label>
                             <input name="doctype" {...register("doctype", { required: true })} className="form__input" />
-                            <span className="form__error">ошибка</span>
+                            <span className="form__error">{makeErr.makeErrDoctype(errors.doctype?.type)}</span>
                         </p>
                         <p className="form__set">
                             <label htmlFor="docno" className="form__label">Номер документа:</label>

@@ -8,6 +8,7 @@
 
 .inn-page__content {
     height: 100%;
+    padding: 100px 0 100px;
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 100px auto 100px;
@@ -15,6 +16,7 @@
 }
 
 .inn-page__title {
+    padding-bottom: 25px;
     font-weight: 700;
     align-self: center;
 }
