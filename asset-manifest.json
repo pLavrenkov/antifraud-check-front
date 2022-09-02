@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/antifraud-check-front/static/css/main.c2f7928b.css",
-    "main.js": "/antifraud-check-front/static/js/main.8130d2d3.js",
+    "main.css": "/antifraud-check-front/static/css/main.79181c4b.css",
+    "main.js": "/antifraud-check-front/static/js/main.6d7a351f.js",
     "static/js/787.8aa84ee2.chunk.js": "/antifraud-check-front/static/js/787.8aa84ee2.chunk.js",
     "static/media/ProximaNova-Light.woff": "/antifraud-check-front/static/media/ProximaNova-Light.7990e5187e35346a1a41.woff",
     "static/media/ProximaNova-Regular.woff": "/antifraud-check-front/static/media/ProximaNova-Regular.3d59ce3e9d6f49acb285.woff",
@@ -11,13 +11,14 @@
     "static/media/ProximaNova-Light.woff2": "/antifraud-check-front/static/media/ProximaNova-Light.862957f462a3cd712229.woff2",
     "static/media/ProximaNova-Bold.woff2": "/antifraud-check-front/static/media/ProximaNova-Bold.c84883dfcd4817e310df.woff2",
     "static/media/ProximaNova-Black.woff2": "/antifraud-check-front/static/media/ProximaNova-Black.5eca80c598e6bc1bd4af.woff2",
+    "static/media/resetInput.svg": "/antifraud-check-front/static/media/resetInput.b8ed0b7d6ac0674af8aa.svg",
     "index.html": "/antifraud-check-front/index.html",
-    "main.c2f7928b.css.map": "/antifraud-check-front/static/css/main.c2f7928b.css.map",
-    "main.8130d2d3.js.map": "/antifraud-check-front/static/js/main.8130d2d3.js.map",
+    "main.79181c4b.css.map": "/antifraud-check-front/static/css/main.79181c4b.css.map",
+    "main.6d7a351f.js.map": "/antifraud-check-front/static/js/main.6d7a351f.js.map",
     "787.8aa84ee2.chunk.js.map": "/antifraud-check-front/static/js/787.8aa84ee2.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.c2f7928b.css",
-    "static/js/main.8130d2d3.js"
+    "static/css/main.79181c4b.css",
+    "static/js/main.6d7a351f.js"
   ]
 }
