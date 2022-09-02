@@ -21,8 +21,9 @@
     align-self: center;
 }
 
-.inn-page__results {
+.inn-page__result {
     align-self: center;
     justify-self: center;
     font-weight: 400;
+    font-size: 24px;
 }

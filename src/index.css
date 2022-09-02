@@ -6,6 +6,7 @@
 @import url(./companents/App/App.css);
 @import url(./companents/Header/Header.css);
 @import url(./companents/Footer/Footer.css);
+@import url(./companents/Navigation/Navigation.css);
 
 /*импорт компанента MainPage*/
 @import url(./companents/MainPage/MainPage.css);

@@ -6,9 +6,10 @@ import * as makeErr from "../../utils/errors";
 import * as Validation from "../../utils/validation";
 
 function InnPage() {
-    const { register, formState: { errors }, setError, handleSubmit, watch } = useForm();
+    const { register, formState: { errors }, handleSubmit, reset, watch } = useForm();
     const buttonName = 'НАЙТИ';
-    const [inn, setInn] = useState('Не найдено');
+    const buttonReset = 'СБРОСИТЬ';
+    const [inn, setInn] = useState('не найдено');
     const [innSearchData, setInnSearchData] = useState({});
     const [serverMessage, setServerMessage] = useState('');
     const [serverResState, setServerResState] = useState(false);
@@ -17,8 +18,8 @@ function InnPage() {
         const searchString = new URLSearchParams({
             c: 'find',
             captcha: '',
-            captchaToken: '',  
-            ...innSearchData, 
+            captchaToken: '',
+            ...innSearchData,
             docdt: '',
         }).toString();
         console.log(searchString);
@@ -82,6 +83,19 @@ function InnPage() {
         });
     }
 
+    const onReset = () => {
+        reset({
+            fam: '',
+            nam: '',
+            otch: '',
+            bdate: '',
+            doctype: '21',
+            docno: ''
+        });
+        setServerMessage('');
+        setInn('не найдено');
+    }
+
     useEffect(() => {
         innSearchData.fam && getINN();
     }, [innSearchData]);
@@ -92,7 +106,7 @@ function InnPage() {
         <section className="inn-page">
             <div className="inn-page__content">
                 <h1 className="inn-page__title">УЗНАТЬ ИНН</h1>
-                <Form handleSubmit={handleSubmit} onSubmit={onSubmit} buttonName={buttonName} serverMessage={serverMessage} resState={serverResState} >
+                <Form handleSubmit={handleSubmit} onSubmit={onSubmit} buttonName={buttonName} serverMessage={serverMessage} resState={serverResState} buttonReset={buttonReset} onReset={onReset}>
                     <div className="form__inputs">
                         <p className="form__set">
                             <label htmlFor="fam" className="form__label">Фамилия:</label>
@@ -113,10 +127,10 @@ function InnPage() {
                             <span className="form__error">{makeErr.makeErrNam(errors.nam?.type)}</span>
                         </p>
                         <p className="form__set">
-                            <label htmlFor="otch" className="form__label">Отчество:</label>
+                            <label htmlFor="otch" defaultValue={"1"} className="form__label">Отчество:</label>
                             <input name="otch" {...register("otch", {
-                                required: true,
-                                minLength: 2,
+                                //required: true,
+                                //minLength: 2,
                                 pattern: /^[а-яА-Я-]+\s?[а-яА-Я-]*$/,
                             })} className="form__input" />
                             <span className="form__error">{makeErr.makeErrOtch(errors.otch?.type)}</span>
@@ -145,13 +159,13 @@ function InnPage() {
                         </p>
                         <p className="form__set">
                             <label htmlFor="docno" className="form__label">Номер документа:</label>
-                            <input name="docno" {...register("docno", {
+                            <input name="docno" placeholder={Validation.docnoPlaceHolder(watch("doctype"))} {...register("docno", {
                                 required: true,
                                 maxLength: 12,
                                 onChange: Validation.docNoFormat(watch("doctype")),
                                 pattern: Validation.docNoPattern(watch("doctype")),
                             })} className="form__input" />
-                            <span className="form__error">{makeErr.makeErrDocNo(errors.docno?.type)}</span>
+                            <span className="form__error">{makeErr.makeErrDocNo(errors.docno?.type, watch("doctype"))}</span>
                         </p>
                     </div>
                 </Form>

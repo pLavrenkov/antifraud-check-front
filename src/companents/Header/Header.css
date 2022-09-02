@@ -3,6 +3,7 @@
     width: 100%;
     height: 75px;
     padding: 0 10px;
+    position: relative;
 }
 
 .header__content {
