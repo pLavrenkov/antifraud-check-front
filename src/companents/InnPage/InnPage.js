@@ -6,7 +6,7 @@ import * as makeErr from "../../utils/errors";
 import * as Validation from "../../utils/validation";
 
 function InnPage() {
-    const { register, formState: { errors }, handleSubmit, reset, watch } = useForm();
+    const { register, formState: { errors }, handleSubmit, reset, watch, resetField } = useForm();
     const buttonName = 'НАЙТИ';
     const buttonReset = 'СБРОСИТЬ';
     const [inn, setInn] = useState('не найдено');
@@ -96,11 +96,15 @@ function InnPage() {
         setInn('не найдено');
     }
 
+    const onResetField = (field) => {
+        resetField(field);
+    }
+
     useEffect(() => {
         innSearchData.fam && getINN();
     }, [innSearchData]);
 
-    console.log(watch("docno")?.length)
+    //console.log(watch("fam"))
 
     return (
         <section className="inn-page">
@@ -115,7 +119,7 @@ function InnPage() {
                                 minLength: 2,
                                 pattern: /^[а-яА-Я-]+$/,
                             })} className="form__input" />
-                            <button type="button" className={watch("fam")?.length > 0 ? "form__reset-input" : "form__reset-input form__reset-input_type_closed"} onClick={() => {reset({fam: ''})}} />
+                            <button type="button" className={watch("fam")?.length > 0 ? "form__reset-input" : "form__reset-input form__reset-input_type_closed"} onClick={() => resetField("fam")} />
                             <span className="form__error">{makeErr.makeErrFam(errors.fam?.type)}</span>
                         </p>
                         <p className="form__set">
@@ -125,7 +129,7 @@ function InnPage() {
                                 minLength: 2,
                                 pattern: /^[а-яА-Я-]+$/,
                             })} className="form__input" />
-                            <button type="button" className={watch("nam")?.length > 0 ? "form__reset-input" : "form__reset-input form__reset-input_type_closed"} onClick={() => {reset({nam: ''})}} />
+                            <button type="button" className={watch("nam")?.length > 0 ? "form__reset-input" : "form__reset-input form__reset-input_type_closed"} onClick={() => resetField("nam")} />
                             <span className="form__error">{makeErr.makeErrNam(errors.nam?.type)}</span>
                         </p>
                         <p className="form__set">
@@ -135,7 +139,7 @@ function InnPage() {
                                 //minLength: 2,
                                 pattern: /^[а-яА-Я-]+\s?[а-яА-Я-]*$/,
                             })} className="form__input" />
-                            <button type="button" className={watch("otch")?.length > 0 ? "form__reset-input" : "form__reset-input form__reset-input_type_closed"} onClick={() => {reset({otch: ''})}} />
+                            <button type="button" className={watch("otch")?.length > 0 ? "form__reset-input" : "form__reset-input form__reset-input_type_closed"} onClick={() => resetField("otch")} />
                             <span className="form__error">{makeErr.makeErrOtch(errors.otch?.type)}</span>
                         </p>
                         <p className="form__set">
@@ -168,7 +172,7 @@ function InnPage() {
                                 onChange: Validation.docNoFormat(watch("doctype")),
                                 pattern: Validation.docNoPattern(watch("doctype")),
                             })} className="form__input" />
-                            <button type="button" className={watch("docno")?.length > 0 ? "form__reset-input" : "form__reset-input form__reset-input_type_closed"} onClick={() => {reset({docno: ''})}} />
+                            <button type="button" className={watch("docno")?.length > 0 ? "form__reset-input" : "form__reset-input form__reset-input_type_closed"} onClick={() => resetField("docno")} />
                             <span className="form__error">{makeErr.makeErrDocNo(errors.docno?.type, watch("doctype"))}</span>
                         </p>
                     </div>
