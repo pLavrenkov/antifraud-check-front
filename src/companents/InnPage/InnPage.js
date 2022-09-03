@@ -13,6 +13,7 @@ function InnPage() {
     const [innSearchData, setInnSearchData] = useState({});
     const [serverMessage, setServerMessage] = useState('');
     const [serverResState, setServerResState] = useState(false);
+    const [keyCode, setKeyCode] = useState('');
 
     const getINN = () => {
         const searchString = new URLSearchParams({
@@ -105,6 +106,9 @@ function InnPage() {
     }, [innSearchData]);
 
     //console.log(watch("fam"))
+    const handleKeyCode = (e) => {
+        setKeyCode(e.code);
+    }
 
     return (
         <section className="inn-page">
@@ -114,32 +118,32 @@ function InnPage() {
                     <div className="form__inputs">
                         <p className="form__set">
                             <label htmlFor="fam" className="form__label">Фамилия:</label>
+                            <button type="button" className={watch("fam")?.length > 0 ? "form__reset-input" : "form__reset-input form__reset-input_type_closed"} onClick={() => resetField("fam")} />
                             <input name="fam" {...register("fam", {
                                 required: true,
                                 minLength: 2,
                                 pattern: /^[а-яА-Я-]+$/,
                             })} className="form__input" />
-                            <button type="button" className={watch("fam")?.length > 0 ? "form__reset-input" : "form__reset-input form__reset-input_type_closed"} onClick={() => resetField("fam")} />
                             <span className="form__error">{makeErr.makeErrFam(errors.fam?.type)}</span>
                         </p>
                         <p className="form__set">
                             <label htmlFor="nam" className="form__label">Имя:</label>
+                            <button type="button" className={watch("nam")?.length > 0 ? "form__reset-input" : "form__reset-input form__reset-input_type_closed"} onClick={() => resetField("nam")} />
                             <input name="nam" {...register("nam", {
                                 required: true,
                                 minLength: 2,
                                 pattern: /^[а-яА-Я-]+$/,
                             })} className="form__input" />
-                            <button type="button" className={watch("nam")?.length > 0 ? "form__reset-input" : "form__reset-input form__reset-input_type_closed"} onClick={() => resetField("nam")} />
                             <span className="form__error">{makeErr.makeErrNam(errors.nam?.type)}</span>
                         </p>
                         <p className="form__set">
                             <label htmlFor="otch" defaultValue={"1"} className="form__label">Отчество:</label>
+                            <button type="button" className={watch("otch")?.length > 0 ? "form__reset-input" : "form__reset-input form__reset-input_type_closed"} onClick={() => resetField("otch")} />
                             <input name="otch" {...register("otch", {
                                 //required: true,
                                 //minLength: 2,
                                 pattern: /^[а-яА-Я-]+\s?[а-яА-Я-]*$/,
                             })} className="form__input" />
-                            <button type="button" className={watch("otch")?.length > 0 ? "form__reset-input" : "form__reset-input form__reset-input_type_closed"} onClick={() => resetField("otch")} />
                             <span className="form__error">{makeErr.makeErrOtch(errors.otch?.type)}</span>
                         </p>
                         <p className="form__set">
@@ -166,13 +170,13 @@ function InnPage() {
                         </p>
                         <p className="form__set">
                             <label htmlFor="docno" className="form__label">Номер документа:</label>
-                            <input name="docno" placeholder={Validation.docnoPlaceHolder(watch("doctype"))} {...register("docno", {
+                            <button type="button" className={watch("docno")?.length > 0 ? "form__reset-input" : "form__reset-input form__reset-input_type_closed"} onClick={() => resetField("docno")} />
+                            <input name="docno" placeholder={Validation.docnoPlaceHolder(watch("doctype"))} onKeyDown={handleKeyCode} {...register("docno", {
                                 required: true,
                                 maxLength: 12,
-                                onChange: Validation.docNoFormat(watch("doctype")),
+                                onChange: Validation.docNoFormat(watch("doctype"), keyCode),
                                 pattern: Validation.docNoPattern(watch("doctype")),
                             })} className="form__input" />
-                            <button type="button" className={watch("docno")?.length > 0 ? "form__reset-input" : "form__reset-input form__reset-input_type_closed"} onClick={() => resetField("docno")} />
                             <span className="form__error">{makeErr.makeErrDocNo(errors.docno?.type, watch("doctype"))}</span>
                         </p>
                     </div>

@@ -8,27 +8,37 @@ export const docNoPattern = (doctypeValue) => {
     }
 }
 
-export const docNoFormat = (doctypeValue) => {
+export const docNoFormat = (doctypeValue, key) => {
+    console.log(key)
     if (doctypeValue === "21" || !doctypeValue) {
         return function (e) {
-            const value = e.target.value.replace(/\D/g, '');
-            if (value.length > 3) {
+            const valueLength = e.target.value.replace(/\D/g, '').length;
+            if (valueLength > 3 && key !== 'Backspace') {
+                const value = e.target.value.replace(/\D/g, '');
                 e.target.value = value.slice(0, 2) + ' ' + value.slice(2, 4) + ' ' + value.slice(4, 10);
-            } else if (value.length > 1) {
+            } else if (valueLength > 1 && key !== 'Backspace') {
+                const value = e.target.value.replace(/\D/g, '');
                 e.target.value = value.slice(0, 2) + ' ' + value.slice(2, 4);
+            } else if (key === 'Backspace') {
+                return;
             } else {
+                const value = e.target.value.replace(/\D/g, '');
                 e.target.value = value;
             }
         };
     } else if (doctypeValue === "03") {
         return function (e) {
-            const value = e.target.value.replace(/[\s-]/g, '').toUpperCase();
-            if (value.length > 3) {
+            const valueLength = e.target.value.replace(/[\s-]/g, '').length;
+            if (valueLength > 3 && key !== 'Backspace') {
+                const value = e.target.value.replace(/[\s-]/g, '').toUpperCase();
                 e.target.value = value.slice(0, 2) + '-' + value.slice(2, 4) + ' ' + value.slice(4, 10);
-            } else if (value.length > 1) {
+            } else if (valueLength > 1 && key !== 'Backspace') {
+                const value = e.target.value.replace(/[\s-]/g, '').toUpperCase();
                 e.target.value = value.slice(0, 2).toUpperCase() + '-' + value.slice(2, 4).toUpperCase();
-
+            } else if (key === 'Backspace' || key === 'Delete') {
+                return;
             } else {
+                const value = e.target.value.replace(/[\s-]/g, '').toUpperCase();
                 e.target.value = value;
             }
         };
