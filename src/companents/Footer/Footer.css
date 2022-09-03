@@ -9,6 +9,32 @@
     box-sizing: border-box;
     height: 100%;
     margin: 0 10px;
-    padding: 10px;
     border-top: #6e6e6e solid 2px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer__copyright {
+    color: #6e6e6e;
+}
+
+.footer__link-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    list-style: none;
+}
+
+.footer__link {
+    text-decoration: none;
+    color: #fff;
+    opacity: .5;
+    padding-left: 20px;
+}
+
+.footer__link:hover {
+    text-decoration: underline;
+    opacity: 1;
 }

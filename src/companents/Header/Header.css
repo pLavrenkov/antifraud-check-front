@@ -9,7 +9,34 @@
 .header__content {
     box-sizing: border-box;
     height: 100%;
-    margin: 0 10px;
-    padding: 10px;
+    margin: 0 10px;    
     border-bottom: #6e6e6e solid 2px;
+}
+
+.header__logo-container {
+    box-sizing: border-box;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    padding: 10px 0;
+    text-decoration: none;
+    opacity: .5;
+}
+
+.header__logo-container:hover {
+    opacity: 1;
+}
+
+.header__logo-image {
+    height: 70%;
+    padding-right: 10px;
+    background-color: #000;
+}
+
+.header__logo-name {
+    font-weight: 900;
+    font-size: 32px;
+    text-decoration: underline;
+    color: #fff;
 }

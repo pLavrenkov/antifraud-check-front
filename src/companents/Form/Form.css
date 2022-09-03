@@ -99,9 +99,12 @@
     right: 5px;
     height: 12px;
     width: 12px;
-    background-image: url(../../images/resetInput.svg);
-    background-color: #000;
-    background-size: cover;
+    background-image: url(../../images/closebutton.png);
+    background-color: #6e6e6e;
+    border-radius: 50px;
+    background-size: 50%;
+    background-repeat: no-repeat;
+    background-position: center;
     border: none;
 }
 

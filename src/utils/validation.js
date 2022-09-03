@@ -9,7 +9,6 @@ export const docNoPattern = (doctypeValue) => {
 }
 
 export const docNoFormat = (doctypeValue, key) => {
-    console.log(key)
     if (doctypeValue === "21" || !doctypeValue) {
         return function (e) {
             const valueLength = e.target.value.replace(/\D/g, '').length;

@@ -8,7 +8,7 @@
 
 .inn-page__content {
     height: 100%;
-    padding: 100px 0 100px;
+    padding: 50px 0 50px;
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 100px auto 100px;
