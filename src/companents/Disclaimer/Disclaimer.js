@@ -1,17 +1,26 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function Disclaimer() {
-    const [isClosed, setIsClosed] = useState(false);
+    const [isClosed, setIsClosed] = useState(sessionStorage.getItem('isClosed') || false);
     const [isChecked, setIsChecked] = useState(false);
 
     const handleCheckBox = (e) => {
         setIsChecked(e.target.checked);
-        console.log(e.target.checked);
     }
 
     const handleDisclaimerHidden = () => {
         setIsClosed(true);
+        sessionStorage.setItem('isClosed', isClosed);
     }
+
+    useEffect(() => {
+        const disclaimerPass = sessionStorage.getItem('isClosed');
+        if (disclaimerPass) {
+            setIsClosed(true);
+        } else {
+            setIsClosed(false);
+        }
+    }, [])
 
     return (
         <section className={isClosed ? "disclaimer disclaimer_type_closed" : "disclaimer"}>
