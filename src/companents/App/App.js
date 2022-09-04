@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
+import Disclaimer from '../Disclaimer/Disclaimer';
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
 import InnPage from '../InnPage/InnPage';
@@ -17,6 +18,7 @@ function App() {
           </Routes>
         </main>
         <Footer />
+        <Disclaimer />
       </div>
     </div>
   );
