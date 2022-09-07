@@ -137,11 +137,11 @@ function InnPage() {
                             <span className="form__error">{makeErr.makeErrNam(errors.nam?.type)}</span>
                         </p>
                         <p className="form__set">
-                            <label htmlFor="otch" defaultValue={"1"} className="form__label">Отчество:</label>
+                            <label htmlFor="otch" className="form__label">Отчество:</label>
                             <button type="button" className={watch("otch")?.length > 0 ? "form__reset-input" : "form__reset-input form__reset-input_type_closed"} onClick={() => resetField("otch")} />
                             <input name="otch" {...register("otch", {
-                                //required: true,
-                                //minLength: 2,
+                                required: true,
+                                minLength: 2,
                                 pattern: /^[а-яА-Я-]+\s?[а-яА-Я-]*$/,
                             })} className="form__input" />
                             <span className="form__error">{makeErr.makeErrOtch(errors.otch?.type)}</span>

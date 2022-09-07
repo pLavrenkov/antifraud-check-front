@@ -1,15 +1,14 @@
 export const urlToken = 'https://service.nalog.ru/inn-new-proc.do';
 export const urlInn = 'https://service.nalog.ru/inn-new-proc.json';
+export const proxyUrl = 'http://localhost:3001/';
 
 export const getToken = (request) => {
-    return fetch(`${urlToken}?${request}`, {
+    return fetch(`${proxyUrl + urlToken}?${request}`, {
         method: 'GET',
         headers: {
             "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
             "Accept": "*/*",
         },
-        //body: JSON.stringify(request),
-        credentials: 'include',
     })
         .then((res) => {
             if (res.ok) {
@@ -21,14 +20,12 @@ export const getToken = (request) => {
 }
 
 export const getInn = (reqId) => {
-    return fetch(`${urlInn}?${reqId}`, {
+    return fetch(`${proxyUrl + urlInn}?${reqId}`, {
         method: 'GET',
         headers: {
             "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
             "Accept": "*/*",
         },
-        //body: JSON.stringify(request),
-        credentials: 'include',
     })
         .then((res) => {
             if (res.ok) {
