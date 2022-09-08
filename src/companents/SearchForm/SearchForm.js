@@ -2,15 +2,31 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 import * as makeErr from "../../utils/errors";
+import * as constants from "../../utils/constants";
+import * as Api from "../../utils/InnApi";
 
 function SearchForm() {
     const { register, formState: { errors }, handleSubmit, watch, resetField } = useForm();
-    const [request, setRequest] = useState();
+    const [request, setRequest] = useState('');
+    const [apiRequest, setApiRequest] = useState({});
+    console.log(request);
+    console.log(apiRequest);
+
+    const handleRequest = (req) => {
+        const requestAll = new URLSearchParams({ ...constants.searchTrBuisAllRequest, queryAll: req });
+        Api.getTrsnsBuis(requestAll.toString())
+            .then(data => console.log(data))
+        console.log(JSON.stringify(requestAll.toString()));
+
+    }
 
     const onSubmit = (data) => {
         setRequest(data.search);
-        console.log(data);
+        resetField("search");
+        handleRequest(data.search);
     }
+
+
 
     return (
         <section className="searchform">
@@ -24,7 +40,7 @@ function SearchForm() {
                 <span className="searchform__error">{makeErr.makeErrSearch(errors.search?.type)}</span>
             </form>
             <p className="serchform__server-error">Ошибка сервера</p>
-            <p className="serchform__request-box">Результаты поискового запроса <span className="searchform__request">{request}</span></p>
+            <p className="serchform__request-box">результаты запроса <span className="searchform__request">{request}</span>:</p>
         </section>
     )
 }
