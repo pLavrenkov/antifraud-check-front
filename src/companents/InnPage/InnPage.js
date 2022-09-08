@@ -61,7 +61,7 @@ function InnPage() {
                             setServerMessage(`Произошла ошибка: ${err.message}, проверьте введенные данные`);
                             setInn('Не найдено');
                         })
-                }, 2000)
+                }, 3000)
 
             })
             .catch((err) => {
