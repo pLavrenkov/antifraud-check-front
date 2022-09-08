@@ -14,6 +14,7 @@ function InnPage() {
     const [serverMessage, setServerMessage] = useState('');
     const [serverResState, setServerResState] = useState(false);
     const [keyCode, setKeyCode] = useState('');
+    const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
     const getINN = () => {
         const searchString = new URLSearchParams({
@@ -49,12 +50,19 @@ function InnPage() {
                                 setServerResState(true);
                                 setServerMessage('Запрос обработан успешно');
                                 setInn(res.inn);
+                            } else if (res.state === 0) {
+                                setServerResState(false);
+                                setServerMessage('ИНН для лица с такими данными не обнаружен, проверьте ввод данных');
+                                setInn('Не найдено');
+                            } else if (res.state === -1) {
+                                setServerResState(false);
+                                setServerMessage('Сервер ФНС перегружен, попробуйте запросить данные повторно');
+                                setInn('Не найдено');
                             } else {
                                 setServerResState(false);
-                                setServerMessage('ИНН для лица с такими данными не обнаружен');
+                                setServerMessage(`Неизвестная ошибка сервера: ${res.state}`);
                                 setInn('Не найдено');
                             }
-
                         })
                         .catch((err) => {
                             setServerResState(false);
@@ -82,6 +90,8 @@ function InnPage() {
             ...data,
             bdate: bdateArr[2] + '.' + bdateArr[1] + '.' + bdateArr[0],
         });
+        setIsButtonDisabled(true);
+        setTimeout(() => setIsButtonDisabled(false), 5000);
     }
 
     const onReset = () => {
@@ -114,7 +124,16 @@ function InnPage() {
         <section className="inn-page">
             <div className="inn-page__content">
                 <h1 className="inn-page__title">УЗНАТЬ ИНН</h1>
-                <Form handleSubmit={handleSubmit} onSubmit={onSubmit} buttonName={buttonName} serverMessage={serverMessage} resState={serverResState} buttonReset={buttonReset} onReset={onReset}>
+                <Form
+                    handleSubmit={handleSubmit}
+                    onSubmit={onSubmit}
+                    buttonName={buttonName}
+                    serverMessage={serverMessage}
+                    resState={serverResState}
+                    buttonReset={buttonReset}
+                    onReset={onReset}
+                    onDisabled={isButtonDisabled}
+                >
                     <div className="form__inputs">
                         <p className="form__set">
                             <label htmlFor="fam" className="form__label">Фамилия:</label>

@@ -32,11 +32,19 @@
     width: 120px;
     height: 35px;
     border: #fff solid 2px;
-    background-color: #000;
+    background-color: rgb(27, 135, 217);
     border-radius: 10px;
     color: #fff;
     font-weight: 300;
     font-size: 12px;
+    transition: .5s linear;
+}
+
+.form__button_type_disabled {
+    border: #fff solid 2px;
+    background-color: #000;
+    color: #fff;
+    transition: .5s linear;
 }
 
 .form__button:hover {
