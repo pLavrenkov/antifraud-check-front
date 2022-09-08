@@ -1,3 +1,5 @@
+export const PROXY = 'http://localhost:3001/';
+
 export const searchTrBuisAllRequest = {
     page: 1,
     pageSize: 10,
