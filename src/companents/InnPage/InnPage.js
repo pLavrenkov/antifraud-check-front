@@ -68,7 +68,9 @@ function InnPage() {
                             setServerResState(false);
                             setServerMessage(`Произошла ошибка: ${err.message}, проверьте введенные данные`);
                             setInn('Не найдено');
+                            setIsButtonDisabled(false);
                         })
+                    setTimeout(() => setIsButtonDisabled(false), 3000);
                 }, 3000)
 
             })
@@ -76,6 +78,7 @@ function InnPage() {
                 setServerResState(false);
                 setServerMessage(`Произошла ошибка: ${err.message}, проверьте введенные данные`);
                 setInn('Не найдено');
+                setIsButtonDisabled(false);
             })
     }
 
@@ -91,7 +94,6 @@ function InnPage() {
             bdate: bdateArr[2] + '.' + bdateArr[1] + '.' + bdateArr[0],
         });
         setIsButtonDisabled(true);
-        setTimeout(() => setIsButtonDisabled(false), 5000);
     }
 
     const onReset = () => {
@@ -105,6 +107,7 @@ function InnPage() {
         });
         setServerMessage('');
         setInn('не найдено');
+        setIsButtonDisabled(false);
     }
 
     const onResetField = (field) => {
