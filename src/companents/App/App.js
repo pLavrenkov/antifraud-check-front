@@ -5,6 +5,7 @@ import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
 import InnPage from '../InnPage/InnPage';
 import MainPage from '../MainPage/MainPage';
+import TransparentBuisness from '../TransparentBuisness/TransparentBuisness';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Routes>
             <Route path='/' element={<MainPage />} />
             <Route path='/inn' element={<InnPage />} />
+            <Route path='/buisness' element={<TransparentBuisness />} />
           </Routes>
         </main>
         <Footer />

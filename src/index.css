@@ -12,8 +12,12 @@
 /*импорт компанента MainPage*/
 @import url(./companents/MainPage/MainPage.css);
 
-/*импорт компанента INN*/
+/*импорт компанента "Узнать ИНН*/
 @import url(./companents/InnPage/InnPage.css);
+
+/*импорт компанентов "Прозраный бизнес"*/
+@import url(./companents/TransparentBuisness/TransparentBuisness.css);
+@import url(./companents/SearchForm/SearchForm.css);
 
 /*импорт компонента Form*/ 
 @import url(./companents/Form/Form.css);

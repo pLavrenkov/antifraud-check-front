@@ -63,3 +63,13 @@ export const makeErrDoctype = (errType) => {
          return "";
      }
  }
+
+ export const makeErrSearch = (errType) => {
+    if (errType === "minLength") {
+        return "Имя должно содержать не менее 3 символов";
+    } else if (errType === "required") {
+        return "Введите данные";
+    } else {
+        return "";
+    }
+}

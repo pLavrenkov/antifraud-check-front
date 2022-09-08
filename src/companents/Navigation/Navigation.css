@@ -33,6 +33,8 @@
 
 .nav__title {
     text-decoration: none;
+    max-width: 120px;
+    text-align: center;
 }
 
 .nav__title:hover {
