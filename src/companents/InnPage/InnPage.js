@@ -173,7 +173,7 @@ function InnPage() {
                             <button type="button" className={watch("docno")?.length > 0 ? "form__reset-input" : "form__reset-input form__reset-input_type_closed"} onClick={() => resetField("docno")} />
                             <input name="docno" placeholder={Validation.docnoPlaceHolder(watch("doctype"))} onKeyDown={handleKeyCode} {...register("docno", {
                                 required: true,
-                                maxLength: 12,
+                                maxLength: 15,
                                 onChange: Validation.docNoFormat(watch("doctype"), keyCode),
                                 pattern: Validation.docNoPattern(watch("doctype")),
                             })} className="form__input" />

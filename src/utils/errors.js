@@ -3,6 +3,8 @@ export const makeErrDocNo = (errType, docType) => {
         return "Необходимо ввести 10 цифр";
     } else if (errType === "pattern" && docType === "03") {
         return "Введите номер в формате IV-ЯЯ 999999";
+    } else if (errType === "pattern" && docType === "01") {
+        return "Введите номер в формате IV-ЯЯ 999999";
     } else if (errType === "required") {
         return "Введите данные";
     } else {
