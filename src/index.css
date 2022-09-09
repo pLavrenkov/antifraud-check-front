@@ -18,6 +18,8 @@
 /*импорт компанентов "Прозраный бизнес"*/
 @import url(./companents/TransparentBuisness/TransparentBuisness.css);
 @import url(./companents/SearchForm/SearchForm.css);
+@import url(./companents/CardList/CardList.css);
+@import url(./companents/Card/Card.css);
 
 /*импорт компонента Form*/ 
 @import url(./companents/Form/Form.css);

@@ -68,7 +68,21 @@
     color: #fF64B4;
 }
 
-.serchform__server-error {}
+.searchform__results-container {
+    box-sizing: border-box;
+    padding: 25px 0 45px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.serchform__server-error {
+    font-weight: 300;
+    font-size: 12px;
+    text-align: center;
+    color: #fF64B4;
+}
 
 .serchform__request-box {
     display: block;

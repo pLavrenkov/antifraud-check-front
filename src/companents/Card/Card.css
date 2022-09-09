@@ -1,0 +1,106 @@
+.card {
+    box-sizing: border-box;
+    width: 300px;
+    height: 200px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 65px repeat(2, 1fr) 40px;
+    background-color: #DCDCDC;
+    color: #000;
+    border-radius: 3px;
+    box-shadow: 2px 2px 5px #F8F8FF;
+    padding: 20px;
+}
+
+.card_type_invalid {
+    background-color: #FFB6C1;
+    border: #F8F8FF solid 1px;
+}
+
+.card__title {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 5px 0;
+    grid-row: 1;
+    font-size: 14px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+    max-height: 50px;
+}
+
+.card__field {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-size: 12px;
+}
+
+.card__set {
+    grid-row: 2;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.card__field_type_inn {
+    position: relative;
+    padding-left: 25px;
+}
+
+.card__field_type_inn::before {
+    position: absolute;
+    content: '';
+    top: -1px;
+    left: -1px;
+    background-image: url(../../images/inn.svg);
+    background-position: 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 15px;
+    height: 16px;
+}
+
+.card__field_type_region {
+    position: relative;
+    padding-left: 25px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.card__field_type_region::before {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    background-image: url(../../images/location.svg);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 12px;
+    height: 12px;
+}
+
+.card__field_type_okved {
+    box-sizing: border-box;
+    position: relative;
+    padding-left: 25px;
+    max-height: 47px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+}
+
+.card__field_type_okved::before {
+    position: absolute;
+    content: '';
+    background-image: url(../../images/tools.svg);
+    background-position: center;
+    background-size: cover;
+    fill: #000;
+    top: 0;
+    left: 0;
+    width: 12px;
+    height: 12px;
+}

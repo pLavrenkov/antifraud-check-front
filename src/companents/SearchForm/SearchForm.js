@@ -1,8 +1,9 @@
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 import * as makeErr from "../../utils/errors";
 
-function SearchForm({ onSubmit, request }) {
+function SearchForm({ onSubmit, request, message }) {
     const { register, formState: { errors }, handleSubmit, watch, resetField } = useForm();
 
     const handleOnSubmit = (data) => {
@@ -21,8 +22,10 @@ function SearchForm({ onSubmit, request }) {
                 <button type="submit" className="searchform__submit-btn">Найти</button>
                 <span className="searchform__error">{makeErr.makeErrSearch(errors.search?.type)}</span>
             </form>
-            <p className="serchform__server-error">Ошибка сервера</p>
-            <p className="serchform__request-box">результаты запроса <span className="searchform__request">{request}</span>:</p>
+            <div className="searchform__results-container">
+                {message && <p className="serchform__server-error">{message}</p>}
+                {request && !message && <p className="serchform__request-box">результаты запроса <span className="searchform__request">{request}</span></p>}
+            </div>
         </section>
     )
 }

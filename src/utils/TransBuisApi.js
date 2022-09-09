@@ -14,10 +14,10 @@ export const getAll = (request) => {
     })
         .then((res) => {
             if (res.ok) {
-                console.log(res);
+                //console.log(res);
                 return res.json();
             } else {
-                throw new Error('запрос на Прозрачный Бизнес обработан с ошибкой');
+                throw new Error(`запрос на Прозрачный Бизнес обработан с ошибкой сервера`);
             }
         })
 }

@@ -1,0 +1,65 @@
+.cardlist {
+    box-sizing: border-box;
+    padding: 0 0 50px;
+}
+
+.cardlist__title {
+    margin: 0;
+    color: #DCDCDC;
+    text-decoration: underline;
+}
+
+.cardslist__container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+    list-style: none;
+    padding: 0;
+}
+
+.cardlist__btn-box {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.cardlist__btn {
+    font-size: 12px;
+    font-weight: 300;
+    color: #fff;
+    border: none;
+    background-color: #000;
+    opacity: .7;
+    padding: 0;
+}
+
+.cardlist__btn:hover {
+    cursor: pointer;
+    opacity: 1;
+}
+
+.cardlist__btn-span:hover {
+    border-bottom: #fff solid .5px;
+}
+
+.cardlist__btn_type_back {
+    grid-column: 1;
+    justify-self: flex-start;
+}
+
+.cardlist__btn_type_next {
+    grid-column: 2;
+    justify-self: flex-end;
+}
+
+@media screen and (max-width: 1000px) {
+    .cardslist__container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .cardslist__container {
+        grid-template-columns: 1fr;
+    }
+}

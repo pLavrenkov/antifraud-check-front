@@ -1,8 +1,9 @@
 export const PROXY = 'http://localhost:3001/';
 
 export const searchTrBuisAllRequest = {
+    type: '',
     page: 1,
-    pageSize: 10,
+    pageSize: 6,
     pbCaptchaToken: '',
     token: '',
     mode: 'search-all',
