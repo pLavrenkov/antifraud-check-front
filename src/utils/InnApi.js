@@ -1,6 +1,9 @@
+import * as constants from "./constants";
+
 export const urlToken = 'https://service.nalog.ru/inn-new-proc.do';
 export const urlInn = 'https://service.nalog.ru/inn-new-proc.json';
-export const proxyUrl = 'http://localhost:3001/';
+
+const proxyUrl = constants.PROXY;
 
 export const getToken = (request) => {
     return fetch(`${proxyUrl + urlToken}?${request}`, {
