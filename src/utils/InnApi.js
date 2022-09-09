@@ -40,22 +40,4 @@ export const getInn = (reqId) => {
         })
 }
 
-export const getTrsnsBuis = (request) => {
-    return fetch(`${proxyUrl + urlInn}`, {
-        method: 'POST',
-        headers: {
-            "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
-            "Accept": "*/*",
-        },
-        body: request,
-    })
-        .then((res) => {
-            if (res.ok) {
-                console.log(res);
-                return res.json();
-            } else {
-                console.log(res);
-                throw new Error('запрос на Прозрачный Бизнес обработан с ошибкой');
-            }
-        })
-}
+

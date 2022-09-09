@@ -50,7 +50,7 @@ function CardList({ data, hasMore, page, pageSize, rowCount, listname, request }
         setTimeout(() => {
             handleRequest(request);
             console.log(pageNumber);
-        }, 5000)       
+        }, 2000)       
     }, [pageNumber]);
 
     console.log(cards);

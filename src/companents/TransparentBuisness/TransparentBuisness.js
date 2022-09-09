@@ -12,6 +12,7 @@ function TransparentBuisness() {
     const [serverMessage, setServerMessage] = useState('');
 
     const handleRequest = (req) => {
+        setServerMessage('');
         const requestAll = new URLSearchParams({ ...constants.searchTrBuisAllRequest, queryAll: req });
         Api.getAll(requestAll.toString())
             .then((data) => {
