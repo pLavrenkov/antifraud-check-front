@@ -1,14 +1,19 @@
+import React from "react";
 import { useEffect, useState } from "react";
 import CardUl from "../Card/CardUl";
 
 import * as constants from "../../utils/constants";
 import * as Api from "../../utils/TransBuisApi";
 
-function CardList({ data, hasMore, page, pageSize, rowCount, listname, request }) {
+const Lazy = React.lazy(() => import('../Card/CardUl'));
+
+function CardList({ data, hasMore, page, pageSize, rowCount, listname, request, onUlCardClick }) {
     const [cards, setCards] = useState(data);
     const [morePages, setMorePages] = useState(hasMore);
     const [pageNumber, setPageNumber] = useState(page);
     const [cardsPageSet, setCardsPageSet] = useState(pageSize);
+    const [previosPage, setPreviosPage] = useState(1);
+    const [error, setError] = useState('');
 
     useEffect(() => {
         setCards(data);
@@ -34,24 +39,29 @@ function CardList({ data, hasMore, page, pageSize, rowCount, listname, request }
                 setCardsPageSet(data.ul.pageSize);
             })
             .catch((err) => {
-                console.log(err);
+                setError(`Произошла ошибка: ${err.message}`)
+                setPageNumber(previosPage);
             })
     }
 
     const backPage = () => {
+        setPreviosPage(pageNumber);
         setPageNumber(pageNumber - 1);
+        setError('');
     }
 
     const nextPage = () => {
+        setPreviosPage(pageNumber);
         setPageNumber(pageNumber + 1);
+        setError('');
     }
 
     useEffect(() => {
         setTimeout(() => {
             handleRequest(request);
             console.log(pageNumber);
-        }, 2000)       
-    }, [pageNumber]);
+        }, 3000)
+    }, [previosPage]);
 
     console.log(cards);
     console.log(`наличие страниц: ${morePages}, номер страницы: ${pageNumber}, количество карточек на страницу: ${cardsPageSet}`);
@@ -74,12 +84,12 @@ function CardList({ data, hasMore, page, pageSize, rowCount, listname, request }
                             regionname={item.regionname ? item.regionname : "регион не указан"}
                             token={item.token}
                             yearcode={item.yearcode}
+                            onCardClick={onUlCardClick}
                         />
                     )
                 })
                 }
             </ul>
-
             <div className="cardlist__btn-box">
                 {
                     pageNumber > 1 &&
@@ -90,6 +100,8 @@ function CardList({ data, hasMore, page, pageSize, rowCount, listname, request }
                     <button type="button" onClick={nextPage} className="cardlist__btn cardlist__btn_type_next"><span className="cardlist__btn-span">cледующая страница</span> &#10230;</button>
                 }
             </div>
+            <p className="cardlist__error">{error}</p>
+
         </section>
     )
 }

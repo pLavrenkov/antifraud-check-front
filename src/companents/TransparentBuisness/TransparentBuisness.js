@@ -1,4 +1,5 @@
 import { useState } from "react";
+import React from "react";
 import * as constants from "../../utils/constants";
 import * as Api from "../../utils/TransBuisApi";
 import CardList from "../CardList/CardList";
@@ -32,6 +33,21 @@ function TransparentBuisness() {
         handleRequest(data.search);
     }
 
+    const handleUlCardClick = (request) => {
+        Api.getUl(request.toString())
+            .then((data) => {
+                console.log(data);
+                const res = new URLSearchParams({ type: '', method: "get-response", id: data.id, token: data.token, type1: '' })
+                setTimeout(() => {
+                    Api.getUl(res.toString())
+                    .then((ul) => {
+                        console.log(ul);
+                    })
+
+                }, 2000)
+            })
+    }
+
     return (
         <section className="trans-buisness">
             <h1 className="trans-buisness__title">ПРОЗРАЧНЫЙ БИЗНЕС</h1>
@@ -46,6 +62,7 @@ function TransparentBuisness() {
                     rowCount={resAllData.ul.rowCount}
                     listname={'Юридические лица'}
                     request={request}
+                    onUlCardClick={handleUlCardClick}
                 />
                 :
                 <p>Результаты не найдены</p>

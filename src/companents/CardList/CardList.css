@@ -1,6 +1,6 @@
 .cardlist {
     box-sizing: border-box;
-    padding: 0 0 50px;
+    padding: 0 0 40px;
 }
 
 .cardlist__title {
@@ -50,6 +50,19 @@
 .cardlist__btn_type_next {
     grid-column: 2;
     justify-self: flex-end;
+}
+
+.cardlist__error {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    text-align: center;
+    font-weight: 300;
+    height: 13px;
+    font-size: 11px;
+    justify-self: center;
+    padding: 5px 0 10px;
+    color: #fF64B4;
 }
 
 @media screen and (max-width: 1000px) {

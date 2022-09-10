@@ -11,6 +11,8 @@ function SearchForm({ onSubmit, request, message }) {
         resetField("search");
     }
 
+    console.log(watch("search"))
+
     return (
         <section className="searchform">
             <form onSubmit={handleSubmit(handleOnSubmit)} className="searchform__container">
@@ -19,7 +21,7 @@ function SearchForm({ onSubmit, request, message }) {
                     required: true,
                     minLength: 3,
                 })} className="searchform__input" />
-                <button type="submit" className="searchform__submit-btn">Найти</button>
+                <button type="submit" className={watch("search") ? "searchform__submit-btn" : "searchform__submit-btn searchform__submit-btn_type_disabled"} disabled={!watch("search")} >Найти</button>
                 <span className="searchform__error">{makeErr.makeErrSearch(errors.search?.type)}</span>
             </form>
             <div className="searchform__results-container">

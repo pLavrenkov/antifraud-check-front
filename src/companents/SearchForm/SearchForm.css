@@ -47,10 +47,19 @@
 }
 
 .searchform__submit-btn {
+    border: #fff solid 2px;
+    background-color: rgb(27, 135, 217);
+    border-radius: 5px;
+    color: #fff;
     margin-left: 10px;
 }
 
-.searchform__submit-btn_type_disabled {}
+.searchform__submit-btn_type_disabled {
+    background-color: #000;
+    color: #6e6e6e;
+    border: #6e6e6e;
+    border: #6e6e6e solid 1px;
+}
 
 .searchform__submit-btn:hover {
     cursor: pointer;

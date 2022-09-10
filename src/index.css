@@ -23,4 +23,5 @@
 
 /*импорт компонента Form*/ 
 @import url(./companents/Form/Form.css);
+@import url(./companents/Preloader/Preloader.css);
 
