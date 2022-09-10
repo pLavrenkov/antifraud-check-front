@@ -1,16 +1,19 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import React from "react";
 import * as constants from "../../utils/constants";
 import * as Api from "../../utils/TransBuisApi";
 import CardList from "../CardList/CardList";
 
 import SearchForm from "../SearchForm/SearchForm";
+import CardPopup from "../CardPopup/CardPopup";
 
 function TransparentBuisness() {
     const [request, setRequest] = useState('');
     const [resAllData, setResAllData] = useState({});
     const [resUlData, setResUlData] = useState([]);
     const [serverMessage, setServerMessage] = useState('');
+    const [isPopupOpen, setIsPopupOpen] = useState(true);
+    const [cardData, setCardData] = useState({});
 
     const handleRequest = (req) => {
         setServerMessage('');
@@ -34,6 +37,7 @@ function TransparentBuisness() {
     }
 
     const handleUlCardClick = (request) => {
+        handlePopupOpen();
         Api.getUl(request.toString())
             .then((data) => {
                 console.log(data);
@@ -42,11 +46,30 @@ function TransparentBuisness() {
                     Api.getUl(res.toString())
                     .then((ul) => {
                         console.log(ul);
+                        setCardData(ul);
                     })
 
                 }, 2000)
             })
     }
+
+    const handlePopupOpen = () => {
+        setIsPopupOpen(true);
+    }
+
+    const handlePopupClosed = () => {
+        setIsPopupOpen(false);
+    }
+
+    useEffect(() => {
+        const closeByEsc = (e) => {
+          if (e.key === 'Escape') {
+            handlePopupClosed();
+          }
+        }
+        window.addEventListener('keydown', closeByEsc);
+        return () => window.removeEventListener('keydown', closeByEsc);
+      }, []);
 
     return (
         <section className="trans-buisness">
@@ -67,6 +90,7 @@ function TransparentBuisness() {
                 :
                 <p>Результаты не найдены</p>
             }
+            <CardPopup isOpen={isPopupOpen} onClose={handlePopupClosed} cardData={cardData}/>
         </section>
     )
 }

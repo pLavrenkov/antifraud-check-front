@@ -1,0 +1,51 @@
+.cardpopup {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: none;
+    background-color: rgba(0, 0, 0, .7);
+    opacity: 1;
+}
+
+.cardpopup_type_active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cardpopup__container {
+    max-width: 1100px;
+    display: grid;
+    grid-template-columns: 20px 1fr 20px;
+    grid-template-rows: 20px 1fr;
+    grid-gap: 10px;
+}
+
+.cardpopup__btn {
+    grid-column: 3;
+    grid-row: 1;
+    justify-self: flex-start;
+    align-self: flex-end;
+    width: 20px;
+    height: 20px;
+    background-image: url('../../images/closecross_white.svg');
+    background-size: cover;
+    border: none;
+    background-color: #000;
+}
+
+.cardpopup__btn:hover {
+    cursor: pointer;
+    transform: scale(1.2);
+    transition: ease .3s;
+    opacity: .7;
+}
+
+.cardpopup__board {
+    grid-column: 2;
+    grid-row: 2;
+    max-width: 1030px;
+    height: 50vh;
+}

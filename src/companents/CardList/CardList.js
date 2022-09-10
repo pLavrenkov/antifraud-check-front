@@ -59,7 +59,6 @@ function CardList({ data, hasMore, page, pageSize, rowCount, listname, request, 
     useEffect(() => {
         setTimeout(() => {
             handleRequest(request);
-            console.log(pageNumber);
         }, 3000)
     }, [previosPage]);
 
