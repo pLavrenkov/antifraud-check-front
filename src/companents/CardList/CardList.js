@@ -57,10 +57,10 @@ function CardList({ data, hasMore, page, pageSize, rowCount, listname, request, 
     }
 
     useEffect(() => {
-        setTimeout(() => {
-            handleRequest(request);
-        }, 3000)
-    }, [previosPage]);
+         setTimeout(() => {
+             handleRequest(request);
+         }, 3000)
+     }, [previosPage]);
 
     console.log(cards);
     console.log(`наличие страниц: ${morePages}, номер страницы: ${pageNumber}, количество карточек на страницу: ${cardsPageSet}`);

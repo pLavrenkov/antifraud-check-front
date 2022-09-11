@@ -12,7 +12,7 @@ function TransparentBuisness() {
     const [resAllData, setResAllData] = useState({});
     const [resUlData, setResUlData] = useState([]);
     const [serverMessage, setServerMessage] = useState('');
-    const [isPopupOpen, setIsPopupOpen] = useState(true);
+    const [isPopupOpen, setIsPopupOpen] = useState(false);
     const [cardData, setCardData] = useState({});
 
     const handleRequest = (req) => {
