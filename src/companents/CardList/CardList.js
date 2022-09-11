@@ -1,6 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import CardUl from "../Card/CardUl";
+import Preloader from "../Preloader/Preloader";
 
 import * as constants from "../../utils/constants";
 import * as Api from "../../utils/TransBuisApi";
@@ -12,6 +13,7 @@ function CardList({ data, hasMore, page, pageSize, rowCount, listname, request, 
     const [cardsPageSet, setCardsPageSet] = useState(pageSize);
     const [previosPage, setPreviosPage] = useState(1);
     const [error, setError] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         setCards(data);
@@ -35,10 +37,12 @@ function CardList({ data, hasMore, page, pageSize, rowCount, listname, request, 
                 setMorePages(data.ul.hasMore);
                 setPageNumber(data.ul.page);
                 setCardsPageSet(data.ul.pageSize);
+                setIsLoading(false);
             })
             .catch((err) => {
                 setError(`Произошла ошибка: ${err.message}`)
                 setPageNumber(previosPage);
+                setIsLoading(false);
             })
     }
 
@@ -55,7 +59,8 @@ function CardList({ data, hasMore, page, pageSize, rowCount, listname, request, 
     }
 
     useEffect(() => {
-        pageNumber !== previosPage &&
+        pageNumber !== previosPage && setIsLoading(true);
+        pageNumber !== previosPage && 
             setTimeout(() => {
                 handleRequest(request);
             }, 3000)
@@ -99,7 +104,7 @@ function CardList({ data, hasMore, page, pageSize, rowCount, listname, request, 
                 }
             </div>
             <p className="cardlist__error">{error}</p>
-
+            <Preloader isOpen={isLoading} />
         </section>
     )
 }
