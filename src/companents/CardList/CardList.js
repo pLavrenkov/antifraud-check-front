@@ -5,8 +5,6 @@ import CardUl from "../Card/CardUl";
 import * as constants from "../../utils/constants";
 import * as Api from "../../utils/TransBuisApi";
 
-const Lazy = React.lazy(() => import('../Card/CardUl'));
-
 function CardList({ data, hasMore, page, pageSize, rowCount, listname, request, onUlCardClick }) {
     const [cards, setCards] = useState(data);
     const [morePages, setMorePages] = useState(hasMore);
@@ -57,13 +55,14 @@ function CardList({ data, hasMore, page, pageSize, rowCount, listname, request, 
     }
 
     useEffect(() => {
-         setTimeout(() => {
-             handleRequest(request);
-         }, 3000)
-     }, [previosPage]);
+        pageNumber !== previosPage &&
+            setTimeout(() => {
+                handleRequest(request);
+            }, 3000)
+    }, [pageNumber]);
 
     console.log(cards);
-    console.log(`наличие страниц: ${morePages}, номер страницы: ${pageNumber}, количество карточек на страницу: ${cardsPageSet}`);
+    console.log(`наличие страниц: ${morePages}, номер страницы: ${pageNumber}, предыдущая страница: ${previosPage}, количество карточек на страницу: ${cardsPageSet}`);
 
     return (
         <section className="cardlist">
