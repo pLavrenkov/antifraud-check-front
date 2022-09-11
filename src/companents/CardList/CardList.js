@@ -14,8 +14,10 @@ function CardList({ data, hasMore, page, pageSize, rowCount, listname, request, 
     const [previosPage, setPreviosPage] = useState(1);
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    const [isPageReq, setIsPageReq] = useState(false);
 
     useEffect(() => {
+        setIsPageReq(false);
         setCards(data);
         setMorePages(hasMore);
         setPageNumber(page);
@@ -47,20 +49,22 @@ function CardList({ data, hasMore, page, pageSize, rowCount, listname, request, 
     }
 
     const backPage = () => {
+        setIsPageReq(true);
         setPreviosPage(pageNumber);
         setPageNumber(pageNumber - 1);
         setError('');
     }
 
     const nextPage = () => {
+        setIsPageReq(true);
         setPreviosPage(pageNumber);
         setPageNumber(pageNumber + 1);
         setError('');
     }
 
     useEffect(() => {
-        pageNumber !== previosPage && setIsLoading(true);
-        pageNumber !== previosPage && 
+        isPageReq && setIsLoading(true);
+        isPageReq && 
             setTimeout(() => {
                 handleRequest(request);
             }, 3000)
@@ -68,6 +72,7 @@ function CardList({ data, hasMore, page, pageSize, rowCount, listname, request, 
 
     console.log(cards);
     console.log(`наличие страниц: ${morePages}, номер страницы: ${pageNumber}, предыдущая страница: ${previosPage}, количество карточек на страницу: ${cardsPageSet}`);
+    console.log(`Запрос от casrList: ${isPageReq}`);
 
     return (
         <section className="cardlist">
