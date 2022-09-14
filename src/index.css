@@ -11,6 +11,7 @@
 
 /*импорт компанента MainPage*/
 @import url(./companents/MainPage/MainPage.css);
+@import url(./companents/LoaderAnimation/LoaderAnimation.css);
 
 /*импорт компанента "Узнать ИНН*/
 @import url(./companents/InnPage/InnPage.css);
@@ -26,3 +27,6 @@
 @import url(./companents/Form/Form.css);
 @import url(./companents/Preloader/Preloader.css);
 
+/*карточки*/
+@import url(./companents/CompanyDetails/CompanyDetails.css);
+@import url(./companents/RiskFactor/RiskFactor.css);

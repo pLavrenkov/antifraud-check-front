@@ -6,7 +6,7 @@ import CardList from "../CardList/CardList";
 
 import SearchForm from "../SearchForm/SearchForm";
 import CardPopup from "../CardPopup/CardPopup";
-import Preloader from "../Preloader/Preloader";
+import LoaderAnimation from "../LoaderAnimation/LoaderAnimation";
 
 function TransparentBuisness() {
     const [request, setRequest] = useState(localStorage.getItem("trbuisreq") || '');
@@ -49,7 +49,7 @@ function TransparentBuisness() {
     }
 
     const handleUlCardClick = (request) => {
-        handlePopupOpen();
+        setIsLoaderOpen(true);
         Api.getUl(request.toString())
             .then((data) => {
                 console.log(data);
@@ -57,8 +57,15 @@ function TransparentBuisness() {
                 setTimeout(() => {
                     Api.getUl(res.toString())
                         .then((ul) => {
+                            handlePopupOpen();
                             console.log(ul);
                             setCardData(ul);
+                            setIsLoaderOpen(false);
+                        })
+                        .catch((err) => {
+                            setIsLoaderOpen(false);
+                            setServerMessage(`Произошла ошибка: ${err.message}`);
+                            console.log(err);
                         })
 
                 }, 2000)
@@ -103,7 +110,7 @@ function TransparentBuisness() {
                 <p>{request && 'Результаты не найдены'}</p>
             }
             <CardPopup isOpen={isPopupOpen} onClose={handlePopupClosed} cardData={cardData} />
-            <Preloader isOpen={isLoaderOpen} />
+            <LoaderAnimation isOpen={isLoaderOpen} />
         </section>
     )
 }

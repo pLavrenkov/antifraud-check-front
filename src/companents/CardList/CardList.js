@@ -92,6 +92,7 @@ function CardList({ data, hasMore, page, pageSize, rowCount, listname, request, 
                             regionname={item.regionname ? item.regionname : "регион не указан"}
                             token={item.token}
                             yearcode={item.yearcode}
+                            listname={listname}
                             onCardClick={onUlCardClick}
                         />
                     )

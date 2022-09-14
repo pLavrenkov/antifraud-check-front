@@ -1,0 +1,14 @@
+.details {
+    box-sizing: border-box;
+    width: 100%;
+    background-color: #DCDCDC;
+    color: #000;
+    border-radius: 3px;
+    box-shadow: 2px 2px 5px #F8F8FF;
+    padding: 25px;
+}
+
+.details__title {
+    font-weight: 700;
+    font-size: 18px;
+}
