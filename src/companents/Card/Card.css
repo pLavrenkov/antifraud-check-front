@@ -96,7 +96,7 @@
 .card__field_type_okved::before {
     position: absolute;
     content: '';
-    background-image: url(../../images/tools.svg);
+    background-image: url(../../images/tools_black.svg);
     background-position: center;
     background-size: cover;
     fill: #000;

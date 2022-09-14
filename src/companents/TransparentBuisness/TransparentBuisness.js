@@ -6,14 +6,16 @@ import CardList from "../CardList/CardList";
 
 import SearchForm from "../SearchForm/SearchForm";
 import CardPopup from "../CardPopup/CardPopup";
+import Preloader from "../Preloader/Preloader";
 
 function TransparentBuisness() {
-    const [request, setRequest] = useState('');
+    const [request, setRequest] = useState(localStorage.getItem("trbuisreq") || '');
     const [resAllData, setResAllData] = useState({});
     const [resUlData, setResUlData] = useState([]);
     const [serverMessage, setServerMessage] = useState('');
     const [isPopupOpen, setIsPopupOpen] = useState(false);
     const [cardData, setCardData] = useState({});
+    const [isLoaderOpen, setIsLoaderOpen] = useState(false);
 
     const handleRequest = (req) => {
         setServerMessage('');
@@ -23,17 +25,27 @@ function TransparentBuisness() {
                 console.log(data);
                 setResAllData(data);
                 setResUlData(Array.from(data.ul.data));
+                setIsLoaderOpen(false);
             })
             .catch((err) => {
+                setIsLoaderOpen(false);
                 setServerMessage(`Произошла ошибка: ${err.message}`);
             })
     }
 
     //console.log(resAllData.ul.hasMore);
 
+    useEffect(() => {
+        localStorage.getItem("trbuisreq") &&
+            handleRequest(localStorage.getItem("trbuisreq"));
+    }, [])
+
     const handleSubmit = (data) => {
         setRequest(data.search);
-        handleRequest(data.search);
+        setIsLoaderOpen(true);
+        setRequest(data.search);
+        localStorage.setItem("trbuisreq", data.search);
+        setTimeout(() => handleRequest(data.search), 2000);
     }
 
     const handleUlCardClick = (request) => {
@@ -44,10 +56,10 @@ function TransparentBuisness() {
                 const res = new URLSearchParams({ type: '', method: "get-response", id: data.id, token: data.token, type1: '' })
                 setTimeout(() => {
                     Api.getUl(res.toString())
-                    .then((ul) => {
-                        console.log(ul);
-                        setCardData(ul);
-                    })
+                        .then((ul) => {
+                            console.log(ul);
+                            setCardData(ul);
+                        })
 
                 }, 2000)
             })
@@ -63,13 +75,13 @@ function TransparentBuisness() {
 
     useEffect(() => {
         const closeByEsc = (e) => {
-          if (e.key === 'Escape') {
-            handlePopupClosed();
-          }
+            if (e.key === 'Escape') {
+                handlePopupClosed();
+            }
         }
         window.addEventListener('keydown', closeByEsc);
         return () => window.removeEventListener('keydown', closeByEsc);
-      }, []);
+    }, []);
 
     return (
         <section className="trans-buisness">
@@ -88,9 +100,10 @@ function TransparentBuisness() {
                     onUlCardClick={handleUlCardClick}
                 />
                 :
-                <p>Результаты не найдены</p>
+                <p>{request && 'Результаты не найдены'}</p>
             }
-            <CardPopup isOpen={isPopupOpen} onClose={handlePopupClosed} cardData={cardData}/>
+            <CardPopup isOpen={isPopupOpen} onClose={handlePopupClosed} cardData={cardData} />
+            <Preloader isOpen={isLoaderOpen} />
         </section>
     )
 }
