@@ -60,7 +60,7 @@ function CompanyDetails({ cardData }) {
                     <div className="details__props-block details__props-block_type_cease">
                         <h4 className="details__props-title details__props-title_type_cease">Сведения о прекращении деятельности</h4>
                         <ul className="details__prop-module details__prop-module_type_cease"> 
-                            <li className="details__prop details__prop_type_date details__prop_type_cease">{constans.formatDate(constans.formatDate(cardData.vyp.ДатаСтатусЮЛ) || '')}</li>
+                            <li className="details__prop details__prop_type_date details__prop_type_cease">{constans.formatDate(cardData.vyp.ДатаСтатусЮЛ) || ''}</li>
                             <li className="details__prop details__prop_type_way details__prop_type_cease">{cardData.vyp.НаимСтатусЮЛ}</li>
                         </ul>
                     </div>

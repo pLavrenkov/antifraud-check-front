@@ -51,8 +51,7 @@ export const formatDate = (date) => {
     const d = date.replace(/(\d{4})-(\d{2})-(\d{2})/, (match, ser1, ser2, ser3) => {
         return `${ser3}.${ser2}.${ser1}`
     });
-    return d;
-    /*
+    
     const g = d.match(/\d{2}.\d{2}.\d{4}/);
-    return g;*/
+    return g;
 }
