@@ -1,14 +1,217 @@
 .details {
     box-sizing: border-box;
-    width: 100%;
+    width: 1040px;
     background-color: #DCDCDC;
     color: #000;
     border-radius: 3px;
     box-shadow: 2px 2px 5px #F8F8FF;
-    padding: 25px;
+    padding: 35px;
+    display: flex;
+    flex-direction: column;
+}
+
+.details__status {
+    width: 100%;
+    height: 25px;
+    padding: 0;
+    margin: 0;
+    text-align: end;
+    color: #CD5C5C;
+    font-weight: 700;
+    font-size: 18px;
+    padding-bottom: 10px;
+}
+
+.details__status_type_open {
+    color: #32CD32;
 }
 
 .details__title {
     font-weight: 700;
     font-size: 18px;
+}
+
+.detais__address {
+    font-size: 14px;
+    padding: 20px 0;
+    border-bottom: #6e6e6e solid 1px;
+    margin: 0 0 25px;
+}
+
+.details__props {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 15px;
+}
+
+.details__props-block {
+    box-sizing: border-box;
+    width: 50%;
+    border-right: #6e6e6e solid 1px;
+    padding: 0 25px;
+}
+
+.details__props-block:last-child {
+    border-right: none;
+}
+
+.details__props-title {
+    margin: 0;
+    font-size: 14px;
+}
+
+.details__prop-module {
+    list-style: none;
+    margin: 0;
+    padding: 10px 0;
+}
+
+.details__prop {
+    font-size: 12px;
+    padding: 5px 0;
+}
+
+.details__prop_type_ogrn {
+    position: relative;
+    padding-left: 40px;
+}
+
+.details__prop_type_ogrn::before {
+    position: absolute;
+    content: 'ОГРН';
+    top: 5px;
+    left: -1px;
+    width: 15px;
+    height: 12px;
+    background-color: #DCDCDC;
+    font-weight: 700;
+    font-size: 13px;
+}
+
+.details__prop_type_inn {
+    position: relative;
+    padding-left: 40px;
+}
+
+.details__prop_type_inn::before {
+    position: absolute;
+    content: 'ИНН';
+    top: 5px;
+    left: 0;
+    width: 15px;
+    height: 12px;
+    background-color: #DCDCDC;
+    font-weight: 700;
+    font-size: 13px;
+}
+
+.details__prop_type_kpp {
+    position: relative;
+    padding-left: 40px;
+}
+
+.details__prop_type_kpp::before {
+    position: absolute;
+    content: 'КПП';
+    top: 5px;
+    left: 0;
+    width: 15px;
+    height: 12px;
+    background-color: #DCDCDC;
+    font-weight: 700;
+    font-size: 13px;
+}
+
+.details__prop_type_createStatement {
+    position: relative;
+    padding-left: 40px;
+}
+
+.details__prop_type_createStatement::before {
+    position: absolute;
+    content: '';
+    top: 5px;
+    left: 0;
+    background-image: url(../../images/statement.svg);
+    background-position: 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 15px;
+    height: 15px;
+    background-color: #DCDCDC;
+    font-weight: 700;
+}
+
+.details__prop_type_date {
+    position: relative;
+    padding-left: 40px;
+}
+
+.details__prop_type_date::before {
+    position: absolute;
+    content: '';
+    top: 5px;
+    left: 0;
+    background-image: url(../../images/date.svg);
+    background-position: 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 15px;
+    height: 15px;
+    background-color: #DCDCDC;
+    font-weight: 700;
+}
+
+.details__prop_type_way {
+    position: relative;
+    padding-left: 40px;
+}
+
+.details__prop_type_way::before {
+    position: absolute;
+    content: '';
+    top: 5px;
+    left: 0;
+    background-image: url(../../images/way.svg);
+    background-position: 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 15px;
+    height: 15px;
+    background-color: #DCDCDC;
+    font-weight: 700;
+}
+
+
+@media screen and (max-width: 1150px) {
+    .details {
+        width: 100%
+    }
+
+    .detais__address {
+        margin: 0;
+    }
+
+    .details__props {
+        flex-direction: column;
+        margin: 0;
+    }
+
+    .details__props-block {
+        width: 100%;
+        border-right: none;
+        border-bottom: #6e6e6e solid 1px;
+        padding: 10px 0;
+    }
+
+    .details__props-block:last-child {
+        border-bottom: none;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .details {
+        width: 100%;
+    }
 }

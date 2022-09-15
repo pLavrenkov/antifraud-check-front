@@ -70,6 +70,11 @@ function TransparentBuisness() {
 
                 }, 2000)
             })
+            .catch((err) => {
+                setIsLoaderOpen(false);
+                setServerMessage(`Произошла ошибка: ${err.message}`);
+                console.log(err);
+            })
     }
 
     const handlePopupOpen = () => {

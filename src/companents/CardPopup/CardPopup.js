@@ -14,9 +14,6 @@ function CardPopup({ isOpen, onClose, cardData, listname }) {
                 <button type="button" onClick={onClose} className="cardpopup__btn" />
                 <div className="cardpopup__board">
                     {cardData.type && cardData.type === 1 && <CompanyDetails cardData={cardData} />}
-
-                    ПОКА НИЧЕГО НЕТ, НО БУДЕТ КАРТОЧКА
-
                 </div>
             </div>
         </section>

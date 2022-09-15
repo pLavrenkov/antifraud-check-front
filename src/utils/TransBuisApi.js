@@ -38,6 +38,7 @@ export const getUl = (request) => {
                 //console.log(res);
                 return res.json();
             } else {
+                console.log(res);
                 throw new Error(`запрос на Прозрачный Бизнес обработан с ошибкой сервера`);
             }
         })
