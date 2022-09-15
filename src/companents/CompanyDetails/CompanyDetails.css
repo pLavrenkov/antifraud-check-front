@@ -8,6 +8,7 @@
     padding: 35px;
     display: flex;
     flex-direction: column;
+    z-index: 1;
 }
 
 .details__status {
@@ -207,6 +208,14 @@
     width: 30%;
 }
 
+.details__risk-factors {
+    width: 100%;
+    list-style: none;
+    margin: 0;
+    padding: 15px 25px;
+    border-top: #6e6e6e solid 1px;
+    border-bottom: #6e6e6e solid 1px;
+}
 
 @media screen and (max-width: 1150px) {
     .details {
@@ -231,6 +240,10 @@
 
     .details__props-block:last-child {
         border-bottom: none;
+    }
+
+    .details__risk-factors {
+        padding: 15px 0;
     }
 }
 

@@ -48,10 +48,13 @@ export const searchTrBuisAllRequest = {
 
 // перевод даты из формата YYYY-MM-DD в DD-MM-YYYY
 export const formatDate = (date) => {
-    const d = date.replace(/(\d{4})-(\d{2})-(\d{2})/, (match, ser1, ser2, ser3) => {
-        return `${ser3}.${ser2}.${ser1}`
-    });
-    
-    const g = d.match(/\d{2}.\d{2}.\d{4}/);
-    return g;
+    if (!date) {
+        return '';
+    } else {
+        const d = date.replace(/(\d{4})-(\d{2})-(\d{2})/, (match, ser1, ser2, ser3) => {
+            return `${ser3}.${ser2}.${ser1}`
+        });
+        const g = d.match(/\d{2}.\d{2}.\d{4}/);
+        return g;
+    }
 }

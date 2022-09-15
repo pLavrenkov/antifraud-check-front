@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 import RiskFactor from "../RiskFactor/RistFactor";
 import * as constans from "../../utils/constants";
+import * as riskFactors from "../../utils/riskFactors";
+import questionYellow from "../../images/question__yell.svg";
+import markGreen from "../../images/mark__green.svg";
+import exclamationRed from "../../images/exclamation__red.svg";
 
 function CompanyDetails({ cardData }) {
     const [address, setAddress] = useState('');
@@ -59,13 +63,18 @@ function CompanyDetails({ cardData }) {
                 isEntityClosed ?
                     <div className="details__props-block details__props-block_type_cease">
                         <h4 className="details__props-title details__props-title_type_cease">Сведения о прекращении деятельности</h4>
-                        <ul className="details__prop-module details__prop-module_type_cease"> 
+                        <ul className="details__prop-module details__prop-module_type_cease">
                             <li className="details__prop details__prop_type_date details__prop_type_cease">{constans.formatDate(cardData.vyp.ДатаСтатусЮЛ) || ''}</li>
                             <li className="details__prop details__prop_type_way details__prop_type_cease">{cardData.vyp.НаимСтатусЮЛ}</li>
                         </ul>
                     </div>
                     :
-                    <RiskFactor image={'Картинка'} title={'Риск-фактор'} status={true}/>
+                    <ul className="details__risk-factors">
+                        {cardData.vyp.invalid === 1 ?
+                            <RiskFactor image={exclamationRed} title={'недействительный адрес'} status={true} /> :
+                            <RiskFactor image={markGreen} title={'претензий к адресу нет'} status={false} />
+                        }
+                    </ul>
             }
             <ul className="details__factors">
             </ul>

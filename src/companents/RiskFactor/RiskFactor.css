@@ -1,0 +1,17 @@
+.risk-faktor {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    padding: 10px 0;
+    align-items: center;
+}
+
+.risk-factor__image {
+    width: 20px;
+    height: 20px;
+    padding-right: 50px;
+}
+
+.risk-factor__title {
+    margin: 0;
+}
