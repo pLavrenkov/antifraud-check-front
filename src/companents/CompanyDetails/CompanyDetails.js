@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import RiskFactor from "../RiskFactor/RistFactor";
 import * as constans from "../../utils/constants";
 
 function CompanyDetails({ cardData }) {
@@ -32,7 +33,7 @@ function CompanyDetails({ cardData }) {
     return (
         <section className="details">
             <p className={isEntityClosed ? "details__status" : "details__status details__status_type_open"}>{isEntityClosed ? 'ДЕЯТЕЛЬНОСТЬ ПРЕКРАЩЕНА' : 'ДЕЙСТВУЮЩЕЕ'}</p>
-            <h1 className="details__title">{`${cardData.vyp.НаимЮЛПолн} // ${cardData.vyp.НаимЮЛСокр}`}</h1>
+            <h1 className="details__title">{`${cardData.vyp.НаимЮЛПолн || ''} // ${cardData.vyp.НаимЮЛСокр || ''}`}</h1>
             <p className="detais__address">{address}</p>
             <div className="details__props">
                 <div className="details__props-block">
@@ -54,6 +55,18 @@ function CompanyDetails({ cardData }) {
                     </ul>
                 </div>
             </div>
+            {
+                isEntityClosed ?
+                    <div className="details__props-block details__props-block_type_cease">
+                        <h4 className="details__props-title details__props-title_type_cease">Сведения о прекращении деятельности</h4>
+                        <ul className="details__prop-module details__prop-module_type_cease"> 
+                            <li className="details__prop details__prop_type_date details__prop_type_cease">{constans.formatDate(constans.formatDate(cardData.vyp.ДатаСтатусЮЛ) || '')}</li>
+                            <li className="details__prop details__prop_type_way details__prop_type_cease">{cardData.vyp.НаимСтатусЮЛ}</li>
+                        </ul>
+                    </div>
+                    :
+                    <RiskFactor image={'Картинка'} title={'Риск-фактор'} status={true}/>
+            }
             <ul className="details__factors">
             </ul>
         </section>

@@ -42,7 +42,7 @@ export const searchTrBuisAllRequest = {
     formUlDoc: '',
     formIpDoc: '',
     ifnsDoc: '',
-    dateFromDoc: '', 
+    dateFromDoc: '',
     dateToDoc: '',
 }
 
@@ -52,4 +52,7 @@ export const formatDate = (date) => {
         return `${ser3}.${ser2}.${ser1}`
     });
     return d;
+    /*
+    const g = d.match(/\d{2}.\d{2}.\d{4}/);
+    return g;*/
 }
