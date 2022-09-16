@@ -46,7 +46,7 @@ export const searchTrBuisAllRequest = {
     dateToDoc: '',
 }
 
-// перевод даты из формата YYYY-MM-DD в DD-MM-YYYY
+// перевод даты из формата YYYY-MM-DD в DD.MM.YYYY
 export const formatDate = (date) => {
     if (!date) {
         return '';

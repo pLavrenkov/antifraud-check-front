@@ -79,25 +79,27 @@ function CompanyDetails({ cardData }) {
                             <RiskFactor image={markGreen} title={'претензии к адресу места нахождения отсутствуют'} status={false} />
                         }
                         {/* адрес массовой регистрации */}
-                        {cardData.masaddress.length && cardData.masaddress.length > 5 ?
-                            <RiskFactor image={exclamationRed} title={`по адресу зарегистрировано ${cardData.masaddress.length} других юридических лиц(-а)`} status={true} /> :
-                            cardData?.masaddress?.length > 1 ?
-                                <RiskFactor image={questionYellow} title={`по адресу зарегистрировано ${cardData.masaddress.length} других юридических лиц(-а)`} status={true} /> :
-                                <RiskFactor image={markGreen} title={`по адресу зарегистрировано ${cardData.masaddress.length || 0} других юридических лиц(-а)`} status={true} />
+                        {!cardData.masaddress || !cardData.masaddress.length ?
+                            <RiskFactor image={markGreen} title={`по адресу не зарегистрировано других юридических лиц(-а)`} status={true} /> :
+                            cardData.masaddress.length > 5 ?
+                                <RiskFactor image={exclamationRed} title={`по адресу зарегистрировано ${cardData.masaddress.length} других юридических лиц`} status={true} /> :
+                                cardData?.masaddress?.length > 1 ?
+                                    <RiskFactor image={questionYellow} title={`по адресу зарегистрировано ${cardData.masaddress.length} других юридических лиц(-а)`} status={true} /> :
+                                    <RiskFactor image={markGreen} title={`по адресу зарегистрировано ${cardData.masaddress.length || 0} других юридических лиц(-а)`} status={true} />
                         }
                         {/* массовый руководитель */}
                         {cardData.vyp.masruk && riskFactors.sortArrByProp(cardData.vyp.masruk) > 3 ?
                             <RiskFactor image={exclamationRed} title={`руководитель числится в ${riskFactors.sortArrByProp(cardData.vyp.masruk)} организации(-ях)`} status={true} /> :
                             riskFactors.sortArrByProp(cardData.vyp.masruk) > 1 ?
                                 <RiskFactor image={questionYellow} title={`руководитель числится в ${riskFactors.sortArrByProp(cardData.vyp.masruk)} организации(-ях)`} status={true} /> :
-                                <RiskFactor image={markGreen} title={`руководитель не числится в других организации(-ях)`} status={true} />
+                                <RiskFactor image={markGreen} title={`руководитель не числится в других организацях`} status={true} />
                         }
                         {/* массовый учредитель */}
                         {cardData.vyp.masuchr && riskFactors.sortArrByProp(cardData.vyp.masuchr) > 3 ?
                             <RiskFactor image={exclamationRed} title={`один из учредителей числится в ${riskFactors.sortArrByProp(cardData.vyp.masuchr)} организации(-ях)`} status={true} /> :
                             riskFactors.sortArrByProp(cardData.vyp.masuchr) > 1 ?
                                 <RiskFactor image={questionYellow} title={`один из учредителей числится в ${riskFactors.sortArrByProp(cardData.vyp.masuchr)} организации(-ях)`} status={true} /> :
-                                <RiskFactor image={markGreen} title={`ни один из учредителей не числится в других организации(-ях)`} status={true} />
+                                <RiskFactor image={markGreen} title={`ни один из учредителей не числится в других организацях`} status={true} />
                         }
                         {/* налоговая отчетность */}
                         {cardData.vyp.pr_otch && cardData.vyp.pr_otch === 1 ?
@@ -117,7 +119,7 @@ function CompanyDetails({ cardData }) {
                         {/* численность */}
                         {!cardData.is_p_sschr || !cardData.vyp.sschr ?
                             <RiskFactor image={questionYellow} title={`отсутствуют сведения о среднештатной численности`} status={true} /> :
-                             cardData.vyp.sschr > 10 ?
+                            cardData.vyp.sschr > 10 ?
                                 <RiskFactor image={markGreen} title={`среднештатная численность ${cardData.vyp.sschr || 'не установлена'}`} status={true} /> :
                                 cardData.vyp.sschr > 2 ?
                                     <RiskFactor image={questionYellow} title={`среднештатная численность ${cardData.vyp.sschr}`} status={true} /> :
