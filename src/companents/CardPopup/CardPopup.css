@@ -2,17 +2,18 @@
     position: absolute;
     top: 0;
     left: 0;
-    width: 100vw;
+    width: 100%;
     height: 100%;
     display: none;
     background-color: rgba(0, 0, 0, .7);
     opacity: 1;
+    padding-top: 50px;
 }
 
 .cardpopup_type_active {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
 }
 
 .cardpopup__container {
@@ -51,6 +52,10 @@
 }
 
 @media screen and (max-width: 1150px) {
+    .cardpopup {
+        padding-top: 40px;
+    }
+
     .cardpopup__container {
         width: 100%;
         padding: 0 50px;
@@ -58,16 +63,22 @@
 }
 
 @media screen and (max-width: 400px) {
+    .cardpopup {
+        padding-top: 30px;
+    }
+
     .cardpopup__container {
         width: 100%;
         padding: 0 50px;
         grid-template-columns: 1fr;
         grid-gap: 20px;
     }
+
     .cardpopup__btn {
         grid-column: 1;
         justify-self: flex-end;
     }
+
     .cardpopup__board {
         grid-column: 1;
     }

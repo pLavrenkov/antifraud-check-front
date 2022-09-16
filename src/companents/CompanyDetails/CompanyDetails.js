@@ -9,6 +9,7 @@ import exclamationRed from "../../images/exclamation__red.svg";
 function CompanyDetails({ cardData }) {
     const [address, setAddress] = useState('');
     const [isEntityClosed, setIsEntityClosed] = useState(false);
+    const masaddressQuontity = `по адресу зарегистрировано ${cardData?.masaddress?.length || 0} юридических лиц(-а)`;
 
     useEffect(() => {
         if (cardData.vyp.Адрес) {
@@ -33,6 +34,8 @@ function CompanyDetails({ cardData }) {
             setIsEntityClosed(false);
         }
     }, [cardData]);
+
+    console.log(cardData?.masaddress?.length)
 
     return (
         <section className="details">
@@ -70,9 +73,55 @@ function CompanyDetails({ cardData }) {
                     </div>
                     :
                     <ul className="details__risk-factors">
+                        {/* недействительный адрес */}
                         {cardData.vyp.invalid === 1 ?
-                            <RiskFactor image={exclamationRed} title={'недействительный адрес'} status={true} /> :
-                            <RiskFactor image={markGreen} title={'претензий к адресу нет'} status={false} />
+                            <RiskFactor image={exclamationRed} title={'недействительный адрес места нахождения'} status={true} /> :
+                            <RiskFactor image={markGreen} title={'претензии к адресу места нахождения отсутствуют'} status={false} />
+                        }
+                        {/* адрес массовой регистрации */}
+                        {cardData.masaddress.length && cardData.masaddress.length > 5 ?
+                            <RiskFactor image={exclamationRed} title={`по адресу зарегистрировано ${cardData.masaddress.length} других юридических лиц(-а)`} status={true} /> :
+                            cardData?.masaddress?.length > 1 ?
+                                <RiskFactor image={questionYellow} title={`по адресу зарегистрировано ${cardData.masaddress.length} других юридических лиц(-а)`} status={true} /> :
+                                <RiskFactor image={markGreen} title={`по адресу зарегистрировано ${cardData.masaddress.length || 0} других юридических лиц(-а)`} status={true} />
+                        }
+                        {/* массовый руководитель */}
+                        {cardData.vyp.masruk && riskFactors.sortArrByProp(cardData.vyp.masruk) > 3 ?
+                            <RiskFactor image={exclamationRed} title={`руководитель числится в ${riskFactors.sortArrByProp(cardData.vyp.masruk)} организации(-ях)`} status={true} /> :
+                            riskFactors.sortArrByProp(cardData.vyp.masruk) > 1 ?
+                                <RiskFactor image={questionYellow} title={`руководитель числится в ${riskFactors.sortArrByProp(cardData.vyp.masruk)} организации(-ях)`} status={true} /> :
+                                <RiskFactor image={markGreen} title={`руководитель не числится в других организации(-ях)`} status={true} />
+                        }
+                        {/* массовый учредитель */}
+                        {cardData.vyp.masuchr && riskFactors.sortArrByProp(cardData.vyp.masuchr) > 3 ?
+                            <RiskFactor image={exclamationRed} title={`один из учредителей числится в ${riskFactors.sortArrByProp(cardData.vyp.masuchr)} организации(-ях)`} status={true} /> :
+                            riskFactors.sortArrByProp(cardData.vyp.masuchr) > 1 ?
+                                <RiskFactor image={questionYellow} title={`один из учредителей числится в ${riskFactors.sortArrByProp(cardData.vyp.masuchr)} организации(-ях)`} status={true} /> :
+                                <RiskFactor image={markGreen} title={`ни один из учредителей не числится в других организации(-ях)`} status={true} />
+                        }
+                        {/* налоговая отчетность */}
+                        {cardData.vyp.pr_otch && cardData.vyp.pr_otch === 1 ?
+                            <RiskFactor image={exclamationRed} title={'не сдает налоговую отчетность более года'} status={true} /> :
+                            <RiskFactor image={markGreen} title={'сдает налоговую отчетность'} status={true} />
+                        }
+                        {/* налоговые нарушения */}
+                        {cardData.is_p_offense ?
+                            <RiskFactor image={exclamationRed} title={`есть налоговые нарушения на ${cardData.vyp.offensesum || 'не установленную сумму'} рублей`} status={true} /> :
+                            <RiskFactor image={markGreen} title={'нет налоговых нарушений'} status={true} />
+                        }
+                        {/* судебная задолженность по налогам */}
+                        {cardData.vyp.pr_zd && cardData.vyp.pr_zd === 1 ?
+                            <RiskFactor image={exclamationRed} title={'есть задолженность по налогам, переданная приставам'} status={true} /> :
+                            <RiskFactor image={markGreen} title={'нет задолженности по налогам, переданной приставам'} status={true} />
+                        }
+                        {/* численность */}
+                        {!cardData.is_p_sschr || !cardData.vyp.sschr ?
+                            <RiskFactor image={questionYellow} title={`отсутствуют сведения о среднештатной численности`} status={true} /> :
+                             cardData.vyp.sschr > 10 ?
+                                <RiskFactor image={markGreen} title={`среднештатная численность ${cardData.vyp.sschr || 'не установлена'}`} status={true} /> :
+                                cardData.vyp.sschr > 2 ?
+                                    <RiskFactor image={questionYellow} title={`среднештатная численность ${cardData.vyp.sschr}`} status={true} /> :
+                                    <RiskFactor image={exclamationRed} title={`среднештатная численность ${cardData.vyp.sschr}`} status={true} />
                         }
                     </ul>
             }

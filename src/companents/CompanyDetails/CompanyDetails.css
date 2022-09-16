@@ -95,7 +95,7 @@
 
 .details__prop_type_ogrn {
     position: relative;
-    padding-left: 40px;
+    padding-left: 50px;
 }
 
 .details__prop_type_ogrn::before {
@@ -112,7 +112,7 @@
 
 .details__prop_type_inn {
     position: relative;
-    padding-left: 40px;
+    padding-left: 50px;
 }
 
 .details__prop_type_inn::before {
@@ -129,7 +129,7 @@
 
 .details__prop_type_kpp {
     position: relative;
-    padding-left: 40px;
+    padding-left: 50px;
 }
 
 .details__prop_type_kpp::before {
@@ -146,7 +146,7 @@
 
 .details__prop_type_createStatement {
     position: relative;
-    padding-left: 40px;
+    padding-left: 50px;
 }
 
 .details__prop_type_createStatement::before {
@@ -166,7 +166,7 @@
 
 .details__prop_type_date {
     position: relative;
-    padding-left: 40px;
+    padding-left: 50px;
 }
 
 .details__prop_type_date::before {
@@ -186,7 +186,7 @@
 
 .details__prop_type_way {
     position: relative;
-    padding-left: 40px;
+    padding-left: 50px;
 }
 
 .details__prop_type_way::before {
