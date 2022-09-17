@@ -204,6 +204,66 @@
     font-weight: 700;
 }
 
+.details__prop_type_coins {
+    position: relative;
+    padding-left: 50px;
+}
+
+.details__prop_type_coins::before {
+    position: absolute;
+    content: '';
+    top: 3px;
+    left: 0;
+    background-image: url(../../images/coins.svg);
+    background-position: 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 15px;
+    height: 15px;
+    background-color: #DCDCDC;
+    font-weight: 700;
+}
+
+.details__prop_type_moneybag {
+    position: relative;
+    padding-left: 50px;
+}
+
+.details__prop_type_moneybag::before {
+    position: absolute;
+    content: '';
+    top: 3px;
+    left: 0;
+    background-image: url(../../images/moneybag.svg);
+    background-position: 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 15px;
+    height: 15px;
+    background-color: #DCDCDC;
+    font-weight: 700;
+}
+
+.details__prop_type_tax {
+    position: relative;
+    padding-left: 50px;
+}
+
+.details__prop_type_tax::before {
+    position: absolute;
+    content: '';
+    top: 3px;
+    left: 0;
+    background-image: url(../../images/tax.svg);
+    background-position: 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 15px;
+    height: 15px;
+    background-color: #DCDCDC;
+    font-weight: 700;
+}
+
 .details__prop_type_cease:first-child {
     width: 30%;
 }
@@ -212,7 +272,7 @@
     box-sizing: border-box;
     width: 100%;
     list-style: none;
-    margin: 0;
+    margin: 0 0 25px;
     padding: 15px 25px;
     border-top: #6e6e6e solid 1px;
     border-bottom: #6e6e6e solid 1px;

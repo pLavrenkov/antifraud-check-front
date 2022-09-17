@@ -29,3 +29,46 @@ export const dateOGRNTimePeriodMonths = (data) => {
   console.log(monthsPeriod);
   return monthsPeriod;
 };
+
+// расчет разницы по выручке
+export const revenueDiff = (formArr) => {
+  if (formArr) {
+    formArr.sort((a, b) => b.yearcode - a.yearcode);
+    if (formArr[1].revenue) {
+      return formArr[0].revenue / formArr[1].revenue;
+    }
+    return '';
+  }
+  return '';
+}
+
+export const expenseShare = (formArr) => {
+  if (formArr) {
+    formArr.sort((a, b) => b.yearcode - a.yearcode);
+    if (formArr[0].revenue && formArr[0].expense) {
+      return formArr[0].expense / formArr[0].revenue;
+    }
+    return '';
+  }
+  return '';
+}
+
+export const checkTaxMode = (taxModeArr) => {
+  if (taxModeArr) {
+    taxModeArr.sort((a, b) => b.yearcode - a.yearcode);
+    if (taxModeArr[0].envd === 1) {
+      return 'единый налог на вмененный доход';
+    } else if (taxModeArr[0].eshn === 1) {
+      return 'единый сельскохозяйственный налог';
+    } else if (taxModeArr[0].spr === 1) {
+      return 'режим соглашения по разделу продукции';
+    } else if (taxModeArr[0].usn === 1) {
+      return 'упрощенная система налогобложения';
+    } else if (taxModeArr[0].empty === 1) {
+      return 'основная система налогообложения';
+    } else {
+      return 'система налогообложения не определена';
+    }
+  }
+  return 'система налогообложения не определена';
+}

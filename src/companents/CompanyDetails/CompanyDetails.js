@@ -125,6 +125,7 @@ function CompanyDetails({ cardData }) {
                                     <RiskFactor image={questionYellow} title={`среднештатная численность ${cardData.vyp.sschr}`} status={true} /> :
                                     <RiskFactor image={exclamationRed} title={`среднештатная численность ${cardData.vyp.sschr}`} status={true} />
                         }
+                        {/* срок создания */}
                         {cardData.vyp.ДатаРег && riskFactors.dateRegTimePeriodMonths(cardData.vyp.ДатаРег) > 12 ?
                             <RiskFactor image={markGreen} title={'создано более года назад'} status={true} /> :
                             cardData.vyp.ДатаРег && riskFactors.dateRegTimePeriodMonths(cardData.vyp.ДатаРег) > 3 ?
@@ -137,11 +138,54 @@ function CompanyDetails({ cardData }) {
                                             <RiskFactor image={questionYellow} title={'создано менее года назад'} status={true} /> :
                                             <RiskFactor image={exclamationRed} title={'создано менее трех месяцев назад'} status={true} />
                         }
-                        
+                        {/* уставной капитал */}
+                        {cardData.vyp.СумКап && cardData.vyp.СумКап < 10001 ?
+                            <RiskFactor image={exclamationRed} title={`уставной капитал равен минимальному`} /> :
+                            cardData.vyp.СумКап && cardData.vyp.СумКап < 100000 ?
+                                <RiskFactor image={questionYellow} title={`низкий уставной капитал ${cardData.vyp.СумКап} рублей`} /> :
+                                cardData.vyp.СумКап ?
+                                    <RiskFactor image={markGreen} title={`достаточный уставной капитал ${cardData.vyp.СумКап} рублей`} /> :
+                                    <RiskFactor image={questionYellow} title={`сведения об уставном капитале отсутствуют`} />
+                        }
+                        {/* динамика выручки */}
+                        {cardData.form1 && riskFactors.revenueDiff(cardData.form1) < -.5 ?
+                            <RiskFactor image={exclamationRed} title={`сильное снижение выручки на ${Math.round(riskFactors.revenueDiff(cardData.form1) * 100)} % от прошлого года`} /> :
+                            cardData.form1 && riskFactors.revenueDiff(cardData.form1) < -.001 ?
+                                <RiskFactor image={questionYellow} title={`снижение выручки на ${Math.round(riskFactors.revenueDiff(cardData.form1) * 100)} % от прошлого года`} /> :
+                                cardData.form1 && riskFactors.revenueDiff(cardData.form1) > .001 ?
+                                    <RiskFactor image={markGreen} title={`рост выручки на ${Math.round(riskFactors.revenueDiff(cardData.form1) * 100)} % от прошлого года`} /> :
+                                    <RiskFactor image={questionYellow} title={`релевантные сведения о динамике выручки отсутствуют`} />
+                        }
+                        {/* доля расходов */}
+                        {cardData.form1 && riskFactors.expenseShare(cardData.form1) > 1 ?
+                            <RiskFactor image={exclamationRed} title={`расходы выше выручки и соствляют ${Math.round(riskFactors.expenseShare(cardData.form1) * 100)} % от выручки`} /> :
+                            cardData.form1 && riskFactors.revenueDiff(cardData.form1) > .8 ?
+                                <RiskFactor image={questionYellow} title={`высокие расходы составляют ${Math.round(riskFactors.expenseShare(cardData.form1) * 100)} % от выручки`} /> :
+                                cardData.form1 && riskFactors.revenueDiff(cardData.form1) > 0 ?
+                                    <RiskFactor image={markGreen} title={`расходы составляют ${Math.round(riskFactors.expenseShare(cardData.form1) * 100)} % от выручки`} /> :
+                                    <RiskFactor image={questionYellow} title={`релевантные сведения о доле расходов в выручке отсуствуют`} />
+                        }
                     </ul>
             }
-            <ul className="details__factors">
-            </ul>
+            {
+                isEntityClosed ? '' :
+                    <div className="details__props">
+                        <div className="details__props-block">
+                            <h4 className="details__props-title">Сведения о капитале</h4>
+                            <ul className="details__prop-module">
+                                <li className="details__prop details__prop_type_coins">{`${cardData.vyp.СумКап} рублей`}</li>
+                                <li className="details__prop details__prop_type_moneybag">{cardData.vyp.НаимВидКап}</li>
+                            </ul>
+                        </div>
+                        <div className="details__props-block">
+                            <h4 className="details__props-title">Налоговые сведения</h4>
+                            <ul className="details__prop-module">
+                                <li className="details__prop details__prop_type_coins">{cardData.vyp.taxpaysum ? `${cardData.vyp.taxpaysum} рублей оплаченных налогов` : `сумма оплаченных налогов не известна`}</li>
+                                <li className="details__prop details__prop_type_tax">{riskFactors.checkTaxMode(cardData.taxmode)}</li>
+                            </ul>
+                        </div>
+                    </div>
+            }
         </section>
     )
 }
