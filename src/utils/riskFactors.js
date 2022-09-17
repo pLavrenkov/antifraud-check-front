@@ -6,15 +6,26 @@ export const sortArrByProp = (arr) => {
   return '';
 }
 
-// расчет разницы между датами в месяцах
-export const dateTimePeriodMonths = (data) => {
+// расчет разницы между датами в месяцах, дата регистрации
+export const dateRegTimePeriodMonths = (data) => {
   const curDate = new Date();
   const regDate = new Date(
     data.replace(/(\d{2}).(\d{2}).(\d{4})/, (match, day, month, year) => {
       return `${year}-${month}-${day}`;
     })
   );
-  const month = 365 * 24 * 60 * 60 * 1000;
+  const month = 365 * 24 * 60 * 5 * 1000;
   const monthsPeriod = (curDate.getTime() - regDate.getTime()) / month;
+  console.log(monthsPeriod);
+  return monthsPeriod;
+};
+
+// расчет разницы между датами в месяцах, дата регистрации
+export const dateOGRNTimePeriodMonths = (data) => {
+  const curDate = new Date();
+  const regDate = new Date(data);
+  const month = 365 * 24 * 60 * 5 * 1000;
+  const monthsPeriod = (curDate.getTime() - regDate.getTime()) / month;
+  console.log(monthsPeriod);
   return monthsPeriod;
 };

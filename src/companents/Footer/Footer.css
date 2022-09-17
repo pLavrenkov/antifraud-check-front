@@ -38,3 +38,35 @@
     text-decoration: underline;
     opacity: 1;
 }
+
+@media screen and (max-width: 750px ){
+    .footer {
+        box-sizing: border-box;
+        height: auto;
+        padding: 0;
+    }
+
+    .footer__content {
+        box-sizing: border-box;
+        height: 100%;
+        margin: 0 5px;
+        flex-direction: column-reverse;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .footer__link-container {
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: center;
+        align-items: center;
+        list-style: none;
+        padding: 0;
+    }
+
+    .footer__link {
+        display: block;
+        box-sizing: border-box;
+        padding: 10px 0;
+    }
+}

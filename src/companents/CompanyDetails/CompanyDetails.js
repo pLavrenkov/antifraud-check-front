@@ -125,6 +125,19 @@ function CompanyDetails({ cardData }) {
                                     <RiskFactor image={questionYellow} title={`среднештатная численность ${cardData.vyp.sschr}`} status={true} /> :
                                     <RiskFactor image={exclamationRed} title={`среднештатная численность ${cardData.vyp.sschr}`} status={true} />
                         }
+                        {cardData.vyp.ДатаРег && riskFactors.dateRegTimePeriodMonths(cardData.vyp.ДатаРег) > 12 ?
+                            <RiskFactor image={markGreen} title={'создано более года назад'} status={true} /> :
+                            cardData.vyp.ДатаРег && riskFactors.dateRegTimePeriodMonths(cardData.vyp.ДатаРег) > 3 ?
+                                <RiskFactor image={questionYellow} title={'создано менее года назад'} status={true} /> :
+                                cardData.vyp.ДатаРег && riskFactors.dateRegTimePeriodMonths(cardData.vyp.ДатаРег) > 0 ?
+                                    <RiskFactor image={exclamationRed} title={'создано менее трех месяцев назад'} status={true} /> :
+                                    cardData.vyp.ДатаОГРН && riskFactors.dateOGRNTimePeriodMonths(cardData.vyp.ДатаОГРН) > 12 ?
+                                        <RiskFactor image={markGreen} title={'создано более года назад'} status={true} /> :
+                                        cardData.vyp.ДатаОГРН && riskFactors.dateOGRNTimePeriodMonths(cardData.vyp.ДатаОГРН) > 3 ?
+                                            <RiskFactor image={questionYellow} title={'создано менее года назад'} status={true} /> :
+                                            <RiskFactor image={exclamationRed} title={'создано менее трех месяцев назад'} status={true} />
+                        }
+                        
                     </ul>
             }
             <ul className="details__factors">

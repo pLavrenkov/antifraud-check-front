@@ -47,3 +47,46 @@
     background-color: #000;
     color: #fff;
 }
+
+@media screen and (max-width: 1000px) {
+    .nav__link {
+        padding-left: 5px;
+        width: 25px;
+    }
+
+    .nav__link:hover {
+        width: 100px;
+    }
+
+    .nav__link_type_active {
+        width: 100px;
+    }
+
+    .nav__title {
+        font-size: 14px;
+        max-width: 120px;
+        overflow: hidden;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .nav__link {
+        padding-left: 5px;
+        width: 15px;
+    }
+
+    .nav__link:hover {
+        width: 50px;
+    }
+
+    .nav__link_type_active {
+        width: 40px;
+    }
+
+    .nav__title {
+        font-size: 12px;
+    }
+}
