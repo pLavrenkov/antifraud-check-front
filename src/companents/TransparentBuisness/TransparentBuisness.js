@@ -38,7 +38,9 @@ function TransparentBuisness() {
     }
 
     const handleCardRequest = (cardReq) => {
-        Api.getAll(cardReq)
+        setIsLoaderOpen(true);
+        setTimeout(() => {
+            Api.getAll(cardReq)
             .then((data) => {
                 console.log(data);
                 setResAllData(data);
@@ -46,13 +48,16 @@ function TransparentBuisness() {
                 setIsLoaderOpen(false);
                 setCardRequest('');
                 localStorage.removeItem("cardRequest");
+                setIsLoaderOpen(false);
             })
             .catch((err) => {
                 setIsLoaderOpen(false);
                 setServerMessage(`Произошла ошибка: ${err.message}`);
                 setCardRequest('');
                 localStorage.removeItem("cardRequest");
+                setIsLoaderOpen(false);
             })
+        }, 3000)        
     }
 
     useEffect(() => {

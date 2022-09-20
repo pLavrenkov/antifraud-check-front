@@ -32,6 +32,8 @@ function CompanyDetails({ cardData }) {
         }
         if (cardData.liquidated) {
             setIsEntityClosed(true);
+        } else if (cardData.vyp.НаимСтатусЮЛСокр && cardData.vyp.НаимСтатусЮЛСокр.includes('Прекрат')) {
+            setIsEntityClosed(true);
         } else {
             setIsEntityClosed(false);
         }
