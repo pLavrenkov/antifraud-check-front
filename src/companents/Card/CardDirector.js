@@ -6,12 +6,17 @@ function CardDirector({ inn, token, name, position, cnt }) {
     const [cardRequest, setCardRequest] = useState('');
 
     useEffect(() => {
-        const req = new URLSearchParams({ ...constants.searchTrBuisAllRequest, token, mode: "search-ul", queryUl: name, });
-        setCardRequest(req.toString());
-        localStorage.setItem('cardRequest', req.toString());
-
+        if (token) {
+            const req = new URLSearchParams({ ...constants.searchTrBuisAllRequest, token, mode: "search-ul", queryUl: name, });
+            setCardRequest(req.toString());
+            localStorage.setItem('cardRequest', req.toString());
+        } else {
+            const req = new URLSearchParams({ ...constants.searchTrBuisAllRequest, queryAll: name });
+            setCardRequest(req.toString());
+            localStorage.setItem('cardRequest', req.toString());
+        }
     }, []);
-    
+
     return (
         <section className="card" onClick={localStorage.setItem('cardRequest', cardRequest)}>
             <Link to={{ pathname: "/buisness", state: { cardRequest: cardRequest } }} target={'_blank'} >

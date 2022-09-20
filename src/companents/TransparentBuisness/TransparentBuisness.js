@@ -41,23 +41,23 @@ function TransparentBuisness() {
         setIsLoaderOpen(true);
         setTimeout(() => {
             Api.getAll(cardReq)
-            .then((data) => {
-                console.log(data);
-                setResAllData(data);
-                setResUlData(Array.from(data.ul.data));
-                setIsLoaderOpen(false);
-                setCardRequest('');
-                localStorage.removeItem("cardRequest");
-                setIsLoaderOpen(false);
-            })
-            .catch((err) => {
-                setIsLoaderOpen(false);
-                setServerMessage(`Произошла ошибка: ${err.message}`);
-                setCardRequest('');
-                localStorage.removeItem("cardRequest");
-                setIsLoaderOpen(false);
-            })
-        }, 3000)        
+                .then((data) => {
+                    console.log(data);
+                    setResAllData(data);
+                    setResUlData(Array.from(data.ul.data));
+                    setIsLoaderOpen(false);
+                    setCardRequest('');
+                    localStorage.removeItem("cardRequest");
+                    setIsLoaderOpen(false);
+                })
+                .catch((err) => {
+                    setIsLoaderOpen(false);
+                    setServerMessage(`Произошла ошибка: ${err.message}`);
+                    setCardRequest('');
+                    localStorage.removeItem("cardRequest");
+                    setIsLoaderOpen(false);
+                })
+        }, 3000);
     }
 
     useEffect(() => {
