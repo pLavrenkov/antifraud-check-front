@@ -15,7 +15,7 @@ function CardDirector({ inn, token, name, position, cnt }) {
 
     return (
         <section className="card">
-            <Link to={{ pathname: "/buisness", state: cardRequest }} target={'_blank'} >
+            <Link to={{ pathname: "/buisness", state: { cardRequest: cardRequest } }} target={'_blank'} >
                 <h3 className="card__title">{position}</h3>
                 <p className="card__field">{name}</p>
                 <p className="card__field">{inn}</p>

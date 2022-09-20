@@ -18,8 +18,8 @@ function TransparentBuisness() {
     const [cardData, setCardData] = useState({});
     const [isLoaderOpen, setIsLoaderOpen] = useState(false);
     const location = useLocation();
-    const [cardRequest, setCardRequest] = useState(location.state?.cardRequest || '');
-    console.log(cardRequest);
+    const [cardRequest, setCardRequest] = useState(localStorage.getItem("cardRequest") || '');
+    console.log(location);
 
     const handleRequest = (req) => {
         setServerMessage('');
@@ -45,12 +45,14 @@ function TransparentBuisness() {
                 setResUlData(Array.from(data.ul.data));
                 setIsLoaderOpen(false);
                 setCardRequest('');
+                localStorage.removeItem("cardRequest");
                 location.state.cardRequest = '';
             })
             .catch((err) => {
                 setIsLoaderOpen(false);
                 setServerMessage(`Произошла ошибка: ${err.message}`);
                 setCardRequest('');
+                localStorage.removeItem("cardRequest");
                 location.state.cardRequest = '';
             })
     }
