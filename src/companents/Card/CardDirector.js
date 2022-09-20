@@ -11,10 +11,9 @@ function CardDirector({ inn, token, name, position, cnt }) {
         localStorage.setItem('cardRequest', req.toString());
 
     }, []);
-    console.log(cardRequest);
-
+    
     return (
-        <section className="card">
+        <section className="card" onClick={localStorage.setItem('cardRequest', cardRequest)}>
             <Link to={{ pathname: "/buisness", state: { cardRequest: cardRequest } }} target={'_blank'} >
                 <h3 className="card__title">{position}</h3>
                 <p className="card__field">{name}</p>
