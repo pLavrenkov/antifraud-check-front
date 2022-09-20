@@ -9,6 +9,7 @@ import exclamationRed from "../../images/exclamation__red.svg";
 function CompanyDetails({ cardData }) {
     const [address, setAddress] = useState('');
     const [isEntityClosed, setIsEntityClosed] = useState(false);
+    const [isEntityRedesined, setIsEntityRedisined] = useState(false);
     const masaddressQuontity = `по адресу зарегистрировано ${cardData?.masaddress?.length || 0} юридических лиц(-а)`;
 
     useEffect(() => {
@@ -28,18 +29,25 @@ function CompanyDetails({ cardData }) {
             ${cardData.vyp.Кварт || ''}`
             );
         }
-        if (cardData.vyp.НаимСтатусЮЛСокр) {
+        if (cardData.liquidated) {
             setIsEntityClosed(true);
         } else {
             setIsEntityClosed(false);
         }
+        if (cardData.vyp.НаимСтатусЮЛ && cardData.vyp.НаимСтатусЮЛ.includes('реорг')) {
+            setIsEntityRedisined(true);
+        } else {
+            setIsEntityRedisined(false);
+        }
     }, [cardData]);
+
+
 
     console.log(cardData?.masaddress?.length)
 
     return (
         <section className="details">
-            <p className={isEntityClosed ? "details__status" : "details__status details__status_type_open"}>{isEntityClosed ? 'ДЕЯТЕЛЬНОСТЬ ПРЕКРАЩЕНА' : 'ДЕЙСТВУЮЩЕЕ'}</p>
+            <p className={isEntityClosed ? "details__status" : isEntityRedesined ? "details__status details__status_type_redesined" : "details__status details__status_type_open"}>{isEntityClosed ? 'ДЕЯТЕЛЬНОСТЬ ПРЕКРАЩЕНА' : isEntityRedesined ? 'РЕОРГАНИЗАЦИЯ' : 'ДЕЙСТВУЮЩЕЕ'}</p>
             <h1 className="details__title">{`${cardData.vyp.НаимЮЛПолн || ''} // ${cardData.vyp.НаимЮЛСокр || ''}`}</h1>
             <p className="detais__address">{address}</p>
             <div className="details__props">
@@ -62,6 +70,15 @@ function CompanyDetails({ cardData }) {
                     </ul>
                 </div>
             </div>
+            {isEntityRedesined ?
+                <div className="details__props-block details__props-block_type_redesined">
+                    <h4 className="details__props-title details__props-title_type_redesined">Сведения о реорганизации</h4>
+                    <ul className="details__prop-module details__prop-module_type_cease">
+                        <li className="details__prop details__prop_type_date details__prop_type_cease">{constans.formatDate(cardData.vyp.ДатаСтатусЮЛ) || ''}</li>
+                        <li className="details__prop details__prop_type_way details__prop_type_cease">{cardData.vyp.НаимСтатусЮЛ}</li>
+                    </ul>
+                </div> : ''
+            }
             {
                 isEntityClosed ?
                     <div className="details__props-block details__props-block_type_cease">
