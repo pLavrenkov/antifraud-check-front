@@ -5,6 +5,7 @@ import * as riskFactors from "../../utils/riskFactors";
 import questionYellow from "../../images/question__yell.svg";
 import markGreen from "../../images/mark__green.svg";
 import exclamationRed from "../../images/exclamation__red.svg";
+import CardDirector from "../Card/CardDirector";
 
 function CompanyDetails({ cardData }) {
     const [address, setAddress] = useState('');
@@ -72,7 +73,7 @@ function CompanyDetails({ cardData }) {
             </div>
             {isEntityRedesined ?
                 <div className="details__props-block details__props-block_type_redesined">
-                    <h4 className="details__props-title details__props-title_type_redesined">Сведения о реорганизации</h4>
+                    <h4 className="details__props-title details__props-title_type_long details__props-title_type_redesined">Сведения о реорганизации</h4>
                     <ul className="details__prop-module details__prop-module_type_cease">
                         <li className="details__prop details__prop_type_date details__prop_type_cease">{constans.formatDate(cardData.vyp.ДатаСтатусЮЛ) || ''}</li>
                         <li className="details__prop details__prop_type_way details__prop_type_cease">{cardData.vyp.НаимСтатусЮЛ}</li>
@@ -82,7 +83,7 @@ function CompanyDetails({ cardData }) {
             {
                 isEntityClosed ?
                     <div className="details__props-block details__props-block_type_cease">
-                        <h4 className="details__props-title details__props-title_type_cease">Сведения о прекращении деятельности</h4>
+                        <h4 className="details__props-title details__props-title_type_long details__props-title_type_cease">Сведения о прекращении деятельности</h4>
                         <ul className="details__prop-module details__prop-module_type_cease">
                             <li className="details__prop details__prop_type_date details__prop_type_cease">{constans.formatDate(cardData.vyp.ДатаСтатусЮЛ) || ''}</li>
                             <li className="details__prop details__prop_type_way details__prop_type_cease">{cardData.vyp.НаимСтатусЮЛ}</li>
@@ -201,6 +202,25 @@ function CompanyDetails({ cardData }) {
                                 <li className="details__prop details__prop_type_tax">{riskFactors.checkTaxMode(cardData.taxmode)}</li>
                             </ul>
                         </div>
+                    </div>
+            }
+            {
+                isEntityClosed ? '' :
+                    <div className="details__props-block details__props-block_type_redesined">
+                        <h4 className="details__props-title details__props-title_type_long">Сведения о руководстве</h4>
+                        {cardData.vyp.masruk ?
+                            cardData.vyp.masruk.map((item) => {
+                                return <CardDirector
+                                    key={item.token}
+                                    inn={item.inn}
+                                    token={item.token}
+                                    name={item.name}
+                                    position={item.position}
+                                    cnt={item.cnt}
+                                />
+                            }) :
+                            <p>сведения отсутствуют или скрыты</p>
+                        }
                     </div>
             }
         </section>

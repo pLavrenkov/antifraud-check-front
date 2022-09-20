@@ -82,15 +82,16 @@
     font-size: 14px;
 }
 
-.details__props-title_type_cease {
+.details__props-title_type_long {
     margin: 0;
     font-size: 14px;
+}
+
+.details__props-title_type_cease {
     color: #CD5C5C;
 }
 
 .details__props-title_type_redesined {
-    margin: 0;
-    font-size: 14px;
     color: #FF8C00;
 }
 

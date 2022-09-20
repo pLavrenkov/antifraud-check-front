@@ -7,6 +7,7 @@ import CardList from "../CardList/CardList";
 import SearchForm from "../SearchForm/SearchForm";
 import CardPopup from "../CardPopup/CardPopup";
 import LoaderAnimation from "../LoaderAnimation/LoaderAnimation";
+import { useLocation } from "react-router-dom";
 
 function TransparentBuisness() {
     const [request, setRequest] = useState(localStorage.getItem("trbuisreq") || '');
@@ -16,6 +17,9 @@ function TransparentBuisness() {
     const [isPopupOpen, setIsPopupOpen] = useState(false);
     const [cardData, setCardData] = useState({});
     const [isLoaderOpen, setIsLoaderOpen] = useState(false);
+    const location = useLocation();
+    const [cardRequest, setCardRequest] = useState(location.state?.cardRequest || '');
+    console.log(cardRequest);
 
     const handleRequest = (req) => {
         setServerMessage('');
@@ -33,11 +37,34 @@ function TransparentBuisness() {
             })
     }
 
-    //console.log(resAllData.ul.hasMore);
+    const handleCardRequest = (cardReq) => {
+        Api.getAll(cardReq)
+            .then((data) => {
+                console.log(data);
+                setResAllData(data);
+                setResUlData(Array.from(data.ul.data));
+                setIsLoaderOpen(false);
+                setCardRequest('');
+                location.state.cardRequest = '';
+            })
+            .catch((err) => {
+                setIsLoaderOpen(false);
+                setServerMessage(`Произошла ошибка: ${err.message}`);
+                setCardRequest('');
+                location.state.cardRequest = '';
+            })
+    }
 
     useEffect(() => {
-        localStorage.getItem("trbuisreq") &&
-            handleRequest(localStorage.getItem("trbuisreq"));
+        console.log(cardRequest);
+        if (cardRequest) {
+            handleCardRequest(cardRequest);
+        } else if (localStorage.getItem("trbuisreq")) {
+            localStorage.getItem("trbuisreq") &&
+                handleRequest(localStorage.getItem("trbuisreq"));
+        } else {
+            return;
+        }
     }, [])
 
     const handleSubmit = (data) => {
