@@ -45,9 +45,9 @@ function CardDirector({ inn, token, name, position, cnt }) {
         <section className="card card_type_detailcard" onClick={onClick}>
             <Link to={{ pathname: "/buisness", state: { cardRequest: cardRequest } }} target={'_blank'} className="card__link">
                 <h3 className="card__title card__title_type_detailcard">{name}</h3>
-                <p className="card__field">{position}</p>
-                <p className="card__field">{`ИНН ${inn}`}</p>
-                <p className="card__field">{`является руководителем в ${cnt} организации(-ях)`}</p>
+                <p className="card__field card__field_type_detailcard">{position}</p>
+                <p className="card__field card__field_type_detailcard">{`ИНН ${inn}`}</p>
+                <p className="card__field card__field_type_detailcard">{`является руководителем в ${cnt} организации(-ях)`}</p>
             </Link>
         </section>
     )

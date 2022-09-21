@@ -252,9 +252,9 @@ function CompanyDetails({ cardData }) {
             {
                 isEntityClosed ? '' :
                     <div className="details__props-block details__props-block_type_long details__props-block_type_redesined">
-                        <h4 className="details__props-title details__props-title_type_long">Организации, зарегистрированные по адресу места нахождения</h4>
+                        <h4 className="details__props-title details__props-title_type_long">Другие организации, зарегистрированные по адресу места нахождения</h4>
                         <div className="details__cards-container">
-                            {cardData.vyp.masuchr ?
+                            {cardData.vyp.masaddress ?
                                 cardData.masaddress.map((item) => {
                                     console.log(item);
                                     return <CardMasAddress
@@ -265,7 +265,7 @@ function CompanyDetails({ cardData }) {
                                         cnt={item.cnt || ''}
                                     />
                                 }) :
-                                <p>сведения отсутствуют или скрыты</p>
+                                <p>сведения отсутствуют</p>
                             }
                         </div>
                     </div>
