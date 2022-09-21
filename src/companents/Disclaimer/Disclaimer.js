@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 function Disclaimer() {
-    const [isClosed, setIsClosed] = useState(sessionStorage.getItem('isClosed') || false);
+    const [isClosed, setIsClosed] = useState(localStorage.getItem('isClosed') || false);
     const [isChecked, setIsChecked] = useState(false);
 
     const handleCheckBox = (e) => {
@@ -10,11 +10,11 @@ function Disclaimer() {
 
     const handleDisclaimerHidden = () => {
         setIsClosed(true);
-        sessionStorage.setItem('isClosed', isClosed);
+        localStorage.setItem('isClosed', isClosed);
     }
 
     useEffect(() => {
-        const disclaimerPass = sessionStorage.getItem('isClosed');
+        const disclaimerPass = localStorage.getItem('isClosed');
         if (disclaimerPass) {
             setIsClosed(true);
         } else {

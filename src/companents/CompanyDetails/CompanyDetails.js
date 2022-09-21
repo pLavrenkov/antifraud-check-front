@@ -6,6 +6,8 @@ import questionYellow from "../../images/question__yell.svg";
 import markGreen from "../../images/mark__green.svg";
 import exclamationRed from "../../images/exclamation__red.svg";
 import CardDirector from "../Card/CardDirector";
+import CardShh from "../Card/CardShh";
+import CardMasAddress from "../Card/CardMasAddress";
 
 function CompanyDetails({ cardData }) {
     const [address, setAddress] = useState('');
@@ -74,7 +76,7 @@ function CompanyDetails({ cardData }) {
                 </div>
             </div>
             {isEntityRedesined ?
-                <div className="details__props-block details__props-block_type_redesined">
+                <div className="details__props-block details__props-title_type_long details__props-block_type_redesined">
                     <h4 className="details__props-title details__props-title_type_long details__props-title_type_redesined">Сведения о реорганизации</h4>
                     <ul className="details__prop-module details__prop-module_type_cease">
                         <li className="details__prop details__prop_type_date details__prop_type_cease">{constans.formatDate(cardData.vyp.ДатаСтатусЮЛ) || ''}</li>
@@ -84,7 +86,7 @@ function CompanyDetails({ cardData }) {
             }
             {
                 isEntityClosed ?
-                    <div className="details__props-block details__props-block_type_cease">
+                    <div className="details__props-block details__props-title_type_long details__props-block_type_cease">
                         <h4 className="details__props-title details__props-title_type_long details__props-title_type_cease">Сведения о прекращении деятельности</h4>
                         <ul className="details__prop-module details__prop-module_type_cease">
                             <li className="details__prop details__prop_type_date details__prop_type_cease">{constans.formatDate(cardData.vyp.ДатаСтатусЮЛ) || ''}</li>
@@ -208,21 +210,64 @@ function CompanyDetails({ cardData }) {
             }
             {
                 isEntityClosed ? '' :
-                    <div className="details__props-block details__props-block_type_redesined">
+                    <div className="details__props-block details__props-block_type_long details__props-block_type_redesined">
                         <h4 className="details__props-title details__props-title_type_long">Сведения о руководстве</h4>
-                        {cardData.vyp.masruk ?
-                            cardData.vyp.masruk.map((item) => {
-                                return <CardDirector
-                                    key={item.token}
-                                    inn={item.inn}
-                                    token={item.token}
-                                    name={item.name}
-                                    position={item.position}
-                                    cnt={item.cnt}
-                                />
-                            }) :
-                            <p>сведения отсутствуют или скрыты</p>
-                        }
+                        <div className="details__cards-container">
+                            {cardData.vyp.masruk ?
+                                cardData.vyp.masruk.map((item) => {
+                                    return <CardDirector
+                                        key={item.token || item.inn}
+                                        inn={item.inn}
+                                        token={item.token}
+                                        name={item.name}
+                                        position={item.position}
+                                        cnt={item.cnt}
+                                    />
+                                }) :
+                                <p>сведения отсутствуют или скрыты</p>
+                            }
+                        </div>
+                    </div>
+            }
+            {
+                isEntityClosed ? '' :
+                    <div className="details__props-block details__props-block_type_long details__props-block_type_redesined">
+                        <h4 className="details__props-title details__props-title_type_long">Сведения об учредителях</h4>
+                        <div className="details__cards-container">
+                            {cardData.vyp.masuchr ?
+                                cardData.vyp.masuchr.map((item) => {
+                                    return <CardShh
+                                        key={item.token || item.inn}
+                                        inn={item.inn}
+                                        token={item.token}
+                                        name={item.name}
+                                        cnt={item.cnt}
+                                    />
+                                }) :
+                                <p>сведения отсутствуют или скрыты</p>
+                            }
+                        </div>
+                    </div>
+            }
+            {
+                isEntityClosed ? '' :
+                    <div className="details__props-block details__props-block_type_long details__props-block_type_redesined">
+                        <h4 className="details__props-title details__props-title_type_long">Организации, зарегистрированные по адресу места нахождения</h4>
+                        <div className="details__cards-container">
+                            {cardData.vyp.masuchr ?
+                                cardData.masaddress.map((item) => {
+                                    console.log(item);
+                                    return <CardMasAddress
+                                        key={item.token || item.massinn}
+                                        inn={item.massinn || ''}
+                                        token={item.token}
+                                        name={item.massnamec || item.massnamep || ''}
+                                        cnt={item.cnt || ''}
+                                    />
+                                }) :
+                                <p>сведения отсутствуют или скрыты</p>
+                            }
+                        </div>
                     </div>
             }
         </section>

@@ -11,11 +11,35 @@
     box-shadow: 2px 2px 5px #F8F8FF;
     padding: 20px;
     cursor: pointer;
+
 }
 
 .card_type_invalid {
     background-color: #FFB6C1;
     border: #F8F8FF solid 1px;
+}
+
+.card_type_detailcard {
+    width: 295px;
+    margin-bottom: 10px;
+    background-color: #D3D3D3;
+    border-radius: 10px;
+    display: block;
+    height: 135px;
+    box-shadow: 2px 2px 5px #F8F8FF;
+}
+
+.card_type_detailcard:hover {
+    transform: scale(1.05);
+    transition: ease .3s;
+}
+
+.card__link {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto repeat(2, 20px);
+    text-decoration: none;
+    color: #000;
 }
 
 .card__title {
@@ -28,6 +52,10 @@
     text-overflow: ellipsis;
     word-wrap: break-word;
     max-height: 50px;
+}
+
+.card__title_type_detailcard {
+    margin-bottom: 10px;
 }
 
 .card__field {
