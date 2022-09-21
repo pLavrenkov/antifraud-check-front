@@ -57,6 +57,14 @@
     padding: 0 25px;
 }
 
+.details__props-block_type_long {
+    width: 100%;
+    border-bottom: none;
+    border-right: none;
+    padding: 20px 25px 30px;
+}
+
+
 .details__props-title_type_long {
     width: 100%;
     border-right: none;
@@ -72,11 +80,9 @@
     grid-gap: 10px;
 }
 
-.details__props-block_type_long {
-    width: 100%;
-    border-bottom: none;
-    border-right: none;
-    padding-bottom: 10px;
+.details__cards-empty_type_masaddress {
+    grid-column: 1;
+    grid-row: 1;
 }
 
 .details__props-block_type_cease {
