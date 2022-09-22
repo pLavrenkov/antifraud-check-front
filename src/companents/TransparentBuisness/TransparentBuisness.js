@@ -17,6 +17,7 @@ function TransparentBuisness() {
     const [isPopupOpen, setIsPopupOpen] = useState(false);
     const [cardData, setCardData] = useState({});
     const [isLoaderOpen, setIsLoaderOpen] = useState(false);
+    const [cardToken, setCardToken] = useState('');
     const location = useLocation();
     const [cardRequest, setCardRequest] = useState(localStorage.getItem("cardRequest") || '');
     console.log(cardRequest);
@@ -84,13 +85,14 @@ function TransparentBuisness() {
         Api.getUl(request.toString())
             .then((data) => {
                 console.log(data);
+                setCardToken(data.token);
                 const res = new URLSearchParams({ type: '', method: "get-response", id: data.id, token: data.token, type1: '' })
                 setTimeout(() => {
                     Api.getUl(res.toString())
                         .then((ul) => {
                             handlePopupOpen();
                             console.log(ul);
-                            setCardData(ul);
+                            setCardData({...ul, token: cardToken});
                             setIsLoaderOpen(false);
                         })
                         .catch((err) => {
@@ -145,7 +147,7 @@ function TransparentBuisness() {
                 :
                 <p>{request && 'Результаты не найдены'}</p>
             }
-            <CardPopup isOpen={isPopupOpen} onClose={handlePopupClosed} cardData={cardData} />
+            <CardPopup isOpen={isPopupOpen} onClose={handlePopupClosed} cardData={cardData} token={cardToken}/>
             <LoaderAnimation isOpen={isLoaderOpen} />
         </section>
     )

@@ -1,6 +1,6 @@
 import CompanyDetails from "../CompanyDetails/CompanyDetails";
 
-function CardPopup({ isOpen, onClose, cardData, listname }) {
+function CardPopup({ isOpen, onClose, cardData, listname, token }) {
 
     const closePopupByLayout = (e) => {
         if (e.target.className.includes('cardpopup_type_active')) {
@@ -13,7 +13,7 @@ function CardPopup({ isOpen, onClose, cardData, listname }) {
             <div className="cardpopup__container">
                 <button type="button" onClick={onClose} className="cardpopup__btn" />
                 <div className="cardpopup__board">
-                    {cardData.type && cardData.type === 1 && <CompanyDetails cardData={cardData} />}
+                    {cardData.type && cardData.type === 1 && <CompanyDetails cardData={cardData} token={token} />}
                 </div>
             </div>
         </section>

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import RiskFactor from "../RiskFactor/RistFactor";
+import * as Api from "../../utils/TransBuisApi";
 import * as constans from "../../utils/constants";
 import * as riskFactors from "../../utils/riskFactors";
 import questionYellow from "../../images/question__yell.svg";
@@ -9,7 +10,7 @@ import CardDirector from "../Card/CardDirector";
 import CardShh from "../Card/CardShh";
 import CardMasAddress from "../Card/CardMasAddress";
 
-function CompanyDetails({ cardData }) {
+function CompanyDetails({ cardData, token }) {
     const [address, setAddress] = useState('');
     const [isEntityClosed, setIsEntityClosed] = useState(false);
     const [isEntityRedesined, setIsEntityRedisined] = useState(false);
@@ -46,12 +47,51 @@ function CompanyDetails({ cardData }) {
         }
     }, [cardData]);
 
+    const handleApiVyp = (request) => {
+        Api.getVip(request)
+            .then((data) => {
+                console.log(data);
+                const req = new URLSearchParams({
+                    token: data.token,
+                    id: data.id,
+                    method: "check-response",
+                }).toString();
+                const pdfReq = new URLSearchParams({
+                    token: data.token,
+                    id: data.id,
+                }).toString();
+                setTimeout(() => {
+                    Api.getVip(req)
+                        .then((data) => {
+                            console.log(data);
+                            Api.getPDF(pdfReq)
+                                .then((data) => {
+                                    console.log(data);
+                                })
+                                .catch(err => console.log(err));
+                        })
+                        .catch(err => console.log(err));
+                }, 3000)
+            })
+            .catch(err => console.log(err));
+    }
 
-
-    console.log(cardData.masaddress)
+    const handleVypClick = () => {
+        const preReq = new URLSearchParams({
+            token: cardData.token,
+            inn: cardData.vyp.ИНН,
+            pdf: "vyp",
+        }).toString();
+        const vypReq = new URLSearchParams({
+            params: preReq,
+            method: "get-request"
+        }).toString();
+        handleApiVyp(vypReq);
+    }
 
     return (
         <section className="details">
+            <button type="button" onClick={handleVypClick} >выписка</button>
             <p className={isEntityClosed ? "details__status" : isEntityRedesined ? "details__status details__status_type_redesined" : "details__status details__status_type_open"}>{isEntityClosed ? 'ДЕЯТЕЛЬНОСТЬ ПРЕКРАЩЕНА' : isEntityRedesined ? 'РЕОРГАНИЗАЦИЯ' : 'ДЕЙСТВУЮЩЕЕ'}</p>
             <h1 className="details__title">{`${cardData.vyp.НаимЮЛПолн || ''} // ${cardData.vyp.НаимЮЛСокр || ''}`}</h1>
             <p className="detais__address">{address}</p>

@@ -2,7 +2,9 @@ import * as constants from "./constants";
 
 const proxyUrl = constants.PROXY;
 const transBuisUrl = "https://pb.nalog.ru/search-proc.json";
-const companyUrl = "https://pb.nalog.ru/company-proc.json"
+const companyUrl = "https://pb.nalog.ru/company-proc.json";
+const vypUrl = "https://pb.nalog.ru/download-proc.json";
+const pdfUrl = "https://pb.nalog.ru/excerpt.pdf";
 
 export const getAll = (request) => {
     return fetch(`${proxyUrl + transBuisUrl}`, {
@@ -44,3 +46,36 @@ export const getUl = (request) => {
         })
 }
 
+export const getVip = (request) => {
+    return fetch(`${proxyUrl + vypUrl}?${request}`, {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+            "Accept": "*/*",
+        },
+    })
+        .then((res) => {
+            if (res.ok) {
+                return res.json();
+            } else {
+                throw new Error('запрос токена на выписку обработан с ошибкой');
+            }
+        })
+}
+
+export const getPDF = (request) => {
+    return fetch(`${proxyUrl + pdfUrl}?${request}`, {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+            "Accept": "*/*",
+        },
+    })
+        .then((res) => {
+            if (res.ok) {
+                return res.json();
+            } else {
+                throw new Error('запрос токена на выписку обработан с ошибкой');
+            }
+        })
+}
