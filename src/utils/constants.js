@@ -58,3 +58,17 @@ export const formatDate = (date) => {
         return g;
     }
 }
+
+// формирование файла для загрузки
+export const formFileToDownload = (data, inn, ext, filetype) => {
+    let blob = new Blob([data], { type: filetype });
+    let link = document.createElement('a');
+    link.download = `${inn}.${ext}`;
+    link.href = URL.createObjectURL(blob);
+    console.log(link);
+    link.click();
+    setTimeout(() => {
+        URL.revokeObjectURL(link.href);
+    }, 100);
+
+}

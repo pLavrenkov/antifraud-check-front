@@ -10,11 +10,10 @@ import CardDirector from "../Card/CardDirector";
 import CardShh from "../Card/CardShh";
 import CardMasAddress from "../Card/CardMasAddress";
 
-function CompanyDetails({ cardData, token }) {
+function CompanyDetails({ cardData, token, handleLoading }) {
     const [address, setAddress] = useState('');
     const [isEntityClosed, setIsEntityClosed] = useState(false);
     const [isEntityRedesined, setIsEntityRedisined] = useState(false);
-    const masaddressQuontity = `по адресу зарегистрировано ${cardData?.masaddress?.length || 0} юридических лиц(-а)`;
 
     useEffect(() => {
         if (cardData.vyp.Адрес) {
@@ -48,9 +47,9 @@ function CompanyDetails({ cardData, token }) {
     }, [cardData]);
 
     const handleApiVyp = (request) => {
+        handleLoading(true);
         Api.getVip(request)
             .then((data) => {
-                console.log(data);
                 const req = new URLSearchParams({
                     token: data.token,
                     id: data.id,
@@ -61,24 +60,36 @@ function CompanyDetails({ cardData, token }) {
                     id: data.id,
                 }).toString();
                 setTimeout(() => {
-                    Api.getVip(req)
-                        .then((data) => {
-                            console.log(data);
-                            Api.getPDF(pdfReq)
-                                .then((data) => {
-                                    console.log(data);
-                                })
-                                .catch(err => console.log(err));
-                        })
-                        .catch(err => console.log(err));
-                }, 3000)
+                    setTimeout(() => {
+                        Api.getVip(req)
+                            .then((data) => {
+                                Api.getPDF(pdfReq)
+                                    .then((data) => {
+                                        constans.formFileToDownload(data, cardData.vyp.ИНН, 'pdf', 'application/pdf');
+                                        handleLoading(false);
+                                    })
+                                    .catch((err) => {
+                                        console.log(err);
+                                        handleLoading(false);
+                                    });
+                            })
+                            .catch((err) => {
+                                console.log(err);
+                                handleLoading(false);
+                            });
+                    }, 3000);
+
+                }, 2000);
             })
-            .catch(err => console.log(err));
+            .catch((err) => {
+                console.log(err);
+                handleLoading(false);
+            });
     }
 
     const handleVypClick = () => {
         const preReq = new URLSearchParams({
-            token: cardData.token,
+            token: token,
             inn: cardData.vyp.ИНН,
             pdf: "vyp",
         }).toString();

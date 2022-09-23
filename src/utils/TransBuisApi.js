@@ -67,13 +67,16 @@ export const getPDF = (request) => {
     return fetch(`${proxyUrl + pdfUrl}?${request}`, {
         method: 'POST',
         headers: {
-            "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+            "Content-Type": "application/x-www-form-urlencoded",
             "Accept": "*/*",
+
         },
+        encoding: null,
     })
         .then((res) => {
             if (res.ok) {
-                return res.json();
+                console.log(res);
+                return res.blob();
             } else {
                 throw new Error('запрос токена на выписку обработан с ошибкой');
             }

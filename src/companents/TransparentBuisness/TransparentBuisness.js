@@ -147,7 +147,7 @@ function TransparentBuisness() {
                 :
                 <p>{request && 'Результаты не найдены'}</p>
             }
-            <CardPopup isOpen={isPopupOpen} onClose={handlePopupClosed} cardData={cardData} token={cardToken}/>
+            <CardPopup isOpen={isPopupOpen} onClose={handlePopupClosed} cardData={cardData} token={cardToken} handleLoading={setIsLoaderOpen}/>
             <LoaderAnimation isOpen={isLoaderOpen} />
         </section>
     )
