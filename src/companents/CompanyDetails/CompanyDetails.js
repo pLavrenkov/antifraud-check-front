@@ -334,6 +334,23 @@ function CompanyDetails({ cardData, token, handleLoading }) {
                         </div>
                     </div>
             }
+            {
+                cardData.bourl || (cardData.vestnik && cardData.vestnik.length > 0) ?
+                    <div className="details__props-block details__props-block_type_long details__props-block_type_footer">
+                        {
+                            cardData.bourl && <a href={cardData.bourl} target="_blank" rel="noreferrer" className="details__props-link">Ресурс БФО</a>
+                        }
+                        {
+                            cardData.vestnik && cardData.vestnik.length > 0 && 
+                            <ul className="details__prop-module">
+                                {cardData.vestnik.map((item) => {
+                                    return <a href={item.url} key={item.code} target="_blank" rel="noreferrer" className="details__props-link">Вестник государственной регистрации</a>
+                                })}
+                            </ul> 
+                        }
+                    </div> :
+                    ''
+            }
         </section>
     )
 }

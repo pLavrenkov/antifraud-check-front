@@ -16,7 +16,6 @@ export const dateRegTimePeriodMonths = (data) => {
   );
   const month = 365 * 24 * 60 * 5 * 1000;
   const monthsPeriod = (curDate.getTime() - regDate.getTime()) / month;
-  console.log(monthsPeriod);
   return monthsPeriod;
 };
 
@@ -26,7 +25,6 @@ export const dateOGRNTimePeriodMonths = (data) => {
   const regDate = new Date(data);
   const month = 365 * 24 * 60 * 5 * 1000;
   const monthsPeriod = (curDate.getTime() - regDate.getTime()) / month;
-  console.log(monthsPeriod);
   return monthsPeriod;
 };
 
