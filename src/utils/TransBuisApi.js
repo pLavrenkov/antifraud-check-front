@@ -69,13 +69,11 @@ export const getPDF = (request) => {
         headers: {
             "Content-Type": "application/x-www-form-urlencoded",
             "Accept": "*/*",
-
         },
         encoding: null,
     })
         .then((res) => {
             if (res.ok) {
-                console.log(res);
                 return res.blob();
             } else {
                 throw new Error('запрос токена на выписку обработан с ошибкой');

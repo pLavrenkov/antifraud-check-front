@@ -14,6 +14,7 @@ function CompanyDetails({ cardData, token, handleLoading }) {
     const [address, setAddress] = useState('');
     const [isEntityClosed, setIsEntityClosed] = useState(false);
     const [isEntityRedesined, setIsEntityRedisined] = useState(false);
+    const [isBtnDisabled, setIsBtnDisabled] = useState(false);
 
     useEffect(() => {
         if (cardData.vyp.Адрес) {
@@ -48,6 +49,10 @@ function CompanyDetails({ cardData, token, handleLoading }) {
 
     const handleApiVyp = (request) => {
         handleLoading(true);
+        setIsBtnDisabled(true);
+        setTimeout(() => {
+            setIsBtnDisabled(false);
+        }, 10000)
         Api.getVip(request)
             .then((data) => {
                 const req = new URLSearchParams({
@@ -78,7 +83,6 @@ function CompanyDetails({ cardData, token, handleLoading }) {
                                 handleLoading(false);
                             });
                     }, 3000);
-
                 }, 2000);
             })
             .catch((err) => {
@@ -102,8 +106,17 @@ function CompanyDetails({ cardData, token, handleLoading }) {
 
     return (
         <section className="details">
-            <button type="button" onClick={handleVypClick} >выписка</button>
-            <p className={isEntityClosed ? "details__status" : isEntityRedesined ? "details__status details__status_type_redesined" : "details__status details__status_type_open"}>{isEntityClosed ? 'ДЕЯТЕЛЬНОСТЬ ПРЕКРАЩЕНА' : isEntityRedesined ? 'РЕОРГАНИЗАЦИЯ' : 'ДЕЙСТВУЮЩЕЕ'}</p>
+            <div className="details__header">
+                <button type="button" onClick={handleVypClick} className={isBtnDisabled ? "details__btn details__btn_type_disabled" : "details__btn"} disabled={isBtnDisabled} >
+                    получить выписку из ЕГРЮЛ
+                </button>
+                <p className={
+                    isEntityClosed ?
+                        "details__status" : isEntityRedesined ?
+                            "details__status details__status_type_redesined" :
+                            "details__status details__status_type_open"
+                }>{isEntityClosed ? 'ДЕЯТЕЛЬНОСТЬ ПРЕКРАЩЕНА' : isEntityRedesined ? 'РЕОРГАНИЗАЦИЯ' : 'ДЕЙСТВУЮЩЕЕ'}</p>
+            </div>
             <h1 className="details__title">{`${cardData.vyp.НаимЮЛПолн || ''} // ${cardData.vyp.НаимЮЛСокр || ''}`}</h1>
             <p className="detais__address">{address}</p>
             <div className="details__props">

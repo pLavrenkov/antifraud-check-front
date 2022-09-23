@@ -61,9 +61,10 @@ export const formatDate = (date) => {
 
 // формирование файла для загрузки
 export const formFileToDownload = (data, inn, ext, filetype) => {
+    const [date] = new Date().toISOString().split('T');
     let blob = new Blob([data], { type: filetype });
     let link = document.createElement('a');
-    link.download = `${inn}.${ext}`;
+    link.download = `${date}_${inn}.${ext}`;
     link.href = URL.createObjectURL(blob);
     console.log(link);
     link.click();
