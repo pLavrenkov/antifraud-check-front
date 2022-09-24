@@ -119,7 +119,7 @@
 
 .details__props-block_type_cease {
     border-top: #6e6e6e solid 1px;
-    border-bottom: #6e6e6e solid 1px;
+    
 }
 
 .details__props-block_type_redesined {
@@ -161,6 +161,11 @@
     list-style: none;
     margin: 0;
     padding: 10px 0;
+}
+
+.details__prop-module_type_footer {
+    display: flex;
+    flex-direction: column;
 }
 
 .details__prop-module_type_cease {

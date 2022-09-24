@@ -102,8 +102,6 @@ function CardList({ data, hasMore, page, pageSize, rowCount, listname, request, 
     }, [pageNumber]);
 
     console.log(cards);
-    console.log(`наличие страниц: ${morePages}, номер страницы: ${pageNumber}, предыдущая страница: ${previosPage}, количество карточек на страницу: ${cardsPageSet}`);
-    console.log(`Запрос от casrList: ${isPageReq}`);
 
     return (
         <section className="cardlist">

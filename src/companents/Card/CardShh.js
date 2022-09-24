@@ -1,25 +1,9 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import * as constants from "../../utils/constants";
 
 function CardShh({ inn, token, name, cnt }) {
     const [cardRequest, setCardRequest] = useState('');
-
-    /*useEffect(() => {
-        if (token) {
-            const req = new URLSearchParams({ ...constants.searchTrBuisAllRequest, token, mode: "search-ul", queryUl: name, });
-            setCardRequest(req.toString());
-            localStorage.setItem('cardRequest', req.toString());
-        } else if (inn) {
-            const req = new URLSearchParams({ ...constants.searchTrBuisAllRequest, queryAll: inn });
-            setCardRequest(req.toString());
-            localStorage.setItem('cardRequest', req.toString());
-        } else {
-            const req = new URLSearchParams({ ...constants.searchTrBuisAllRequest, queryAll: name });
-            setCardRequest(req.toString());
-            localStorage.setItem('cardRequest', req.toString());
-        }
-    }, []);*/
 
     const handleClick = (token, inn, name) => {
         if (token) {

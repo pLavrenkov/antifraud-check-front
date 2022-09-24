@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 import * as makeErr from "../../utils/errors";
@@ -10,8 +9,6 @@ function SearchForm({ onSubmit, request, message }) {
         onSubmit(data);
         resetField("search");
     }
-
-    console.log(watch("search"))
 
     return (
         <section className="searchform">

@@ -20,7 +20,6 @@ function TransparentBuisness() {
     const [cardToken, setCardToken] = useState('');
     const location = useLocation();
     const [cardRequest, setCardRequest] = useState(localStorage.getItem("cardRequest") || '');
-    console.log(cardRequest);
 
     const handleRequest = (req) => {
         setServerMessage('');

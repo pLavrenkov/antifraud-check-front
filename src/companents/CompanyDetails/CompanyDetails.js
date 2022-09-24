@@ -160,7 +160,7 @@ function CompanyDetails({ cardData, token, handleLoading }) {
                     :
                     <ul className="details__risk-factors">
                         {/* недействительный адрес */}
-                        {cardData.vyp.invalid === 1 ?
+                        {cardData.vyp.invalid === 1 || cardData.vyp.СвНедАдресЮЛ ?
                             <RiskFactor image={exclamationRed} title={'недействительный адрес места нахождения'} status={true} /> :
                             <RiskFactor image={markGreen} title={'претензии к адресу места нахождения отсутствуют'} status={false} />
                         }
@@ -280,7 +280,7 @@ function CompanyDetails({ cardData, token, handleLoading }) {
                             {cardData.vyp.masruk ?
                                 cardData.vyp.masruk.map((item) => {
                                     return <CardDirector
-                                        key={item.token || item.inn}
+                                        key={item.token || item.inn || item.name}
                                         inn={item.inn}
                                         token={item.token}
                                         name={item.name}
@@ -301,7 +301,7 @@ function CompanyDetails({ cardData, token, handleLoading }) {
                             {cardData.vyp.masuchr ?
                                 cardData.vyp.masuchr.map((item) => {
                                     return <CardShh
-                                        key={item.token || item.inn}
+                                        key={item.token || item.inn || item.name}
                                         inn={item.inn}
                                         token={item.token}
                                         name={item.name}
@@ -322,7 +322,7 @@ function CompanyDetails({ cardData, token, handleLoading }) {
                                 cardData.masaddress.map((item) => {
                                     console.log(item);
                                     return <CardMasAddress
-                                        key={item.token || item.massinn}
+                                        key={item.token || item.massinn || item.massnamec}
                                         inn={item.massinn || ''}
                                         token={item.token}
                                         name={item.massnamec || item.massnamep || ''}
@@ -342,7 +342,7 @@ function CompanyDetails({ cardData, token, handleLoading }) {
                         }
                         {
                             cardData.vestnik && cardData.vestnik.length > 0 && 
-                            <ul className="details__prop-module">
+                            <ul className="details__prop-module details__prop-module_type_footer">
                                 {cardData.vestnik.map((item) => {
                                     return <a href={item.url} key={item.code} target="_blank" rel="noreferrer" className="details__props-link">Вестник государственной регистрации</a>
                                 })}
