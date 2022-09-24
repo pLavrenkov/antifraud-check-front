@@ -28,5 +28,5 @@
 @import url(./companents/Preloader/Preloader.css);
 
 /*карточки*/
-@import url(./companents/CompanyDetails/CompanyDetails.css);
+@import url(./companents/CardDetails/CardDetails.css);
 @import url(./companents/RiskFactor/RiskFactor.css);

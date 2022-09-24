@@ -119,6 +119,7 @@ function CompanyDetails({ cardData, token, handleLoading }) {
             </div>
             <h1 className="details__title">{`${cardData.vyp.НаимЮЛПолн || ''} // ${cardData.vyp.НаимЮЛСокр || ''}`}</h1>
             <p className="detais__address">{address}</p>
+            <p className="detais__okved">{`${cardData.vyp.КодОКВЭД || ''} - ${cardData.vyp.НаимОКВЭД || 'ОКВЭД не определен'}`}</p>
             <div className="details__props">
                 <div className="details__props-block">
                     <h4 className="details__props-title">Сведения о создании</h4>
@@ -320,7 +321,6 @@ function CompanyDetails({ cardData, token, handleLoading }) {
                         <div className="details__cards-container">
                             {cardData.masaddress && cardData.masaddress.length ?
                                 cardData.masaddress.map((item) => {
-                                    console.log(item);
                                     return <CardMasAddress
                                         key={item.token || item.massinn || item.massnamec}
                                         inn={item.massinn || ''}
@@ -341,12 +341,12 @@ function CompanyDetails({ cardData, token, handleLoading }) {
                             cardData.bourl && <a href={cardData.bourl} target="_blank" rel="noreferrer" className="details__props-link">Ресурс БФО</a>
                         }
                         {
-                            cardData.vestnik && cardData.vestnik.length > 0 && 
+                            cardData.vestnik && cardData.vestnik.length > 0 &&
                             <ul className="details__prop-module details__prop-module_type_footer">
                                 {cardData.vestnik.map((item) => {
                                     return <a href={item.url} key={item.code} target="_blank" rel="noreferrer" className="details__props-link">Вестник государственной регистрации</a>
                                 })}
-                            </ul> 
+                            </ul>
                         }
                     </div> :
                     ''

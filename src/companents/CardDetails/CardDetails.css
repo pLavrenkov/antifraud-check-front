@@ -70,9 +70,32 @@
 
 .detais__address {
     font-size: 14px;
-    padding: 20px 0;
+    padding: 20px 0 10px;
+    margin: 0;
+}
+
+
+.detais__okved {
+    position: relative;
     border-bottom: #6e6e6e solid 1px;
+    padding: 10px 0 20px 30px ;
     margin: 0 0 25px;
+    font-size: 14px;
+}
+
+.detais__okved::before {
+    position: absolute;
+    content: '';
+    top: 10px;
+    left: -1px;
+    width: 15px;
+    height: 15px;
+    background-color: #DCDCDC;
+    background-image: url('../../images/okved.png');
+    background-position: 50%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    z-index: 1;
 }
 
 .details__props {
@@ -119,7 +142,7 @@
 
 .details__props-block_type_cease {
     border-top: #6e6e6e solid 1px;
-    
+
 }
 
 .details__props-block_type_redesined {
