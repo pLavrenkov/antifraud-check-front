@@ -89,6 +89,25 @@
     height: 16px;
 }
 
+.card__field_type_ogrn {
+    position: relative;
+    padding-left: 25px;
+    background-color: #DCDCDC;
+}
+
+.card__field_type_ogrn::before {
+    position: absolute;
+    content: '';
+    top: -2px;
+    left: -3px;
+    background-position: 50%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-image: url('../../images/ogrn_greyBG.svg');
+    width: 20px;
+    height: 16px;
+}
+
 .card__field_type_region {
     position: relative;
     padding-left: 25px;

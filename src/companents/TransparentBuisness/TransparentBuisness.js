@@ -145,7 +145,22 @@ function TransparentBuisness() {
                     onUlCardClick={handleUlCardClick}
                 />
                 :
-                <p>{request && 'Результаты не найдены'}</p>
+                <p className="trans-buisness__nth-found">{request && 'Юридические лица: результаты не найдены'}</p>
+            }
+            {resAllData.ip &&
+                resAllData.ip.rowCount > 0 ?
+                <CardList
+                    data={resAllData.ip.data}
+                    hasMore={resAllData.ip.hasMore}
+                    page={resAllData.ip.page}
+                    pageSize={resAllData.ip.pageSize}
+                    rowCount={resAllData.ip.rowCount}
+                    listname={'Индивидуальные предприниматели'}
+                    request={request}
+                    onUlCardClick={handleUlCardClick}
+                />
+                :
+                <p className="trans-buisness__nth-found">{request && 'Индивидуальные предприниматели: результаты не найдены'}</p>
             }
             <CardPopup isOpen={isPopupOpen} onClose={handlePopupClosed} cardData={cardData} token={cardToken} handleLoading={setIsLoaderOpen}/>
             <LoaderAnimation isOpen={isLoaderOpen} />

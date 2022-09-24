@@ -5,6 +5,7 @@ import Preloader from "../Preloader/Preloader";
 
 import * as constants from "../../utils/constants";
 import * as Api from "../../utils/TransBuisApi";
+import CardIp from "../Card/CardIp";
 
 function CardList({ data, hasMore, page, pageSize, rowCount, listname, request, onUlCardClick }) {
     const [cards, setCards] = useState(data);
@@ -29,23 +30,53 @@ function CardList({ data, hasMore, page, pageSize, rowCount, listname, request, 
         let requestAll = '';
         if (listname === 'Юридические лица') {
             requestAll = new URLSearchParams({ ...constants.searchTrBuisAllRequest, queryAll: req, queryUl: req, page: pageNumber, mode: 'search-ul' });
+            Api.getAll(requestAll.toString())
+                .then((data) => {
+                    console.log(data.ul);
+                    setCards(data.ul.data);
+                    setMorePages(data.ul.hasMore);
+                    setPageNumber(data.ul.page);
+                    setCardsPageSet(data.ul.pageSize);
+                    setIsLoading(false);
+                })
+                .catch((err) => {
+                    setError(`Произошла ошибка: ${err.message}`)
+                    setPageNumber(previosPage);
+                    setIsLoading(false);
+                })
+        } else if (listname === 'Индивидуальные предприниматели') {
+            requestAll = new URLSearchParams({ ...constants.searchTrBuisAllRequest, queryAll: req, queryIp: req, page: pageNumber, mode: 'search-ip' });
+            Api.getAll(requestAll.toString())
+                .then((data) => {
+                    console.log(data.ip);
+                    setCards(data.ip.data);
+                    setMorePages(data.ip.hasMore);
+                    setPageNumber(data.ip.page);
+                    setCardsPageSet(data.ip.pageSize);
+                    setIsLoading(false);
+                })
+                .catch((err) => {
+                    setError(`Произошла ошибка: ${err.message}`)
+                    setPageNumber(previosPage);
+                    setIsLoading(false);
+                })
         } else {
             requestAll = new URLSearchParams({ ...constants.searchTrBuisAllRequest, queryAll: req });
+            Api.getAll(requestAll.toString())
+                .then((data) => {
+                    console.log(data.ul);
+                    setCards(data.ul.data);
+                    setMorePages(data.ul.hasMore);
+                    setPageNumber(data.ul.page);
+                    setCardsPageSet(data.ul.pageSize);
+                    setIsLoading(false);
+                })
+                .catch((err) => {
+                    setError(`Произошла ошибка: ${err.message}`)
+                    setPageNumber(previosPage);
+                    setIsLoading(false);
+                })
         }
-        Api.getAll(requestAll.toString())
-            .then((data) => {
-                console.log(data.ul);
-                setCards(data.ul.data);
-                setMorePages(data.ul.hasMore);
-                setPageNumber(data.ul.page);
-                setCardsPageSet(data.ul.pageSize);
-                setIsLoading(false);
-            })
-            .catch((err) => {
-                setError(`Произошла ошибка: ${err.message}`)
-                setPageNumber(previosPage);
-                setIsLoading(false);
-            })
     }
 
     const backPage = () => {
@@ -64,7 +95,7 @@ function CardList({ data, hasMore, page, pageSize, rowCount, listname, request, 
 
     useEffect(() => {
         isPageReq && setIsLoading(true);
-        isPageReq && 
+        isPageReq &&
             setTimeout(() => {
                 handleRequest(request);
             }, 3000)
@@ -90,6 +121,25 @@ function CardList({ data, hasMore, page, pageSize, rowCount, listname, request, 
                             okved2name={item.okved2name ? item.okved2name : ""}
                             periodcode={item.periodcode}
                             regionname={item.regionname ? item.regionname : "регион не указан"}
+                            token={item.token}
+                            handleLoading={setIsLoading}
+                            yearcode={item.yearcode}
+                            listname={listname}
+                            onCardClick={onUlCardClick}
+                        />
+                    )
+                })
+                }
+                {listname === "Индивидуальные предприниматели" && cards.map((item) => {
+                    return (
+                        <CardIp
+                            key={item.token}
+                            inn={item.inn ? item.inn : "не указан"}
+                            ogrn={item.ogrn ? item.ogrn : "не указан"}
+                            namec={item.namec || ''}
+                            okved2={item.okved2 ? item.okved2 : "ОКВЭД не указан"}
+                            okved2name={item.okved2name ? item.okved2name : ""}
+                            periodcode={item.periodcode}
                             token={item.token}
                             handleLoading={setIsLoading}
                             yearcode={item.yearcode}
