@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
-import * as constants from "../../utils/constants"
+import * as constants from "../../utils/constants";
+import * as Api from "../../utils/TransBuisApi";
+import { BankruptsApi } from "../../utils/bankruptsApi";
 
 function IpDetails({ cardData, token, handleLoading }) {
     const [isIpClosed, setIsIpClosed] = useState(false);
@@ -15,10 +17,77 @@ function IpDetails({ cardData, token, handleLoading }) {
         } else {
             setIsIpClosed(false);
         }
+        //handleBankrupts();
     }, [cardData]);
 
-    const handleVypClick = () => {
+    const handleBankrupts = () => {
+        BankruptsApi(cardData.vyp.ИННФЛ, constants.urlBankruptsPerson)
+            .then((data) => {
+                console.log(data);
+            })
+            .catch(err => console.log(err));
+        BankruptsApi(cardData.vyp.ИННФЛ, constants.urlBankruptsEntity)
+            .then((data) => {
+                console.log(data);
+            })
+            .catch(err => console.log(err));
+    }
 
+    const handleApiVyp = (request) => {
+        handleLoading(true);
+        setIsBtnDisabled(true);
+        setTimeout(() => {
+            setIsBtnDisabled(false);
+        }, 10000)
+        Api.getVip(request)
+            .then((data) => {
+                const req = new URLSearchParams({
+                    token: data.token,
+                    id: data.id,
+                    method: "check-response",
+                }).toString();
+                const pdfReq = new URLSearchParams({
+                    token: data.token,
+                    id: data.id,
+                }).toString();
+                setTimeout(() => {
+                    setTimeout(() => {
+                        Api.getVip(req)
+                            .then((data) => {
+                                Api.getPDF(pdfReq)
+                                    .then((data) => {
+                                        constants.formFileToDownload(data, cardData.vyp.ИННФЛ, 'pdf', 'application/pdf');
+                                        handleLoading(false);
+                                    })
+                                    .catch((err) => {
+                                        console.log(err);
+                                        handleLoading(false);
+                                    });
+                            })
+                            .catch((err) => {
+                                console.log(err);
+                                handleLoading(false);
+                            });
+                    }, 3000);
+                }, 2000);
+            })
+            .catch((err) => {
+                console.log(err);
+                handleLoading(false);
+            });
+    }
+
+    const handleVypClick = () => {
+        const preReq = new URLSearchParams({
+            token: token,
+            inn: cardData.vyp.ИННФЛ,
+            pdf: "vyp",
+        }).toString();
+        const vypReq = new URLSearchParams({
+            params: preReq,
+            method: "get-request"
+        }).toString();
+        handleApiVyp(vypReq);
     }
 
     return (
@@ -32,6 +101,13 @@ function IpDetails({ cardData, token, handleLoading }) {
                 </p>
             </div>
             <h1 className="details__title">{name}</h1>
+            {
+                cardData.vyp.ВидГражд ?
+                    <p className="detais__address">
+                        {cardData.vyp.ВидГражд < 2 ? "гражданин Российской Федерации" : "не является гражданином Российской Федерации"}
+                    </p> :
+                    ''
+            }
             <p className="detais__okved">{`${cardData.vyp.КодОКВЭД || ''} - ${cardData.vyp.НаимОКВЭД || 'ОКВЭД не указан'}`}</p>
             <div className="details__props">
                 <div className="details__props-block">

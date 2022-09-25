@@ -73,3 +73,8 @@ export const formFileToDownload = (data, inn, ext, filetype) => {
     }, 100);
 
 }
+
+// url для api
+export const urlBankrupts = 'https://bankrot.fedresurs.ru/bankrupts';
+export const urlBankruptsEntity = 'https://bankrot.fedresurs.ru/backend/prsnbankrupts';
+export const urlBankruptsPerson = 'https://bankrot.fedresurs.ru/backend/cmpbankrupts';
