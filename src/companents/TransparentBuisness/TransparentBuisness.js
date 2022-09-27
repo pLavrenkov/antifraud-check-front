@@ -8,6 +8,8 @@ import SearchForm from "../SearchForm/SearchForm";
 import CardPopup from "../CardPopup/CardPopup";
 import LoaderAnimation from "../LoaderAnimation/LoaderAnimation";
 import { useLocation } from "react-router-dom";
+import CompanyDetails from "../CardDetails/CompanyDetails";
+import IpDetails from "../CardDetails/IpDetails";
 
 function TransparentBuisness() {
     const [request, setRequest] = useState(localStorage.getItem("trbuisreq") || '');
@@ -91,7 +93,7 @@ function TransparentBuisness() {
                         .then((ul) => {
                             handlePopupOpen();
                             console.log(ul);
-                            setCardData({...ul, token: cardToken});
+                            setCardData({ ...ul, token: cardToken });
                             setIsLoaderOpen(false);
                         })
                         .catch((err) => {
@@ -161,7 +163,10 @@ function TransparentBuisness() {
                 :
                 <p className="trans-buisness__nth-found">{request && 'Индивидуальные предприниматели: результаты не найдены'}</p>
             }
-            <CardPopup isOpen={isPopupOpen} onClose={handlePopupClosed} cardData={cardData} token={cardToken} handleLoading={setIsLoaderOpen}/>
+            <CardPopup isOpen={isPopupOpen} onClose={handlePopupClosed} cardData={cardData} token={cardToken} handleLoading={setIsLoaderOpen}>
+                {cardData.type && cardData.type === 1 && <CompanyDetails cardData={cardData} token={cardToken} handleLoading={setIsLoaderOpen} />}
+                {cardData.type && cardData.type === 2 && <IpDetails cardData={cardData} token={cardToken} handleLoading={setIsLoaderOpen} />}
+            </CardPopup>
             <LoaderAnimation isOpen={isLoaderOpen} />
         </section>
     )
