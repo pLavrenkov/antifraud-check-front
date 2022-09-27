@@ -10,7 +10,7 @@ import CardDirector from "../Card/CardDirector";
 import CardShh from "../Card/CardShh";
 import CardMasAddress from "../Card/CardMasAddress";
 
-function CompanyDetails({ cardData, token, handleLoading }) {
+function CompanyDetails({ cardData, token, handleLoading, onCardClick }) {
     const [address, setAddress] = useState('');
     const [isEntityClosed, setIsEntityClosed] = useState(false);
     const [isEntityRedesined, setIsEntityRedisined] = useState(false);
@@ -287,6 +287,7 @@ function CompanyDetails({ cardData, token, handleLoading }) {
                                         name={item.name}
                                         position={item.position}
                                         cnt={item.cnt}
+                                        onCardClick={onCardClick}
                                     />
                                 }) :
                                 <p>сведения отсутствуют или скрыты</p>
@@ -307,6 +308,7 @@ function CompanyDetails({ cardData, token, handleLoading }) {
                                         token={item.token}
                                         name={item.name}
                                         cnt={item.cnt}
+                                        onCardClick={onCardClick}
                                     />
                                 }) :
                                 <p>сведения отсутствуют или скрыты</p>
@@ -327,6 +329,7 @@ function CompanyDetails({ cardData, token, handleLoading }) {
                                         token={item.token}
                                         name={item.massnamec || item.massnamep || ''}
                                         cnt={item.cnt || ''}
+                                        onCardClick={onCardClick}
                                     />
                                 }) :
                                 <p className="details__cards-empty details__cards-empty_type_masaddress">сведения отсутствуют</p>

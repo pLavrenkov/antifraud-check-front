@@ -1,0 +1,12 @@
+.new-search-popup {
+    box-sizing: border-box;
+    max-width: 1030px;
+    background-color: #DCDCDC;
+    color: #000;
+    border-radius: 3px;
+    box-shadow: 2px 2px 5px #F8F8FF;
+    padding: 35px;
+    display: flex;
+    flex-direction: column;
+    z-index: 1;
+}

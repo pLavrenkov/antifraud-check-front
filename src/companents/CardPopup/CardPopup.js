@@ -1,5 +1,4 @@
 function CardPopup({ children, isOpen, onClose }) {
-
     const closePopupByLayout = (e) => {
         if (e.target.className.includes('cardpopup_type_active')) {
             onClose();

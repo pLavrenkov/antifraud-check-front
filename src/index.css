@@ -22,6 +22,7 @@
 @import url(./companents/CardList/CardList.css);
 @import url(./companents/Card/Card.css);
 @import url(./companents/CardPopup/CardPopup.css);
+@import url(./companents/NewSearchPopup/NewSearchPopup.css);
 
 /*импорт компонента Form*/ 
 @import url(./companents/Form/Form.css);

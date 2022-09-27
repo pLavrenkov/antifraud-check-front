@@ -7,21 +7,27 @@ import CardList from "../CardList/CardList";
 import SearchForm from "../SearchForm/SearchForm";
 import CardPopup from "../CardPopup/CardPopup";
 import LoaderAnimation from "../LoaderAnimation/LoaderAnimation";
-import { useLocation } from "react-router-dom";
+//import { useLocation } from "react-router-dom";
 import CompanyDetails from "../CardDetails/CompanyDetails";
 import IpDetails from "../CardDetails/IpDetails";
+import NewSearchPopup from "../NewSearchPopup/NewSearchPopup";
 
 function TransparentBuisness() {
     const [request, setRequest] = useState(sessionStorage.getItem("trbuisreq") ? localStorage.getItem("trbuisreq") : localStorage.getItem('linkRequest') ? localStorage.getItem('linkRequest') : '');
     const [resAllData, setResAllData] = useState({});
-    const [resUlData, setResUlData] = useState([]);
+    //const [resUlData, setResUlData] = useState([]);
     const [serverMessage, setServerMessage] = useState('');
     const [isPopupOpen, setIsPopupOpen] = useState(false);
+    const [isNewSearchPopupOpen, setIsNewSearchPopupOpen] = useState(false);
     const [cardData, setCardData] = useState({});
     const [isLoaderOpen, setIsLoaderOpen] = useState(false);
     const [cardToken, setCardToken] = useState('');
-    const location = useLocation();
+    //const location = useLocation();
     const [cardRequest, setCardRequest] = useState(localStorage.getItem("cardRequest") || '');
+    const [tokenReq, setTokenReq] = useState('');
+    const [innReq, setInnReq] = useState('');
+    const [nameReq, setNameReq] = useState('');
+    const [currentClickData, setCurrentClickData] = useState({});
 
     const handleRequest = (req) => {
         setServerMessage('');
@@ -30,7 +36,7 @@ function TransparentBuisness() {
             .then((data) => {
                 console.log(data);
                 setResAllData(data);
-                setResUlData(Array.from(data.ul.data));
+                //setResUlData(Array.from(data.ul.data));
                 setIsLoaderOpen(false);
             })
             .catch((err) => {
@@ -40,13 +46,14 @@ function TransparentBuisness() {
     }
 
     const handleCardRequest = (cardReq) => {
+        console.log(cardReq);
         setIsLoaderOpen(true);
         setTimeout(() => {
             Api.getAll(cardReq)
                 .then((data) => {
                     console.log(data);
                     setResAllData(data);
-                    setResUlData(Array.from(data.ul.data));
+                    //setResUlData(Array.from(data.ul.data));
                     setIsLoaderOpen(false);
                     setCardRequest('');
                     localStorage.removeItem("cardRequest");
@@ -63,8 +70,10 @@ function TransparentBuisness() {
     }
 
     useEffect(() => {
+        console.log(cardRequest);
         if (cardRequest) {
             handleCardRequest(cardRequest);
+            sessionStorage.setItem("trbuisreq", localStorage.getItem('linkRequest'));
         } else if (sessionStorage.getItem("trbuisreq")) {
             sessionStorage.getItem("trbuisreq") &&
                 handleRequest(sessionStorage.getItem("trbuisreq"));
@@ -119,6 +128,33 @@ function TransparentBuisness() {
         setIsPopupOpen(false);
     }
 
+    const handleTokenRequest = (token, name) => {
+        const req = new URLSearchParams({ ...constants.searchTrBuisAllRequest, token, mode: "search-ul", queryUl: name, });
+        setTokenReq(req.toString())
+    }
+
+    const handleInnRequest = (inn) => {
+        const req = new URLSearchParams({ ...constants.searchTrBuisAllRequest, queryAll: inn });
+        setInnReq(req.toString());
+    }
+
+    const handleNameRequest = (name) => {
+        const req = new URLSearchParams({ ...constants.searchTrBuisAllRequest, queryAll: name });
+        setNameReq(req.toString());
+    }
+
+    const handleOnCardClick = (token, inn, name) => {
+        setCurrentClickData({ token, inn, name });
+        setIsNewSearchPopupOpen(true);
+        token && name && handleTokenRequest(token, name);
+        inn && handleInnRequest(inn);
+        name && handleNameRequest(name);
+     }
+
+    const handlePopupNewSearchClosed = () => {
+        setIsNewSearchPopupOpen(false);
+    }
+
     useEffect(() => {
         const closeByEsc = (e) => {
             if (e.key === 'Escape') {
@@ -144,6 +180,7 @@ function TransparentBuisness() {
                     listname={'Юридические лица'}
                     request={request}
                     onUlCardClick={handleUlCardClick}
+
                 />
                 :
                 <p className="trans-buisness__nth-found">{request && 'Юридические лица: результаты не найдены'}</p>
@@ -164,8 +201,11 @@ function TransparentBuisness() {
                 <p className="trans-buisness__nth-found">{request && 'Индивидуальные предприниматели: результаты не найдены'}</p>
             }
             <CardPopup isOpen={isPopupOpen} onClose={handlePopupClosed} cardData={cardData} token={cardToken} handleLoading={setIsLoaderOpen}>
-                {cardData.type && cardData.type === 1 && <CompanyDetails cardData={cardData} token={cardToken} handleLoading={setIsLoaderOpen} />}
-                {cardData.type && cardData.type === 2 && <IpDetails cardData={cardData} token={cardToken} handleLoading={setIsLoaderOpen} />}
+                {cardData.type && cardData.type === 1 && <CompanyDetails cardData={cardData} token={cardToken} handleLoading={setIsLoaderOpen} onCardClick={handleOnCardClick} />}
+                {cardData.type && cardData.type === 2 && <IpDetails cardData={cardData} token={cardToken} handleLoading={setIsLoaderOpen} onCardClick={handleOnCardClick} />}
+            </CardPopup>
+            <CardPopup isOpen={isNewSearchPopupOpen} onClose={handlePopupNewSearchClosed} cardData={cardData} token={cardToken} handleLoading={setIsLoaderOpen}>
+                <NewSearchPopup tokenReq={tokenReq} innReq={innReq} nameReq={nameReq} data={currentClickData} onClose={handlePopupNewSearchClosed} />
             </CardPopup>
             <LoaderAnimation isOpen={isLoaderOpen} />
         </section>

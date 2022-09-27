@@ -7,7 +7,7 @@ import * as constants from "../../utils/constants";
 import * as Api from "../../utils/TransBuisApi";
 import CardIp from "../Card/CardIp";
 
-function CardList({ data, hasMore, page, pageSize, rowCount, listname, request, onUlCardClick }) {
+function CardList({ data, hasMore, page, pageSize, rowCount, listname, request, onUlCardClick, onCardClick }) {
     const [cards, setCards] = useState(data);
     const [morePages, setMorePages] = useState(hasMore);
     const [pageNumber, setPageNumber] = useState(page);
@@ -124,6 +124,7 @@ function CardList({ data, hasMore, page, pageSize, rowCount, listname, request, 
                             yearcode={item.yearcode}
                             listname={listname}
                             onCardClick={onUlCardClick}
+
                         />
                     )
                 })
