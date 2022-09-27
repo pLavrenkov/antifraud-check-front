@@ -12,7 +12,7 @@ import CompanyDetails from "../CardDetails/CompanyDetails";
 import IpDetails from "../CardDetails/IpDetails";
 
 function TransparentBuisness() {
-    const [request, setRequest] = useState(localStorage.getItem("trbuisreq") || '');
+    const [request, setRequest] = useState(sessionStorage.getItem("trbuisreq") ? localStorage.getItem("trbuisreq") : localStorage.getItem('linkRequest') ? localStorage.getItem('linkRequest') : '');
     const [resAllData, setResAllData] = useState({});
     const [resUlData, setResUlData] = useState([]);
     const [serverMessage, setServerMessage] = useState('');
@@ -65,10 +65,11 @@ function TransparentBuisness() {
     useEffect(() => {
         if (cardRequest) {
             handleCardRequest(cardRequest);
-        } else if (localStorage.getItem("trbuisreq")) {
-            localStorage.getItem("trbuisreq") &&
-                handleRequest(localStorage.getItem("trbuisreq"));
-        } else {
+        } else if (sessionStorage.getItem("trbuisreq")) {
+            sessionStorage.getItem("trbuisreq") &&
+                handleRequest(sessionStorage.getItem("trbuisreq"));
+        } else if (localStorage.getItem('linkrequest')) {
+            handleRequest(localStorage.getItem('linkRequest'));
             return;
         }
     }, [])
@@ -76,8 +77,7 @@ function TransparentBuisness() {
     const handleSubmit = (data) => {
         setRequest(data.search);
         setIsLoaderOpen(true);
-        setRequest(data.search);
-        localStorage.setItem("trbuisreq", data.search);
+        sessionStorage.setItem("trbuisreq", data.search);
         setTimeout(() => handleRequest(data.search), 2000);
     }
 

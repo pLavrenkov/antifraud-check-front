@@ -25,14 +25,17 @@ function CardDirector({ inn, token, name, position, cnt }) {
         if (token) {
             const req = new URLSearchParams({ ...constants.searchTrBuisAllRequest, token, mode: "search-ul", queryUl: name, });
             setCardRequest(req.toString());
+            localStorage.setItem('linkRequest', `окружение ${name}, обновление страницы приведет к сбросу данных`);
             localStorage.setItem('cardRequest', req.toString());
         } else if (inn) {
             const req = new URLSearchParams({ ...constants.searchTrBuisAllRequest, queryAll: inn });
             setCardRequest(req.toString());
+            localStorage.setItem('linkRequest', inn);
             localStorage.setItem('cardRequest', req.toString());
         } else {
             const req = new URLSearchParams({ ...constants.searchTrBuisAllRequest, queryAll: name });
             setCardRequest(req.toString());
+            localStorage.setItem('linkRequest', name);
             localStorage.setItem('cardRequest', req.toString());
         }
     }

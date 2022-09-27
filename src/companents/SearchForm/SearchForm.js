@@ -10,6 +10,8 @@ function SearchForm({ onSubmit, request, message }) {
         resetField("search");
     }
 
+    console.log(request === null);
+
     return (
         <section className="searchform">
             <form onSubmit={handleSubmit(handleOnSubmit)} className="searchform__container">
@@ -23,7 +25,7 @@ function SearchForm({ onSubmit, request, message }) {
             </form>
             <div className="searchform__results-container">
                 {message && <p className="serchform__server-error">{message}</p>}
-                {request && !message && <p className="serchform__request-box">результаты запроса <span className="searchform__request">{request}</span></p>}
+                {!message && <p className="serchform__request-box">результаты запроса <span className="searchform__request">{request === null ? sessionStorage.getItem("trbuisreq") : request}</span></p>}
             </div>
         </section>
     )
