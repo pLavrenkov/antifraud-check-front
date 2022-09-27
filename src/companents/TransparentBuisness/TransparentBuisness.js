@@ -13,7 +13,7 @@ import IpDetails from "../CardDetails/IpDetails";
 import NewSearchPopup from "../NewSearchPopup/NewSearchPopup";
 
 function TransparentBuisness() {
-    const [request, setRequest] = useState(sessionStorage.getItem("trbuisreq") ? localStorage.getItem("trbuisreq") : localStorage.getItem('linkRequest') ? localStorage.getItem('linkRequest') : '');
+    const [request, setRequest] = useState(sessionStorage.getItem("trbuisreq") ? sessionStorage.getItem("trbuisreq") : localStorage.getItem('linkRequest') ? localStorage.getItem('linkRequest') : '');
     const [resAllData, setResAllData] = useState({});
     //const [resUlData, setResUlData] = useState([]);
     const [serverMessage, setServerMessage] = useState('');
@@ -28,6 +28,7 @@ function TransparentBuisness() {
     const [innReq, setInnReq] = useState('');
     const [nameReq, setNameReq] = useState('');
     const [currentClickData, setCurrentClickData] = useState({});
+    const [isMassAdd, setIsMassAdd] = useState(false);
 
     const handleRequest = (req) => {
         setServerMessage('');
@@ -36,7 +37,6 @@ function TransparentBuisness() {
             .then((data) => {
                 console.log(data);
                 setResAllData(data);
-                //setResUlData(Array.from(data.ul.data));
                 setIsLoaderOpen(false);
             })
             .catch((err) => {
@@ -53,7 +53,6 @@ function TransparentBuisness() {
                 .then((data) => {
                     console.log(data);
                     setResAllData(data);
-                    //setResUlData(Array.from(data.ul.data));
                     setIsLoaderOpen(false);
                     setCardRequest('');
                     localStorage.removeItem("cardRequest");
@@ -143,13 +142,14 @@ function TransparentBuisness() {
         setNameReq(req.toString());
     }
 
-    const handleOnCardClick = (token, inn, name) => {
+    const handleOnCardClick = (token, inn, name, isMasAdd) => {
         setCurrentClickData({ token, inn, name });
         setIsNewSearchPopupOpen(true);
         token && name && handleTokenRequest(token, name);
         inn && handleInnRequest(inn);
         name && handleNameRequest(name);
-     }
+        setIsMassAdd(isMasAdd);
+    }
 
     const handlePopupNewSearchClosed = () => {
         setIsNewSearchPopupOpen(false);
@@ -205,7 +205,7 @@ function TransparentBuisness() {
                 {cardData.type && cardData.type === 2 && <IpDetails cardData={cardData} token={cardToken} handleLoading={setIsLoaderOpen} onCardClick={handleOnCardClick} />}
             </CardPopup>
             <CardPopup isOpen={isNewSearchPopupOpen} onClose={handlePopupNewSearchClosed} cardData={cardData} token={cardToken} handleLoading={setIsLoaderOpen}>
-                <NewSearchPopup tokenReq={tokenReq} innReq={innReq} nameReq={nameReq} data={currentClickData} onClose={handlePopupNewSearchClosed} />
+                <NewSearchPopup tokenReq={tokenReq} innReq={innReq} nameReq={nameReq} data={currentClickData} onClose={handlePopupNewSearchClosed} masAdd={isMassAdd} />
             </CardPopup>
             <LoaderAnimation isOpen={isLoaderOpen} />
         </section>

@@ -1,6 +1,6 @@
 function CardDirector({ inn, token, name, position, cnt, onCardClick }) {
     const onClick = () => {
-        onCardClick(token, inn, name);
+        onCardClick(token, inn, name, false);
     }
 
     return (

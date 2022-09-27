@@ -1,6 +1,6 @@
 function CardShh({ inn, token, name, cnt, onCardClick }) {
     const onClick = () => {
-        onCardClick(token, inn, name);
+        onCardClick(token, inn, name, false);
     }
 
     return (
