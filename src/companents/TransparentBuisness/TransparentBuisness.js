@@ -7,7 +7,6 @@ import CardList from "../CardList/CardList";
 import SearchForm from "../SearchForm/SearchForm";
 import CardPopup from "../CardPopup/CardPopup";
 import LoaderAnimation from "../LoaderAnimation/LoaderAnimation";
-//import { useLocation } from "react-router-dom";
 import CompanyDetails from "../CardDetails/CompanyDetails";
 import IpDetails from "../CardDetails/IpDetails";
 import NewSearchPopup from "../NewSearchPopup/NewSearchPopup";
@@ -15,14 +14,12 @@ import NewSearchPopup from "../NewSearchPopup/NewSearchPopup";
 function TransparentBuisness() {
     const [request, setRequest] = useState(sessionStorage.getItem("trbuisreq") ? sessionStorage.getItem("trbuisreq") : localStorage.getItem('linkRequest') ? localStorage.getItem('linkRequest') : '');
     const [resAllData, setResAllData] = useState({});
-    //const [resUlData, setResUlData] = useState([]);
     const [serverMessage, setServerMessage] = useState('');
     const [isPopupOpen, setIsPopupOpen] = useState(false);
     const [isNewSearchPopupOpen, setIsNewSearchPopupOpen] = useState(false);
     const [cardData, setCardData] = useState({});
     const [isLoaderOpen, setIsLoaderOpen] = useState(false);
     const [cardToken, setCardToken] = useState('');
-    //const location = useLocation();
     const [cardRequest, setCardRequest] = useState(localStorage.getItem("cardRequest") || '');
     const [tokenReq, setTokenReq] = useState('');
     const [innReq, setInnReq] = useState('');
@@ -53,6 +50,7 @@ function TransparentBuisness() {
                 .then((data) => {
                     console.log(data);
                     setResAllData(data);
+                    localStorage.setItem("reqData", JSON.stringify(data));
                     setIsLoaderOpen(false);
                     setCardRequest('');
                     localStorage.removeItem("cardRequest");
@@ -73,12 +71,15 @@ function TransparentBuisness() {
         if (cardRequest) {
             handleCardRequest(cardRequest);
             sessionStorage.setItem("trbuisreq", localStorage.getItem('linkRequest'));
-        } else if (sessionStorage.getItem("trbuisreq")) {
+            console.log("сработал cardrequest");
+        } else if (sessionStorage.getItem("trbuisreq") && !sessionStorage.getItem("trbuisreq").includes("окружение")) {
             sessionStorage.getItem("trbuisreq") &&
                 handleRequest(sessionStorage.getItem("trbuisreq"));
-        } else if (localStorage.getItem('linkrequest')) {
-            handleRequest(localStorage.getItem('linkRequest'));
-            return;
+                console.log("сработал sessionStorage");
+                console.log(!sessionStorage.getItem("trbuisreq").includes("окружение"));
+        } else {
+            setResAllData(JSON.parse(localStorage.getItem("reqData")));
+            console.log("сработал localStorage");
         }
     }, [])
 

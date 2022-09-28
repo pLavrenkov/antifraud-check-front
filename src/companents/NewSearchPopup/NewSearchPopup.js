@@ -12,24 +12,21 @@ function NewSearchPopup({ tokenReq, innReq, nameReq, data, onClose, masAdd }) {
     }
 
     const onTokenClick = () => {
-        localStorage.setItem('linkRequest', `окружение ${data.name}, обновление страницы приведет к сбросу данных`);
+        localStorage.setItem('linkRequest', `окружение ${data.name}`);
         localStorage.setItem('cardRequest', tokenReq);
         handleDisabled();
-        //onClose();
     }
 
     const onInnClick = () => {
         localStorage.setItem('linkRequest', data.inn);
         localStorage.setItem('cardRequest', innReq);
         handleDisabled();
-        //onClose();
     }
 
     const onNameClick = () => {
         localStorage.setItem('linkRequest', data.name);
         localStorage.setItem('cardRequest', nameReq);
         handleDisabled();
-        //onClose();
     }
 
     const handlePrevent = (e) => {
