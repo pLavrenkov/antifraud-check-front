@@ -35,7 +35,7 @@ function NewSearchPopup({ tokenReq, innReq, nameReq, data, onClose, masAdd }) {
 
     return (
         <section className="new-search-popup">
-            <h1 className="new-search-popup__title">Осуществить поиск</h1>
+            <h1 className="new-search-popup__title">ОСУЩЕСТВИТЬ ПОИСК</h1>
             <ul className="new-search-popup__container">
                 {
                     data.token && !masAdd &&

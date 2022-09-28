@@ -129,7 +129,7 @@ function TransparentBuisness() {
     }
 
     const handleTokenRequest = (token, name) => {
-        const req = new URLSearchParams({ ...constants.searchTrBuisAllRequest, token, mode: "search-ul", queryUl: name, });
+        const req = new URLSearchParams({ ...constants.searchTrBuisAllRequest, token, mode: "search-ul", queryUl: name, pageSize: 99, });
         setTokenReq(req.toString())
     }
 

@@ -38,7 +38,7 @@
     background-image: url('../../images/closecross_white.svg');
     background-size: cover;
     border: none;
-    background-color: #000;
+    background-color: rgba(0, 0, 0, 0);
 }
 
 .cardpopup__btn:hover {
