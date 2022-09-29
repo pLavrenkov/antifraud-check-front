@@ -7,11 +7,12 @@
     margin: 0;
     color: #DCDCDC;
     text-decoration: underline;
+    white-space: normal;
 }
 
 .cardslist__container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 295px);
     grid-gap: 20px;
     list-style: none;
     padding: 0;
@@ -67,12 +68,18 @@
 
 @media screen and (max-width: 1000px) {
     .cardslist__container {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2, 295px);
     }
 }
 
 @media screen and (max-width: 700px) {
     .cardslist__container {
         grid-template-columns: 1fr;
+        align-items: center;
+        justify-items: center;
+    }
+
+    .cardlist__title {
+        max-width: 295px;
     }
 }

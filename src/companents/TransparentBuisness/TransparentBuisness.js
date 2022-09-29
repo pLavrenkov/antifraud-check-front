@@ -201,6 +201,36 @@ function TransparentBuisness() {
                 :
                 <p className="trans-buisness__nth-found">{request && 'Индивидуальные предприниматели: результаты не найдены'}</p>
             }
+            {resAllData.upr &&
+                resAllData.upr.rowCount > 0 ?
+                <CardList
+                    data={resAllData.upr.data}
+                    hasMore={resAllData.upr.hasMore}
+                    page={resAllData.upr.page}
+                    pageSize={resAllData.upr.pageSize}
+                    rowCount={resAllData.upr.rowCount}
+                    listname={'Руководители организаций'}
+                    request={request}
+                    onUlCardClick={handleOnCardClick}
+                />
+                :
+                <p className="trans-buisness__nth-found">{request && 'Руководители организаций: результаты не найдены'}</p>
+            }
+            {resAllData.uchr &&
+                resAllData.uchr.rowCount > 0 ?
+                <CardList
+                    data={resAllData.uchr.data}
+                    hasMore={resAllData.uchr.hasMore}
+                    page={resAllData.uchr.page}
+                    pageSize={resAllData.uchr.pageSize}
+                    rowCount={resAllData.uchr.rowCount}
+                    listname={'Учредители организаций'}
+                    request={request}
+                    onUlCardClick={handleOnCardClick}
+                />
+                :
+                <p className="trans-buisness__nth-found">{request && 'Учредители организаций: результаты не найдены'}</p>
+            }
             <CardPopup isOpen={isPopupOpen} onClose={handlePopupClosed} cardData={cardData} token={cardToken} handleLoading={setIsLoaderOpen}>
                 {cardData.type && cardData.type === 1 && <CompanyDetails cardData={cardData} token={cardToken} handleLoading={setIsLoaderOpen} onCardClick={handleOnCardClick} />}
                 {cardData.type && cardData.type === 2 && <IpDetails cardData={cardData} token={cardToken} handleLoading={setIsLoaderOpen} onCardClick={handleOnCardClick} />}

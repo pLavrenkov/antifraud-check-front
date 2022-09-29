@@ -59,7 +59,7 @@ function NewSearchPopup({ tokenReq, innReq, nameReq, data, onClose, masAdd }) {
                     data.name &&
                     <li className="new-search-popup__btn-place">
                         <Link to={"/buisness"} target={'_blank'} disabled={isDisabled} className={isDisabled ? "new-search-popup__link new-search-popup__link_type_disabled" : "new-search-popup__link"} onClick={handlePrevent}>
-                            <button type="button" onClick={onNameClick} disabled={isDisabled} className={isDisabled ? "new-search-popup__btn new-search-popup__btn_type_disabled" : "new-search-popup__btn"}>ФИО/НАИМЕНОВАНИЕ</button>
+                            <button type="button" onClick={onNameClick} disabled={isDisabled} className={isDisabled ? "new-search-popup__btn new-search-popup__btn_type_disabled" : "new-search-popup__btn"}>ФИО / НАИМЕНОВАНИЕ</button>
                         </Link>
                         <span className="new-search-popup__description">найдем всех юридических лиц или индивидуальных предпринимателей по ФИО или названию и можно будет посмотреть подробности</span>
                     </li>

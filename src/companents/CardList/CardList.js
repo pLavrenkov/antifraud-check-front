@@ -6,6 +6,8 @@ import Preloader from "../Preloader/Preloader";
 import * as constants from "../../utils/constants";
 import * as Api from "../../utils/TransBuisApi";
 import CardIp from "../Card/CardIp";
+import CardDirector from "../Card/CardDirector";
+import CardShh from "../Card/CardShh";
 
 function CardList({ data, hasMore, page, pageSize, rowCount, listname, request, onUlCardClick, onCardClick }) {
     const [cards, setCards] = useState(data);
@@ -60,6 +62,38 @@ function CardList({ data, hasMore, page, pageSize, rowCount, listname, request, 
                     setPageNumber(previosPage);
                     setIsLoading(false);
                 })
+        } else if (listname === 'Руководители организаций') {
+            requestAll = new URLSearchParams({ ...constants.searchTrBuisAllRequest, queryAll: req, queryUpr: req, page: pageNumber, mode: 'search-upr-uchr' });
+            Api.getAll(requestAll.toString())
+                .then((data) => {
+                    console.log(data.upr);
+                    setCards(data.upr.data);
+                    setMorePages(data.upr.hasMore);
+                    setPageNumber(data.upr.page);
+                    setCardsPageSet(data.upr.pageSize);
+                    setIsLoading(false);
+                })
+                .catch((err) => {
+                    setError(`Произошла ошибка: ${err.message}`)
+                    setPageNumber(previosPage);
+                    setIsLoading(false);
+                })
+        } else if (listname === 'Учредители организаций') {
+            requestAll = new URLSearchParams({ ...constants.searchTrBuisAllRequest, queryAll: req, queryUpr: req, page: pageNumber, mode: 'search-upr-uchr' });
+            Api.getAll(requestAll.toString())
+                .then((data) => {
+                    console.log(data.uchr);
+                    setCards(data.uchr.data);
+                    setMorePages(data.uchr.hasMore);
+                    setPageNumber(data.uchr.page);
+                    setCardsPageSet(data.uchr.pageSize);
+                    setIsLoading(false);
+                })
+                .catch((err) => {
+                    setError(`Произошла ошибка: ${err.message}`)
+                    setPageNumber(previosPage);
+                    setIsLoading(false);
+                })
         } else {
             requestAll = new URLSearchParams({ ...constants.searchTrBuisAllRequest, queryAll: req });
             Api.getAll(requestAll.toString())
@@ -94,6 +128,7 @@ function CardList({ data, hasMore, page, pageSize, rowCount, listname, request, 
     }
 
     useEffect(() => {
+        console.log(`страница = ${pageNumber}; предыдущая страница = ${previosPage}; запрос = ${request}`)
         isPageReq && setIsLoading(true);
         isPageReq &&
             setTimeout(() => {
@@ -142,6 +177,37 @@ function CardList({ data, hasMore, page, pageSize, rowCount, listname, request, 
                             token={item.token}
                             handleLoading={setIsLoading}
                             yearcode={item.yearcode}
+                            listname={listname}
+                            onCardClick={onUlCardClick}
+                        />
+                    )
+                })
+                }
+                {listname === "Руководители организаций" && cards.map((item) => {
+                    return (
+                        <CardShh
+                            key={item.token}
+                            inn={item.inn ? item.inn : "не указан"}
+                            token={item.token}
+                            name={item.name || ''}
+                            type={item.type}
+                            cnt={item.ul_cnt}
+                            position={item.position || ''}
+                            listname={listname}
+                            onCardClick={onUlCardClick}
+                        />
+                    )
+                })
+                }
+                {listname === "Учредители организаций" && cards.map((item) => {
+                    return (
+                        <CardShh
+                            key={item.token}
+                            inn={item.inn ? item.inn : "не указан"}
+                            token={item.token}
+                            name={item.name || ''}
+                            type={item.type}
+                            cnt={item.ul_cnt}
                             listname={listname}
                             onCardClick={onUlCardClick}
                         />
