@@ -152,6 +152,75 @@
     height: 12px;
 }
 
+.card__field_type_position {
+    box-sizing: border-box;
+    position: relative;
+    padding-left: 25px;
+    max-height: 47px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+}
+
+.card__field_type_position::before {
+    position: absolute;
+    content: '';
+    background-image: url(../../images/position_black.svg);
+    background-position: center;
+    background-size: cover;
+    fill: #000;
+    top: 0;
+    left: 0;
+    width: 12px;
+    height: 12px;
+}
+
+.card__field_type_org {
+    box-sizing: border-box;
+    position: relative;
+    padding-left: 25px;
+    max-height: 47px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+}
+
+.card__field_type_org::before {
+    position: absolute;
+    content: '';
+    background-image: url(../../images/organization_black.svg);
+    background-position: center;
+    background-size: cover;
+    fill: #000;
+    top: 0;
+    left: 0;
+    width: 12px;
+    height: 12px;
+}
+
+.card__field_type_date {
+    box-sizing: border-box;
+    position: relative;
+    padding-left: 25px;
+    max-height: 47px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+}
+
+.card__field_type_date::before {
+    position: absolute;
+    content: '';
+    background-image: url(../../images/date.svg);
+    background-position: center;
+    background-size: cover;
+    fill: #000;
+    top: 0;
+    left: 0;
+    width: 12px;
+    height: 12px;
+}
+
 @media screen and (max-width: 500px) {
     .card_type_detailcard {
         width: 200px;

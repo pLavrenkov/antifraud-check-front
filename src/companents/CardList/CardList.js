@@ -6,8 +6,8 @@ import Preloader from "../Preloader/Preloader";
 import * as constants from "../../utils/constants";
 import * as Api from "../../utils/TransBuisApi";
 import CardIp from "../Card/CardIp";
-import CardDirector from "../Card/CardDirector";
 import CardShh from "../Card/CardShh";
+import CardDisqualify from "../Card/CardDisqualify";
 
 function CardList({ data, hasMore, page, pageSize, rowCount, listname, request, onUlCardClick, onCardClick }) {
     const [cards, setCards] = useState(data);
@@ -87,6 +87,22 @@ function CardList({ data, hasMore, page, pageSize, rowCount, listname, request, 
                     setMorePages(data.uchr.hasMore);
                     setPageNumber(data.uchr.page);
                     setCardsPageSet(data.uchr.pageSize);
+                    setIsLoading(false);
+                })
+                .catch((err) => {
+                    setError(`Произошла ошибка: ${err.message}`)
+                    setPageNumber(previosPage);
+                    setIsLoading(false);
+                })
+        } else if (listname === 'Дисквалифицированные лица') {
+            requestAll = new URLSearchParams({ ...constants.searchTrBuisAllRequest, queryAll: req, queryRdl: req, page: pageNumber, mode: 'search-rdl' });
+            Api.getAll(requestAll.toString())
+                .then((data) => {
+                    console.log(data.rdl);
+                    setCards(data.rdl.data);
+                    setMorePages(data.rdl.hasMore);
+                    setPageNumber(data.rdl.page);
+                    setCardsPageSet(data.rdl.pageSize);
                     setIsLoading(false);
                 })
                 .catch((err) => {
@@ -208,6 +224,21 @@ function CardList({ data, hasMore, page, pageSize, rowCount, listname, request, 
                             name={item.name || ''}
                             type={item.type}
                             cnt={item.ul_cnt}
+                            listname={listname}
+                            onCardClick={onUlCardClick}
+                        />
+                    )
+                })
+                }
+                {listname === "Дисквалифицированные лица" && cards.map((item) => {
+                    return (
+                        <CardDisqualify
+                            key={item.nomzap}
+                            data={item}
+                            namefl={item.namefl}
+                            dolzhnost={item.dolzhnost || ''}
+                            naimorg={item.naimorg || ''}
+                            datakondiskv={item.datakondiskv}
                             listname={listname}
                             onCardClick={onUlCardClick}
                         />

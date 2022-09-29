@@ -1,4 +1,4 @@
-function CardShh({ inn, token, name, cnt, onCardClick }) {
+function CardShh({ inn, token, name, cnt, onCardClick, listname }) {
     const onClick = () => {
         onCardClick(token, inn, name, false);
     }
@@ -8,7 +8,11 @@ function CardShh({ inn, token, name, cnt, onCardClick }) {
             <div className="card__link">
                 <h3 className="card__title card__title_type_detailcard">{name}</h3>
                 <p className="card__field card__field_type_detailcard">{`ИНН ${inn || ''}`}</p>
-                <p className="card__field card__field_type_detailcard">{`является учредителем в ${cnt} организации(-ях)`}</p>
+                <p className="card__field card__field_type_detailcard">
+                    {
+                        listname === "Учредители организаций" ? `является учредителем в ${cnt} организации(-ях)` : `является руководителем в ${cnt} организации(-ях)`
+                    }
+                </p>
             </div>
         </section>
     )

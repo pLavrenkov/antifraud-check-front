@@ -120,6 +120,11 @@ function TransparentBuisness() {
             })
     }
 
+    const handleFlCardClick = (data) => {
+        handlePopupOpen();
+        setCardData(data);
+    }
+
     const handlePopupOpen = () => {
         setIsPopupOpen(true);
     }
@@ -230,6 +235,21 @@ function TransparentBuisness() {
                 />
                 :
                 <p className="trans-buisness__nth-found">{request && 'Учредители организаций: результаты не найдены'}</p>
+            }
+            {resAllData.rdl &&
+                resAllData.rdl.rowCount > 0 ?
+                <CardList
+                    data={resAllData.rdl.data}
+                    hasMore={resAllData.rdl.hasMore}
+                    page={resAllData.rdl.page}
+                    pageSize={resAllData.rdl.pageSize}
+                    rowCount={resAllData.rdl.rowCount}
+                    listname={'Дисквалифицированные лица'}
+                    request={request}
+                    onUlCardClick={handleFlCardClick}
+                />
+                :
+                <p className="trans-buisness__nth-found">{request && 'Дисквалифицированные лица: результаты не найдены'}</p>
             }
             <CardPopup isOpen={isPopupOpen} onClose={handlePopupClosed} cardData={cardData} token={cardToken} handleLoading={setIsLoaderOpen}>
                 {cardData.type && cardData.type === 1 && <CompanyDetails cardData={cardData} token={cardToken} handleLoading={setIsLoaderOpen} onCardClick={handleOnCardClick} />}
