@@ -37,6 +37,8 @@ function CompanyDetails({ cardData, token, handleLoading, onCardClick }) {
             setIsEntityClosed(true);
         } else if (cardData.vyp.НаимСтатусЮЛСокр && cardData.vyp.НаимСтатусЮЛСокр.includes('Прекрат')) {
             setIsEntityClosed(true);
+        } else if (cardData.vyp.НаимСтатусЮЛСокр && cardData.vyp.НаимСтатусЮЛСокр.includes('Исключ')) {
+            setIsEntityClosed(true);
         } else {
             setIsEntityClosed(false);
         }
