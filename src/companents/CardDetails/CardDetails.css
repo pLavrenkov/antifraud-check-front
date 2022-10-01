@@ -1,6 +1,6 @@
 .details {
     box-sizing: border-box;
-    max-width: 1030px;
+    width: 100%;
     background-color: #DCDCDC;
     color: #000;
     border-radius: 3px;
@@ -74,6 +74,28 @@
     margin: 0;
 }
 
+.details__bdate {
+    position: relative;
+    box-sizing: border-box;
+    padding: 20px 0 10px 50px ;
+    margin: 0;
+    font-size: 14px;
+}
+
+.details__bdate::before {
+    position: absolute;
+    content: '';
+    top: 20px;
+    left: -1px;
+    width: 15px;
+    height: 15px;
+    background-color: #DCDCDC;
+    background-image: url('../../images/okved.png');
+    background-position: 50%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    z-index: 1;
+}
 
 .detais__okved {
     position: relative;

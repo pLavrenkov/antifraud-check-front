@@ -1,5 +1,6 @@
 function CardDisqualify({ data, datakondiskv, dolzhnost, naimorg, namefl, onCardClick }) {
     const handleClick = () => {
+        console.log(data);
         onCardClick(data);
     }
     return (

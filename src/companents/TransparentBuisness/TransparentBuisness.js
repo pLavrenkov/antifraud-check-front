@@ -10,6 +10,7 @@ import LoaderAnimation from "../LoaderAnimation/LoaderAnimation";
 import CompanyDetails from "../CardDetails/CompanyDetails";
 import IpDetails from "../CardDetails/IpDetails";
 import NewSearchPopup from "../NewSearchPopup/NewSearchPopup";
+import RdlDetails from "../CardDetails/RdlDetails";
 
 function TransparentBuisness() {
     const [request, setRequest] = useState(sessionStorage.getItem("trbuisreq") ? sessionStorage.getItem("trbuisreq") : localStorage.getItem('linkRequest') ? localStorage.getItem('linkRequest') : '');
@@ -75,8 +76,8 @@ function TransparentBuisness() {
         } else if (sessionStorage.getItem("trbuisreq") && !sessionStorage.getItem("trbuisreq").includes("окружение")) {
             sessionStorage.getItem("trbuisreq") &&
                 handleRequest(sessionStorage.getItem("trbuisreq"));
-                console.log("сработал sessionStorage");
-                console.log(!sessionStorage.getItem("trbuisreq").includes("окружение"));
+            console.log("сработал sessionStorage");
+            console.log(!sessionStorage.getItem("trbuisreq").includes("окружение"));
         } else {
             setResAllData(JSON.parse(localStorage.getItem("reqData")));
             console.log("сработал localStorage");
@@ -254,6 +255,7 @@ function TransparentBuisness() {
             <CardPopup isOpen={isPopupOpen} onClose={handlePopupClosed} cardData={cardData} token={cardToken} handleLoading={setIsLoaderOpen}>
                 {cardData.type && cardData.type === 1 && <CompanyDetails cardData={cardData} token={cardToken} handleLoading={setIsLoaderOpen} onCardClick={handleOnCardClick} />}
                 {cardData.type && cardData.type === 2 && <IpDetails cardData={cardData} token={cardToken} handleLoading={setIsLoaderOpen} onCardClick={handleOnCardClick} />}
+                {cardData.datanachdiskv && <RdlDetails cardData={cardData} handleLoading={setIsLoaderOpen} onCardClick={handleOnCardClick} />}
             </CardPopup>
             <CardPopup isOpen={isNewSearchPopupOpen} onClose={handlePopupNewSearchClosed} cardData={cardData} token={cardToken} handleLoading={setIsLoaderOpen}>
                 <NewSearchPopup tokenReq={tokenReq} innReq={innReq} nameReq={nameReq} data={currentClickData} onClose={handlePopupNewSearchClosed} masAdd={isMassAdd} />
