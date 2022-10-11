@@ -222,177 +222,72 @@
     font-size: 12px;
     padding: 5px 0;
     min-height: 12px;
-}
-
-.details__prop_type_ogrn {
     position: relative;
     padding-left: 50px;
+    vertical-align: bottom;
+}
+
+.details__prop::before {
+    position: absolute;
+    top: 3px;
+    left: -1px;
+    width: 15px;
+    height: 15px;
+    background-color: #DCDCDC;
+    font-weight: 700;
+    font-size: 13px;
+    background-position: 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 .details__prop_type_ogrn::before {
-    position: absolute;
-    content: 'ОГРН';
     top: 5px;
-    left: -1px;
-    width: 15px;
-    height: 12px;
-    background-color: #DCDCDC;
-    font-weight: 700;
-    font-size: 13px;
-}
-
-.details__prop_type_inn {
-    position: relative;
-    padding-left: 50px;
+    content: 'ОГРН';
 }
 
 .details__prop_type_inn::before {
-    position: absolute;
-    content: 'ИНН';
     top: 5px;
-    left: 0;
-    width: 15px;
-    height: 12px;
-    background-color: #DCDCDC;
-    font-weight: 700;
-    font-size: 13px;
-}
-
-.details__prop_type_kpp {
-    position: relative;
-    padding-left: 50px;
+    content: 'ИНН';
 }
 
 .details__prop_type_kpp::before {
-    position: absolute;
-    content: 'КПП';
     top: 5px;
-    left: 0;
-    width: 15px;
-    height: 12px;
-    background-color: #DCDCDC;
-    font-weight: 700;
-    font-size: 13px;
-}
-
-.details__prop_type_createStatement {
-    position: relative;
-    padding-left: 50px;
+    content: 'КПП';
 }
 
 .details__prop_type_createStatement::before {
-    position: absolute;
     content: '';
-    top: 5px;
-    left: 0;
     background-image: url(../../images/statement.svg);
-    background-position: 50%;
-    background-size: cover;
-    background-repeat: no-repeat;
-    width: 15px;
-    height: 15px;
-    background-color: #DCDCDC;
-    font-weight: 700;
-}
-
-.details__prop_type_date {
-    position: relative;
-    padding-left: 50px;
 }
 
 .details__prop_type_date::before {
-    position: absolute;
     content: '';
-    top: 5px;
-    left: 0;
     background-image: url(../../images/date.svg);
-    background-position: 50%;
-    background-size: cover;
-    background-repeat: no-repeat;
-    width: 15px;
-    height: 15px;
-    background-color: #DCDCDC;
-    font-weight: 700;
-}
-
-.details__prop_type_way {
-    position: relative;
-    padding-left: 50px;
 }
 
 .details__prop_type_way::before {
-    position: absolute;
     content: '';
-    top: 5px;
-    left: 0;
     background-image: url(../../images/way.svg);
-    background-position: 50%;
-    background-size: cover;
-    background-repeat: no-repeat;
-    width: 15px;
-    height: 15px;
-    background-color: #DCDCDC;
-    font-weight: 700;
-}
-
-.details__prop_type_coins {
-    position: relative;
-    padding-left: 50px;
 }
 
 .details__prop_type_coins::before {
-    position: absolute;
     content: '';
-    top: 3px;
-    left: 0;
     background-image: url(../../images/coins.svg);
-    background-position: 50%;
-    background-size: cover;
-    background-repeat: no-repeat;
-    width: 15px;
-    height: 15px;
-    background-color: #DCDCDC;
-    font-weight: 700;
-}
-
-.details__prop_type_moneybag {
-    position: relative;
-    padding-left: 50px;
 }
 
 .details__prop_type_moneybag::before {
-    position: absolute;
     content: '';
     top: 3px;
     left: 0;
     background-image: url(../../images/moneybag.svg);
-    background-position: 50%;
-    background-size: cover;
-    background-repeat: no-repeat;
-    width: 15px;
-    height: 15px;
-    background-color: #DCDCDC;
-    font-weight: 700;
-}
-
-.details__prop_type_tax {
-    position: relative;
-    padding-left: 50px;
 }
 
 .details__prop_type_tax::before {
-    position: absolute;
     content: '';
     top: 3px;
     left: 0;
     background-image: url(../../images/tax.svg);
-    background-position: 50%;
-    background-size: cover;
-    background-repeat: no-repeat;
-    width: 15px;
-    height: 15px;
-    background-color: #DCDCDC;
-    font-weight: 700;
 }
 
 .details__prop_type_cease:first-child {
