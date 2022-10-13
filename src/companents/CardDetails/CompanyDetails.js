@@ -120,9 +120,13 @@ function CompanyDetails({ cardData, token, handleLoading, onCardClick }) {
                 }>{isEntityClosed ? 'ДЕЯТЕЛЬНОСТЬ ПРЕКРАЩЕНА' : isEntityRedesined ? 'РЕОРГАНИЗАЦИЯ' : 'ДЕЙСТВУЮЩЕЕ'}</p>
             </div>
             <h1 className="details__title">{`${cardData.vyp.НаимЮЛПолн || ''} // ${cardData.vyp.НаимЮЛСокр || ''}`}</h1>
-            <p className="detais__address">{address}</p>
-            <p className="detais__okved">{`${cardData.vyp.КодОКВЭД || ''} - ${cardData.vyp.НаимОКВЭД || 'ОКВЭД не определен'}`}</p>
-            <div className="details__props">
+            <div className="details__props details__props_type_column">
+                <ul className="details__prop-module">
+                    <li className="details__prop details__prop_type_biggerfont details__prop_type_address">{address}</li>
+                    <li className="details__prop details__prop_type_okved">{`${cardData.vyp.КодОКВЭД || ''} - ${cardData.vyp.НаимОКВЭД || 'ОКВЭД не определен'}`}</li>
+                </ul>
+            </div>
+            <div className="details__props details__props_type_toplined">
                 <div className="details__props-block">
                     <h4 className="details__props-title">Сведения о создании</h4>
                     <ul className="details__prop-module">

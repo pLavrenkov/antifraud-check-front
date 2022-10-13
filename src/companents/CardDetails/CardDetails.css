@@ -66,18 +66,13 @@
 .details__title {
     font-weight: 700;
     font-size: 18px;
-}
-
-.detais__address {
-    font-size: 14px;
-    padding: 20px 0 10px;
-    margin: 0;
+    margin: 15px 0 0;
 }
 
 .details__bdate {
     position: relative;
     box-sizing: border-box;
-    padding: 20px 0 10px 50px ;
+    padding: 20px 0 10px 50px;
     margin: 0;
     font-size: 14px;
 }
@@ -97,34 +92,19 @@
     z-index: 1;
 }
 
-.detais__okved {
-    position: relative;
-    border-bottom: #6e6e6e solid 1px;
-    padding: 10px 0 20px 30px ;
-    margin: 0 0 25px;
-    font-size: 14px;
-}
-
-.detais__okved::before {
-    position: absolute;
-    content: '';
-    top: 10px;
-    left: -1px;
-    width: 15px;
-    height: 15px;
-    background-color: #DCDCDC;
-    background-image: url('../../images/okved.png');
-    background-position: 50%;
-    background-size: contain;
-    background-repeat: no-repeat;
-    z-index: 1;
-}
-
 .details__props {
     width: 100%;
     display: flex;
     flex-direction: row;
-    margin-bottom: 15px;
+    padding: 25px 0;
+}
+
+.details__props_type_column {
+    flex-direction: column;
+}
+
+.details__props_type_toplined {
+    border-top: #6e6e6e solid 1px;
 }
 
 .details__props-block {
@@ -177,10 +157,9 @@
 }
 
 .details__props-title {
-    margin: 0;
+    margin: 0 0 10px;
     font-size: 14px;
 }
-
 
 .details__props-title_type_long {
     width: 100%;
@@ -241,6 +220,10 @@
     background-repeat: no-repeat;
 }
 
+.details__prop_type_biggerfont {
+    font-size: 14px;
+}
+
 .details__prop_type_ogrn::before {
     top: 5px;
     content: 'ОГРН';
@@ -259,6 +242,16 @@
 .details__prop_type_createStatement::before {
     content: '';
     background-image: url(../../images/statement.svg);
+}
+
+.details__prop_type_okved::before {
+    content: '';
+    background-image: url('../../images/okved.png');
+}
+
+.details__prop_type_address::before {
+    content: '';
+    background-image: url('../../images/место.png');
 }
 
 .details__prop_type_date::before {
@@ -298,7 +291,7 @@
     box-sizing: border-box;
     width: 100%;
     list-style: none;
-    margin: 0 0 25px;
+    margin: 0;
     padding: 15px 25px;
     border-top: #6e6e6e solid 1px;
     border-bottom: #6e6e6e solid 1px;
@@ -329,6 +322,7 @@
     .details__props {
         flex-direction: column;
         margin: 0;
+        padding: 10px 0;
     }
 
     .details__cards-container {
@@ -339,7 +333,7 @@
         width: 100%;
         border-right: none;
         border-bottom: #6e6e6e solid 1px;
-        padding: 10px 0;
+        padding: 20px 0;
     }
 
     .details__props-block_type_long {
