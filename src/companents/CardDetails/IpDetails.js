@@ -101,39 +101,51 @@ function IpDetails({ cardData, token, handleLoading }) {
                 </p>
             </div>
             <h1 className="details__title">{name}</h1>
-            {
-                cardData.vyp.ВидГражд ?
-                    <p className="detais__address">
-                        {cardData.vyp.ВидГражд < 2 ? "гражданин Российской Федерации" : "не является гражданином Российской Федерации"}
-                    </p> :
-                    ''
-            }
-            <p className="detais__okved">{`${cardData.vyp.КодОКВЭД || ''} - ${cardData.vyp.НаимОКВЭД || 'ОКВЭД не указан'}`}</p>
-            <div className="details__props">
-                <div className="details__props-block">
-                    <h4 className="details__props-title">Сведения о создании</h4>
-                    <ul className="details__prop-module">
-                        <li className="details__prop details__prop_type_ogrn">{cardData.vyp.ОГРНИП}</li>
-                        <li className="details__prop details__prop_type_date">{constants.formatDate(cardData.vyp.ДатаЗаписи || cardData.vyp.ДатаОГРНИП || '')}</li>
-                        <li className="details__prop details__prop_type_createStatement">{cardData.vyp.НаимРО}</li>
-                    </ul>
-                </div>
-                <div className="details__props-block">
-                    <h4 className="details__props-title">Сведения о налоговом учете</h4>
-                    <ul className="details__prop-module">
-                        <li className="details__prop details__prop_type_inn">{cardData.vyp.ИННФЛ}</li>
-                        <li className="details__prop details__prop_type_date">{constants.formatDate(cardData.vyp.ДатаПостУч || '')}</li>
-                        <li className="details__prop details__prop_type_createStatement">{cardData.vyp.НаимНО}</li>
+            <div className="details__props details__props_type_column">
+                <div className="details__props-container">
+                    <ul className="details__props-block details__props-block_type_100">
+                        {
+                            cardData.vyp.ВидГражд ?
+                                <li className="details__prop details__prop_type_biggerfont details__prop_type_address">
+                                    {cardData.vyp.ВидГражд < 2 ? "гражданин Российской Федерации" : "не является гражданином Российской Федерации"}
+                                </li> :
+                                ''
+                        }
+                        <li className="details__prop details__prop_type_biggerfont details__prop_type_okved">{`${cardData.vyp.КодОКВЭД || ''} - ${cardData.vyp.НаимОКВЭД || 'ОКВЭД не указан'}`}</li>
                     </ul>
                 </div>
             </div>
+            <div className="details__props details__props_type_toplined">
+                <div className="details__props-container">
+                    <div className="details__props-block details__props-block_type_50">
+                        <h4 className="details__props-title">Сведения о создании</h4>
+                        <ul className="details__prop-module">
+                            <li className="details__prop details__prop_type_ogrn">{cardData.vyp.ОГРНИП}</li>
+                            <li className="details__prop details__prop_type_date">{constants.formatDate(cardData.vyp.ДатаЗаписи || cardData.vyp.ДатаОГРНИП || '')}</li>
+                            <li className="details__prop details__prop_type_createStatement">{cardData.vyp.НаимРО}</li>
+                        </ul>
+                    </div>
+                    <div className="details__props-block details__props-block_type_50">
+                        <h4 className="details__props-title">Сведения о налоговом учете</h4>
+                        <ul className="details__prop-module">
+                            <li className="details__prop details__prop_type_inn">{cardData.vyp.ИННФЛ}</li>
+                            <li className="details__prop details__prop_type_date">{constants.formatDate(cardData.vyp.ДатаПостУч || '')}</li>
+                            <li className="details__prop details__prop_type_createStatement">{cardData.vyp.НаимНО}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
             {isIpClosed ?
-                <div className="details__props-block details__props-title_type_long details__props-block_type_cease">
+                <div className="details__props details__props_type_toplined">
                     <h4 className="details__props-title details__props-title_type_long details__props-title_type_cease">Сведения о прекращении деятельности</h4>
-                    <ul className="details__prop-module details__prop-module_type_cease">
-                        <li className="details__prop details__prop_type_date details__prop_type_cease">{constants.formatDate(cardData.vyp.ДатаСтатус) || ''}</li>
-                        <li className="details__prop details__prop_type_way details__prop_type_cease">{cardData.vyp.НаимСтатус}</li>
-                    </ul>
+                    <div className="details__props-container">
+                        <ul className="details__props-block details__props-block_type_30 details__props-block_type_non-rightborder">
+                            <li className="details__prop details__prop_type_date details__prop_type_cease">{constants.formatDate(cardData.vyp.ДатаСтатус) || ''}</li>
+                        </ul>
+                        <ul className="details__props-block details__props-block_type_100">
+                            <li className="details__prop details__prop_type_way details__prop_type_cease">{cardData.vyp.НаимСтатус}</li>
+                        </ul>
+                    </div>
                 </div> : ''
             }
         </section>
