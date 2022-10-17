@@ -119,7 +119,7 @@ function IpDetails({ cardData, token, handleLoading }) {
                 <div className="details__props-container">
                     <div className="details__props-block details__props-block_type_50">
                         <h4 className="details__props-title">Сведения о создании</h4>
-                        <ul className="details__prop-module">
+                        <ul className="details__prop-module details__props-module_type_column">
                             <li className="details__prop details__prop_type_ogrn">{cardData.vyp.ОГРНИП}</li>
                             <li className="details__prop details__prop_type_date">{constants.formatDate(cardData.vyp.ДатаЗаписи || cardData.vyp.ДатаОГРНИП || '')}</li>
                             <li className="details__prop details__prop_type_createStatement">{cardData.vyp.НаимРО}</li>
@@ -127,7 +127,7 @@ function IpDetails({ cardData, token, handleLoading }) {
                     </div>
                     <div className="details__props-block details__props-block_type_50">
                         <h4 className="details__props-title">Сведения о налоговом учете</h4>
-                        <ul className="details__prop-module">
+                        <ul className="details__prop-module details__props-module_type_column">
                             <li className="details__prop details__prop_type_inn">{cardData.vyp.ИННФЛ}</li>
                             <li className="details__prop details__prop_type_date">{constants.formatDate(cardData.vyp.ДатаПостУч || '')}</li>
                             <li className="details__prop details__prop_type_createStatement">{cardData.vyp.НаимНО}</li>
@@ -139,12 +139,12 @@ function IpDetails({ cardData, token, handleLoading }) {
                 <div className="details__props details__props_type_toplined">
                     <h4 className="details__props-title details__props-title_type_long details__props-title_type_cease">Сведения о прекращении деятельности</h4>
                     <div className="details__props-container">
-                        <ul className="details__props-block details__props-block_type_30 details__props-block_type_non-rightborder">
-                            <li className="details__prop details__prop_type_date details__prop_type_cease">{constants.formatDate(cardData.vyp.ДатаСтатус) || ''}</li>
-                        </ul>
-                        <ul className="details__props-block details__props-block_type_100">
-                            <li className="details__prop details__prop_type_way details__prop_type_cease">{cardData.vyp.НаимСтатус}</li>
-                        </ul>
+                        <div className="details__props-block details__props-block_type_100 details__props-block_type_non-rightborder">
+                            <ul className="details__prop-module">
+                                <li className="details__prop details__prop_type_date details__prop_type_cease details__prop_type_30">{constants.formatDate(cardData.vyp.ДатаСтатус) || ''}</li>
+                                <li className="details__prop details__prop_type_way details__prop_type_cease details__prop_type_70">{cardData.vyp.НаимСтатус}</li>
+                            </ul>
+                        </div>
                     </div>
                 </div> : ''
             }
