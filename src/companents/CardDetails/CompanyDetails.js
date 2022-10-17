@@ -121,48 +121,60 @@ function CompanyDetails({ cardData, token, handleLoading, onCardClick }) {
             </div>
             <h1 className="details__title">{`${cardData.vyp.НаимЮЛПолн || ''} // ${cardData.vyp.НаимЮЛСокр || ''}`}</h1>
             <div className="details__props details__props_type_column">
-                <ul className="details__prop-module">
-                    <li className="details__prop details__prop_type_biggerfont details__prop_type_address">{address}</li>
-                    <li className="details__prop details__prop_type_okved">{`${cardData.vyp.КодОКВЭД || ''} - ${cardData.vyp.НаимОКВЭД || 'ОКВЭД не определен'}`}</li>
-                </ul>
-            </div>
-            <div className="details__props details__props_type_toplined">
-                <div className="details__props-block">
-                    <h4 className="details__props-title">Сведения о создании</h4>
-                    <ul className="details__prop-module">
-                        <li className="details__prop details__prop_type_ogrn">{cardData.vyp.ОГРН}</li>
-                        <li className="details__prop details__prop_type_way">{cardData.vyp.НаимСпОбрЮЛ}</li>
-                        <li className="details__prop details__prop_type_date">{constans.formatDate(cardData.vyp.ДатаРег || cardData.vyp.ДатаОГРН || '')}</li>
-                        <li className="details__prop details__prop_type_createStatement">{cardData.vyp.НаимРО}</li>
+                <div className="details__props-container">
+                    <ul className="details__props-block details__props-block_type_100">
+                        <li className="details__prop details__prop_type_biggerfont details__prop_type_address">{address}</li>
+                        <li className="details__prop details__prop_type_biggerfont details__prop_type_okved">{`${cardData.vyp.КодОКВЭД || ''} - ${cardData.vyp.НаимОКВЭД || 'ОКВЭД не определен'}`}</li>
                     </ul>
                 </div>
-                <div className="details__props-block">
-                    <h4 className="details__props-title">Сведения о налоговом учете</h4>
-                    <ul className="details__prop-module">
-                        <li className="details__prop details__prop_type_inn">{cardData.vyp.ИНН}</li>
-                        <li className="details__prop details__prop_type_kpp">{cardData.vyp.КПП}</li>
-                        <li className="details__prop details__prop_type_date">{constans.formatDate(cardData.vyp.ДатаПостУч || '')}</li>
-                        <li className="details__prop details__prop_type_createStatement">{cardData.vyp.НаимНО}</li>
-                    </ul>
+            </div>
+            <div className="details__props details__props_type_toplined">
+                <div className="details__props-container">
+                    <div className="details__props-block details__props-block_type_50">
+                        <h4 className="details__props-title">Сведения о создании</h4>
+                        <ul className="details__prop-module details__props-module_type_column">
+                            <li className="details__prop details__prop_type_ogrn">{cardData.vyp.ОГРН}</li>
+                            <li className="details__prop details__prop_type_way">{cardData.vyp.НаимСпОбрЮЛ}</li>
+                            <li className="details__prop details__prop_type_date">{constans.formatDate(cardData.vyp.ДатаРег || cardData.vyp.ДатаОГРН || '')}</li>
+                            <li className="details__prop details__prop_type_createStatement">{cardData.vyp.НаимРО}</li>
+                        </ul>
+                    </div>
+                    <div className="details__props-block details__props-block_type_50">
+                        <h4 className="details__props-title">Сведения о налоговом учете</h4>
+                        <ul className="details__prop-module details__props-module_type_column">
+                            <li className="details__prop details__prop_type_inn">{cardData.vyp.ИНН}</li>
+                            <li className="details__prop details__prop_type_kpp">{cardData.vyp.КПП}</li>
+                            <li className="details__prop details__prop_type_date">{constans.formatDate(cardData.vyp.ДатаПостУч || '')}</li>
+                            <li className="details__prop details__prop_type_createStatement">{cardData.vyp.НаимНО}</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
             {isEntityRedesined ?
-                <div className="details__props-block details__props-title_type_long details__props-block_type_redesined">
+                <div className="details__props details__props_type_toplined">
                     <h4 className="details__props-title details__props-title_type_long details__props-title_type_redesined">Сведения о реорганизации</h4>
-                    <ul className="details__prop-module details__prop-module_type_cease">
-                        <li className="details__prop details__prop_type_date details__prop_type_cease">{constans.formatDate(cardData.vyp.ДатаСтатусЮЛ) || ''}</li>
-                        <li className="details__prop details__prop_type_way details__prop_type_cease">{cardData.vyp.НаимСтатусЮЛ}</li>
-                    </ul>
+                    <div className="details__props-container">
+                        <div className="details__props-block details__props-block_type_50 details__props-block_type_non-rightborder">
+                            <ul className="details__prop-module">
+                                <li className="details__prop details__prop_type_date details__prop_type_cease details__prop_type_30">{constans.formatDate(cardData.vyp.ДатаСтатусЮЛ) || ''}</li>
+                                <li className="details__prop details__prop_type_way details__prop_type_cease details__prop_type_70">{cardData.vyp.НаимСтатусЮЛ}</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div> : ''
             }
             {
                 isEntityClosed ?
-                    <div className="details__props-block details__props-title_type_long details__props-block_type_cease">
+                    <div className="details__props details__props_type_toplined">
                         <h4 className="details__props-title details__props-title_type_long details__props-title_type_cease">Сведения о прекращении деятельности</h4>
-                        <ul className="details__prop-module details__prop-module_type_cease">
-                            <li className="details__prop details__prop_type_date details__prop_type_cease">{constans.formatDate(cardData.vyp.ДатаСтатусЮЛ) || ''}</li>
-                            <li className="details__prop details__prop_type_way details__prop_type_cease">{cardData.vyp.НаимСтатусЮЛ}</li>
-                        </ul>
+                        <div className="details__props-container">
+                            <div className="details__props-block details__props-block_type_100 details__props-block_type_non-rightborder">
+                                <ul className="details__prop-module">
+                                    <li className="details__prop details__prop_type_date details__prop_type_cease details__prop_type_30">{constans.formatDate(cardData.vyp.ДатаСтатусЮЛ) || ''}</li>
+                                    <li className="details__prop details__prop_type_way details__prop_type_cease details__prop_type_70">{cardData.vyp.НаимСтатусЮЛ}</li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                     :
                     <ul className="details__risk-factors">
@@ -263,25 +275,27 @@ function CompanyDetails({ cardData, token, handleLoading, onCardClick }) {
             {
                 isEntityClosed ? '' :
                     <div className="details__props">
-                        <div className="details__props-block">
-                            <h4 className="details__props-title">Сведения о капитале</h4>
-                            <ul className="details__prop-module">
-                                <li className="details__prop details__prop_type_coins">{`${cardData.vyp.СумКап} рублей`}</li>
-                                <li className="details__prop details__prop_type_moneybag">{cardData.vyp.НаимВидКап}</li>
-                            </ul>
-                        </div>
-                        <div className="details__props-block">
-                            <h4 className="details__props-title">Налоговые сведения</h4>
-                            <ul className="details__prop-module">
-                                <li className="details__prop details__prop_type_coins">{cardData.vyp.taxpaysum ? `${cardData.vyp.taxpaysum} рублей оплаченных налогов` : `сумма оплаченных налогов не известна`}</li>
-                                <li className="details__prop details__prop_type_tax">{riskFactors.checkTaxMode(cardData.taxmode)}</li>
-                            </ul>
+                        <div className="details__props-container">
+                            <div className="details__props-block details__props-block_type_50">
+                                <h4 className="details__props-title">Сведения о капитале</h4>
+                                <ul className="details__prop-module details__props-module_type_column">
+                                    <li className="details__prop details__prop_type_coins">{`${cardData.vyp.СумКап || 'ХХ'} рублей`}</li>
+                                    <li className="details__prop details__prop_type_moneybag">{cardData.vyp.НаимВидКап || 'не определен'}</li>
+                                </ul>
+                            </div>
+                            <div className="details__props-block details__props-block_type_50">
+                                <h4 className="details__props-title">Налоговые сведения</h4>
+                                <ul className="details__prop-module details__props-module_type_column">
+                                    <li className="details__prop details__prop_type_coins">{cardData.vyp.taxpaysum ? `${cardData.vyp.taxpaysum} рублей оплаченных налогов` : `сумма оплаченных налогов не известна`}</li>
+                                    <li className="details__prop details__prop_type_tax">{riskFactors.checkTaxMode(cardData.taxmode)}</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
             }
             {
                 isEntityClosed ? '' :
-                    <div className="details__props-block details__props-block_type_long details__props-block_type_redesined">
+                    <div className="details__props details__props_type_toplined">
                         <h4 className="details__props-title details__props-title_type_long">Сведения о руководстве</h4>
                         <div className="details__cards-container">
                             {cardData.vyp.masruk ?
@@ -303,7 +317,7 @@ function CompanyDetails({ cardData, token, handleLoading, onCardClick }) {
             }
             {
                 isEntityClosed ? '' :
-                    <div className="details__props-block details__props-block_type_long details__props-block_type_redesined">
+                    <div className="details__props details__props_type_toplined">
                         <h4 className="details__props-title details__props-title_type_long">Сведения об учредителях</h4>
                         <div className="details__cards-container">
                             {cardData.vyp.masuchr ?
@@ -324,7 +338,7 @@ function CompanyDetails({ cardData, token, handleLoading, onCardClick }) {
             }
             {
                 isEntityClosed ? '' :
-                    <div className="details__props-block details__props-block_type_long details__props-block_type_redesined">
+                    <div className="details__props details__props_type_toplined">
                         <h4 className="details__props-title details__props-title_type_long">Другие организации, зарегистрированные по адресу места нахождения</h4>
                         <div className="details__cards-container">
                             {cardData.masaddress && cardData.masaddress.length ?
@@ -345,7 +359,7 @@ function CompanyDetails({ cardData, token, handleLoading, onCardClick }) {
             }
             {
                 cardData.bourl || (cardData.vestnik && cardData.vestnik.length > 0) ?
-                    <div className="details__props-block details__props-block_type_long details__props-block_type_footer">
+                    <div className="details__props details__props_type_column details__props_type_toplined">
                         {
                             cardData.bourl && <a href={cardData.bourl} target="_blank" rel="noreferrer" className="details__props-link">Ресурс БФО</a>
                         }
