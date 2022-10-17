@@ -11,6 +11,8 @@
     z-index: 1;
 }
 
+/*заголовок листа*/
+
 .details__header {
     height: 50px;
     display: flex;
@@ -92,11 +94,13 @@
     z-index: 1;
 }
 
+/*блок с деталями*/
+
 .details__props {
     width: 100%;
     display: flex;
     flex-direction: row;
-    padding: 25px 0;
+    padding: 20px 0;
 }
 
 .details__props_type_column {
@@ -105,6 +109,10 @@
 
 .details__props_type_toplined {
     border-top: #6e6e6e solid 1px;
+}
+
+.details__props_type_bottomlined {
+    border-bottom: #6e6e6e solid 1px;
 }
 
 .details__props-block {
@@ -184,7 +192,7 @@
 .details__prop-module {
     list-style: none;
     margin: 0;
-    padding: 10px 0;
+    padding: 10px 0 0;
 }
 
 .details__prop-module_type_footer {
