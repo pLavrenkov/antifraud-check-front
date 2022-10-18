@@ -252,6 +252,21 @@ function TransparentBuisness() {
                 :
                 <p className="trans-buisness__nth-found">{request && 'Дисквалифицированные лица: результаты не найдены'}</p>
             }
+            {resAllData.addr &&
+                resAllData.addr.rowCount > 0 ?
+                <CardList
+                    data={resAllData.addr.data}
+                    hasMore={resAllData.addr.hasMore}
+                    page={resAllData.addr.page}
+                    pageSize={resAllData.addr.pageSize}
+                    rowCount={resAllData.addr.rowCount}
+                    listname={'Адреса регистрации'}
+                    request={request}
+                    onUlCardClick={handleOnCardClick}
+                />
+                :
+                <p className="trans-buisness__nth-found">{request && 'Дисквалифицированные лица: результаты не найдены'}</p>
+            }
             <CardPopup isOpen={isPopupOpen} onClose={handlePopupClosed} cardData={cardData} token={cardToken} handleLoading={setIsLoaderOpen}>
                 {cardData.type && cardData.type === 1 && <CompanyDetails cardData={cardData} token={cardToken} handleLoading={setIsLoaderOpen} onCardClick={handleOnCardClick} />}
                 {cardData.type && cardData.type === 2 && <IpDetails cardData={cardData} token={cardToken} handleLoading={setIsLoaderOpen} onCardClick={handleOnCardClick} />}

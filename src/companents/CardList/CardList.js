@@ -8,6 +8,8 @@ import * as Api from "../../utils/TransBuisApi";
 import CardIp from "../Card/CardIp";
 import CardShh from "../Card/CardShh";
 import CardDisqualify from "../Card/CardDisqualify";
+import CardMasAddress from "../Card/CardMasAddress";
+import CardAddress from "../Card/CardAddress";
 
 function CardList({ data, hasMore, page, pageSize, rowCount, listname, request, onUlCardClick, onCardClick }) {
     const [cards, setCards] = useState(data);
@@ -103,6 +105,22 @@ function CardList({ data, hasMore, page, pageSize, rowCount, listname, request, 
                     setMorePages(data.rdl.hasMore);
                     setPageNumber(data.rdl.page);
                     setCardsPageSet(data.rdl.pageSize);
+                    setIsLoading(false);
+                })
+                .catch((err) => {
+                    setError(`Произошла ошибка: ${err.message}`)
+                    setPageNumber(previosPage);
+                    setIsLoading(false);
+                })
+        } else if (listname === "Адреса регистрации") {
+            requestAll = new URLSearchParams({ ...constants.searchTrBuisAllRequest, queryAll: req, queryUpr: req, queryAddr: req, page: pageNumber, mode: 'search-addr' });
+            Api.getAll(requestAll.toString())
+                .then((data) => {
+                    console.log(data.addr);
+                    setCards(data.addr.data);
+                    setMorePages(data.addr.hasMore);
+                    setPageNumber(data.addr.page);
+                    setCardsPageSet(data.addr.pageSize);
                     setIsLoading(false);
                 })
                 .catch((err) => {
@@ -239,6 +257,20 @@ function CardList({ data, hasMore, page, pageSize, rowCount, listname, request, 
                             dolzhnost={item.dolzhnost || ''}
                             naimorg={item.naimorg || ''}
                             datakondiskv={item.datakondiskv}
+                            listname={listname}
+                            onCardClick={onUlCardClick}
+                        />
+                    )
+                })
+                }
+                {listname === "Адреса регистрации" && cards.map((item) => {
+                    return (
+                        <CardAddress
+                            key={item.token}
+                            data={item}
+                            token={item.token}
+                            address={item.address}
+                            numberentities={item.masscnt}
                             listname={listname}
                             onCardClick={onUlCardClick}
                         />

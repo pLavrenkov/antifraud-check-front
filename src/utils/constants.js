@@ -78,3 +78,8 @@ export const formFileToDownload = (data, inn, ext, filetype) => {
 export const urlBankrupts = 'https://bankrot.fedresurs.ru/bankrupts';
 export const urlBankruptsEntity = 'https://bankrot.fedresurs.ru/backend/prsnbankrupts';
 export const urlBankruptsPerson = 'https://bankrot.fedresurs.ru/backend/cmpbankrupts';
+
+// форматирование адреса из ЕГРЮЛ
+export const formatAddress = (address) => {
+    return address.replace(/,{2,}/g, ',').replace(/,/g, ', ').replace(/,$/, '');
+}
