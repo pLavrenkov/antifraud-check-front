@@ -308,6 +308,7 @@ function CompanyDetails({ cardData, token, handleLoading, onCardClick }) {
                                         position={item.position}
                                         cnt={item.cnt}
                                         onCardClick={onCardClick}
+                                        listtype={'руководство'}
                                     />
                                 }) :
                                 <p>сведения отсутствуют или скрыты</p>
@@ -329,6 +330,7 @@ function CompanyDetails({ cardData, token, handleLoading, onCardClick }) {
                                         name={item.name}
                                         cnt={item.cnt}
                                         onCardClick={onCardClick}
+                                        listtype={'учредители'}
                                     />
                                 }) :
                                 <p>сведения отсутствуют или скрыты</p>

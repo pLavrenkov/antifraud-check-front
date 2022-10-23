@@ -267,6 +267,36 @@ function TransparentBuisness() {
                 :
                 <p className="trans-buisness__nth-found">{request && 'Дисквалифицированные лица: результаты не найдены'}</p>
             }
+            {resAllData.ogrfl &&
+                resAllData.ogrfl.rowCount > 0 ?
+                <CardList
+                    data={resAllData.ogrfl.data}
+                    hasMore={resAllData.ogrfl.hasMore}
+                    page={resAllData.ogrfl.page}
+                    pageSize={resAllData.ogrfl.pageSize}
+                    rowCount={resAllData.ogrfl.rowCount}
+                    listname={'Физические лица. Badwill'}
+                    request={request}
+                    onUlCardClick={handleOnCardClick}
+                />
+                :
+                <p className="trans-buisness__nth-found">{request && 'Физические лица с badwill не найдены'}</p>
+            }
+            {resAllData.docul &&
+                resAllData.docul.rowCount > 0 ?
+                <CardList
+                    data={resAllData.docul.data}
+                    hasMore={resAllData.docul.hasMore}
+                    page={resAllData.docul.page}
+                    pageSize={resAllData.docul.pageSize}
+                    rowCount={resAllData.docul.rowCount}
+                    listname={'Заявления в ЕГРЮЛ по юридическим лицам'}
+                    request={request}
+                    onUlCardClick={handleOnCardClick}
+                />
+                :
+                <p className="trans-buisness__nth-found">{request && 'Юридические лица, поданные на регистрацию, не найдены'}</p>
+            }
             <CardPopup isOpen={isPopupOpen} onClose={handlePopupClosed} cardData={cardData} token={cardToken} handleLoading={setIsLoaderOpen}>
                 {cardData.type && cardData.type === 1 && <CompanyDetails cardData={cardData} token={cardToken} handleLoading={setIsLoaderOpen} onCardClick={handleOnCardClick} />}
                 {cardData.type && cardData.type === 2 && <IpDetails cardData={cardData} token={cardToken} handleLoading={setIsLoaderOpen} onCardClick={handleOnCardClick} />}

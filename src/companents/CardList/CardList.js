@@ -10,6 +10,8 @@ import CardShh from "../Card/CardShh";
 import CardDisqualify from "../Card/CardDisqualify";
 import CardMasAddress from "../Card/CardMasAddress";
 import CardAddress from "../Card/CardAddress";
+import CardFlBadwill from "../Card/CardFLBadwill";
+import CardApplication from "../Card/CardApplication";
 
 function CardList({ data, hasMore, page, pageSize, rowCount, listname, request, onUlCardClick, onCardClick }) {
     const [cards, setCards] = useState(data);
@@ -121,6 +123,38 @@ function CardList({ data, hasMore, page, pageSize, rowCount, listname, request, 
                     setMorePages(data.addr.hasMore);
                     setPageNumber(data.addr.page);
                     setCardsPageSet(data.addr.pageSize);
+                    setIsLoading(false);
+                })
+                .catch((err) => {
+                    setError(`Произошла ошибка: ${err.message}`)
+                    setPageNumber(previosPage);
+                    setIsLoading(false);
+                })
+        } else if (listname === "Физические лица. Badwill") {
+            requestAll = new URLSearchParams({ ...constants.searchTrBuisAllRequest, queryAll: req, queryOgr: req, page: pageNumber, mode: 'search-ogr' });
+            Api.getAll(requestAll.toString())
+                .then((data) => {
+                    console.log(data.ogrfl);
+                    setCards(data.ogrfl.data);
+                    setMorePages(data.ogrfl.hasMore);
+                    setPageNumber(data.ogrfl.page);
+                    setCardsPageSet(data.ogrfl.pageSize);
+                    setIsLoading(false);
+                })
+                .catch((err) => {
+                    setError(`Произошла ошибка: ${err.message}`)
+                    setPageNumber(previosPage);
+                    setIsLoading(false);
+                })
+        } else if (listname === "Заявления в ЕГРЮЛ по юридическим лицам") {
+            requestAll = new URLSearchParams({ ...constants.searchTrBuisAllRequest, queryAll: req, nameUlDoc: req, nameIpDoc: req, page: pageNumber, mode: 'search-doc' });
+            Api.getAll(requestAll.toString())
+                .then((data) => {
+                    console.log(data.docul);
+                    setCards(data.docul.data);
+                    setMorePages(data.docul.hasMore);
+                    setPageNumber(data.docul.page);
+                    setCardsPageSet(data.docul.pageSize);
                     setIsLoading(false);
                 })
                 .catch((err) => {
@@ -243,6 +277,7 @@ function CardList({ data, hasMore, page, pageSize, rowCount, listname, request, 
                             type={item.type}
                             cnt={item.ul_cnt}
                             listname={listname}
+                            listtype={'учредители'}
                             onCardClick={onUlCardClick}
                         />
                     )
@@ -271,6 +306,36 @@ function CardList({ data, hasMore, page, pageSize, rowCount, listname, request, 
                             token={item.token}
                             address={item.address}
                             numberentities={item.masscnt}
+                            listname={listname}
+                            onCardClick={onUlCardClick}
+                        />
+                    )
+                })
+                }
+                {listname === "Физические лица. Badwill" && cards.map((item) => {
+                    return (
+                        <CardFlBadwill
+                            key={item.token}
+                            data={item}
+                            name={item.ogr_name}
+                            inn={item.ogr_inn}
+                            token={item.token}
+                            position={item.rel}
+                            company={item.ul_name}
+                            listname={listname}
+                            onCardClick={onUlCardClick}
+                        />
+                    )
+                })
+                }
+                {listname === "Заявления в ЕГРЮЛ по юридическим лицам" && cards.map((item) => {
+                    return (
+                        <CardApplication
+                            key={item.in_number}
+                            data={item}
+                            name={item.name}
+                            dateApplication={item.date_post}
+                            form={item.form}
                             listname={listname}
                             onCardClick={onUlCardClick}
                         />
