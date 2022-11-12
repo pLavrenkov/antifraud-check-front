@@ -265,7 +265,7 @@ function TransparentBuisness() {
                     onUlCardClick={handleOnCardClick}
                 />
                 :
-                <p className="trans-buisness__nth-found">{request && 'Дисквалифицированные лица: результаты не найдены'}</p>
+                <p className="trans-buisness__nth-found">{request && 'Адреса регистрации: результаты не найдены'}</p>
             }
             {resAllData.ogrfl &&
                 resAllData.ogrfl.rowCount > 0 ?

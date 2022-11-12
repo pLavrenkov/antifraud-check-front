@@ -2,6 +2,7 @@ function CardFlBadwill({ inn, token, name, position, company, onCardClick }) {
     const onClick = () => {
         onCardClick(token, inn, name, false);
     }
+    console.log(token);
 
     return (
         <section className="card card_type_detailcard" onClick={onClick}>

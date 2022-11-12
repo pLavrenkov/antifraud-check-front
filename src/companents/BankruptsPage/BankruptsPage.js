@@ -1,21 +1,23 @@
 import { useState } from "react";
 import SearchForm from "../SearchForm/SearchForm";
+import * as Api from "../../utils/bankruptsApi";
 
 function BancruptsPage() {
-    const [request, setRequest] = useState('петров');
+    const [request, setRequest] = useState(sessionStorage.getItem("bankruptsreq") ? sessionStorage.getItem("bankruptsreq") : '');
     const [serverMessage, setServerMessage] = useState('');
     const [isLoaderOpen, setIsLoaderOpen] = useState(false);
 
     const handleRequest = (req) => {
         setServerMessage('');
+        Api.BankruptsPrsApi(req)
+        .then(data => console.log(data))
         const searchString = new URLSearchParams(req);
-        
     }
 
     const handleSubmit = (data) => {
         setRequest(data.search);
         setIsLoaderOpen(true);
-        sessionStorage.setItem("trbuisreq", data.search);
+        sessionStorage.setItem("bankruptsreq", data.search);
         setTimeout(() => handleRequest(data.search), 2000);
     }
 
