@@ -10,6 +10,9 @@ function Footer() {
                     <li>
                         <a href="https://pb.nalog.ru/" target="_blank" rel="noreferrer" className="footer__link">Прозрачный бизнес</a>
                     </li>
+                    <li>
+                        <a href="https://bankrot.fedresurs.ru//" target="_blank" rel="noreferrer" className="footer__link">Банкроты</a>
+                    </li>
                 </ul>
             </div>
         </footer>

@@ -12,6 +12,9 @@ function Navigation() {
                 <Link to={'/buisness'} className={location.pathname === '/buisness' ? "nav__link nav__link_type_active" : "nav__link"}>
                     <span className="nav__title">Прозрачный бизнес</span>
                 </Link>
+                <Link to={'/bankrupts'} className={location.pathname === '/bankrupts' ? "nav__link nav__link_type_active" : "nav__link"}>
+                    <span className="nav__title">Банкроты</span>
+                </Link>
                 <Link to={'/inn'} className={location.pathname === '/inn' ? "nav__link nav__link_type_active" : "nav__link"}>
                     <span className="nav__title">Узнать ИНН</span>
                 </Link>

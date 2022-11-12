@@ -6,6 +6,7 @@ import Header from '../Header/Header';
 import InnPage from '../InnPage/InnPage';
 import MainPage from '../MainPage/MainPage';
 import TransparentBuisness from '../TransparentBuisness/TransparentBuisness';
+import BancruptsPage from '../BankruptsPage/BankruptsPage';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
             <Route path='/' element={<MainPage />} />
             <Route path='/inn' element={<InnPage />} />
             <Route path='/buisness' element={<TransparentBuisness />} />
+            <Route path='/bankrupts' element={<BancruptsPage />} />
           </Routes>
         </main>
         <Footer />
