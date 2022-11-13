@@ -77,3 +77,20 @@ export const BankruptsCmpApi = (search, offset, limit, isActive, region) => {
             }
         })
 }
+
+export const BankruptsRegionApi = () => {
+    return fetch(constants.urlBankruptsRegions, {
+        method: 'GET',
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+            "Accept": "*/*",
+        },
+    })
+        .then((res) => {
+            if (res.ok) {
+                return res.json();
+            } else {
+                throw new Error('запрос на банкротство обработан с ошибкой');
+            }
+        })
+}

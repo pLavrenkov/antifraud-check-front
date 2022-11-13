@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SearchForm from "../SearchForm/SearchForm";
 import LoaderAnimation from "../LoaderAnimation/LoaderAnimation";
 import * as Api from "../../utils/bankruptsApi";
@@ -14,6 +14,7 @@ function BancruptsPage() {
     const [limit, setLimit] = useState(12);
     const [isActive, setIsActive] = useState(null);
     const [region, setRegion] = useState('All');
+    const [regionList, setRegionList] = useState(sessionStorage.getItem("regionlist") ? JSON.parse(sessionStorage.getItem("regionlist")) : {});
 
 
     const handleRequest = (req, offset, limit, isActive, region) => {
@@ -41,6 +42,23 @@ function BancruptsPage() {
         sessionStorage.setItem("bankruptsreq", data.search);
         setTimeout(() => handleRequest(data.search, offset, limit, isActive, region), 2000);
     }
+
+    useEffect(() => {
+        if (JSON.parse(sessionStorage.getItem("regionlist"))) {
+            setRegionList(JSON.parse(sessionStorage.getItem("regionlist")));
+        } else {
+            Api.BankruptsRegionApi()
+                .then((data) => {
+                    console.log(data);
+                    setRegionList(data);
+                    sessionStorage.setItem("regionlist", JSON.stringify(data));
+                })
+                .catch((err) => {
+                    setServerMessage(`Произошла ошибка: ${err.message}`);
+                    console.log(err);
+                })
+        }
+    }, [])
 
     return (
         <section className="bankruptspage">

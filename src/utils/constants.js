@@ -80,6 +80,7 @@ export const urlBankruptsEntity = 'https://bankrot.fedresurs.ru/backend/prsnbank
 export const urlBankruptsPerson = 'https://bankrot.fedresurs.ru/backend/cmpbankrupts';
 export const urlBankruptsPrs = 'http://localhost:3002/bankrupts/prsnbankrupts';
 export const urlBankruptsCmp = 'http://localhost:3002/bankrupts/cmpbankrupts'
+export const urlBankruptsRegions = 'http://localhost:3002/bankrupts/regions'
 
 // форматирование адреса из ЕГРЮЛ
 export const formatAddress = (address) => {
