@@ -28,7 +28,7 @@ export const BankruptsApi = (search, url) => {
         })
 }
 
-export const BankruptsPrsApi = (search) => {
+export const BankruptsPrsApi = (search, offset, limit, isActive, region) => {
     console.log(search);
     const req = new URLSearchParams(search).toString();
     console.log(req);
@@ -38,11 +38,39 @@ export const BankruptsPrsApi = (search) => {
             "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
             "Accept": "*/*",
             "SearchString": req,
+            "Offset": offset,
+            "Limit": limit,
+            "IsActiveLegalCase": isActive,
+            "RegionId": region,
         },
     })
         .then((res) => {
             if (res.ok) {
-                console.log(res);
+                return res.json();
+            } else {
+                throw new Error('запрос на банкротство обработан с ошибкой');
+            }
+        })
+}
+
+export const BankruptsCmpApi = (search, offset, limit, isActive, region) => {
+    console.log(search);
+    const req = new URLSearchParams(search).toString();
+    console.log(req);
+    return fetch(constants.urlBankruptsCmp, {
+        method: 'GET',
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+            "Accept": "*/*",
+            "SearchString": req,
+            "Offset": offset,
+            "Limit": limit,
+            "IsActiveLegalCase": isActive,
+            "RegionId": region,
+        },
+    })
+        .then((res) => {
+            if (res.ok) {
                 return res.json();
             } else {
                 throw new Error('запрос на банкротство обработан с ошибкой');
