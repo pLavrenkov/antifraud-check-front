@@ -26,6 +26,7 @@
 
 /*импорт компанентов "Банкроты"*/
 @import url(./companents/BankruptsPage/BankruptsPage.css);
+@import url(./companents/SearchFilter/SearchFilter.css);
 
 /*импорт компонента Form*/ 
 @import url(./companents/Form/Form.css);

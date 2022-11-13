@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import SearchForm from "../SearchForm/SearchForm";
 import LoaderAnimation from "../LoaderAnimation/LoaderAnimation";
 import * as Api from "../../utils/bankruptsApi";
+import SearchFilter from "../SearchFilter/SearchFilter";
 
 function BancruptsPage() {
     const [request, setRequest] = useState(sessionStorage.getItem("bankruptsreq") ? sessionStorage.getItem("bankruptsreq") : '');
@@ -58,12 +59,23 @@ function BancruptsPage() {
                     console.log(err);
                 })
         }
-    }, [])
+    }, []);
+
+    const handleRegionSubmit = (region) => {
+        setRegion(region);
+    }
+
+    const handleCaseTypeSubmit = (type) => {
+        setIsActive(type);
+    }
+
+    console.log(`регион ${region}, тип дела ${isActive}`)
 
     return (
         <section className="bankruptspage">
             <h1 className="bankruptspage__title">БАНКРОТЫ</h1>
             <SearchForm onSubmit={handleSubmit} request={request} message={serverMessage} />
+            <SearchFilter onRegion={handleRegionSubmit} onCaseType={handleCaseTypeSubmit} regionList={regionList} />
             <LoaderAnimation isOpen={isLoaderOpen} />
         </section>
     )
