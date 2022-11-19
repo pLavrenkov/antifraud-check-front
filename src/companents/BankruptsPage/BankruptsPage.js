@@ -3,6 +3,7 @@ import SearchForm from "../SearchForm/SearchForm";
 import LoaderAnimation from "../LoaderAnimation/LoaderAnimation";
 import * as Api from "../../utils/bankruptsApi";
 import SearchFilter from "../SearchFilter/SearchFilter";
+import CardListBankrupts from "../CardList/CardListBankrupts";
 
 function BancruptsPage() {
     const [request, setRequest] = useState(sessionStorage.getItem("bankruptsreq") ? sessionStorage.getItem("bankruptsreq") : '');
@@ -13,8 +14,8 @@ function BancruptsPage() {
 
     const [offset, setOffset] = useState(0);
     const [limit, setLimit] = useState(12);
-    const [isActive, setIsActive] = useState(null);
-    const [region, setRegion] = useState('All');
+    const [isActive, setIsActive] = useState(sessionStorage.getItem("type") ? sessionStorage.getItem("type") : null);
+    const [region, setRegion] = useState(sessionStorage.getItem("region") ? sessionStorage.getItem("region") : 'All');
     const [regionList, setRegionList] = useState(sessionStorage.getItem("regionlist") ? JSON.parse(sessionStorage.getItem("regionlist")) : {});
 
 
@@ -50,7 +51,6 @@ function BancruptsPage() {
         } else {
             Api.BankruptsRegionApi()
                 .then((data) => {
-                    console.log(data);
                     setRegionList(data);
                     sessionStorage.setItem("regionlist", JSON.stringify(data));
                 })
@@ -59,23 +59,57 @@ function BancruptsPage() {
                     console.log(err);
                 })
         }
+        sessionStorage.getItem("bankruptsreq") && handleRequest(request, offset, limit, isActive, region);
+
     }, []);
 
     const handleRegionSubmit = (region) => {
         setRegion(region);
+        sessionStorage.setItem("region", region);
+    }
+
+    const handleResetRegion = () => {
+        setRegion("All");
+        sessionStorage.setItem("region", 'All');
     }
 
     const handleCaseTypeSubmit = (type) => {
         setIsActive(type);
+        sessionStorage.setItem("type", type);
+    }
+
+    const handleResetType = () => {
+        setIsActive(null);
+        sessionStorage.setItem("type", null);
     }
 
     console.log(`регион ${region}, тип дела ${isActive}`)
+    console.log(cmpBankrupts);
 
     return (
         <section className="bankruptspage">
             <h1 className="bankruptspage__title">БАНКРОТЫ</h1>
             <SearchForm onSubmit={handleSubmit} request={request} message={serverMessage} />
-            <SearchFilter onRegion={handleRegionSubmit} onCaseType={handleCaseTypeSubmit} regionList={regionList} />
+            <SearchFilter
+                onRegion={handleRegionSubmit}
+                onCaseType={handleCaseTypeSubmit}
+                regionList={regionList}
+                resetType={handleResetType}
+                resetRegion={handleResetRegion}
+                type={isActive}
+            />
+            {
+                cmpBankrupts.pageData && cmpBankrupts.pageData.length > 0 ?
+                    <CardListBankrupts
+                        listname={"Юридические лица и предприниматели"}
+                        cards={cmpBankrupts.pageData}
+                        total={cmpBankrupts.total}
+                        offset={offset}
+                        limit={limit}
+                    />
+                    :
+                    <p className="trans-buisness__nth-found">{request && 'Юридические лица и предприниматели: результаты не найдены'}</p>
+            }
             <LoaderAnimation isOpen={isLoaderOpen} />
         </section>
     )

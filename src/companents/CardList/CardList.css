@@ -21,7 +21,7 @@
 .cardlist__btn-box {
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr auto 1fr;
 }
 
 .cardlist__btn {
@@ -48,8 +48,13 @@
     justify-self: flex-start;
 }
 
-.cardlist__btn_type_next {
+.cardlist__btn_type_middle {
     grid-column: 2;
+    justify-self: center;
+}
+
+.cardlist__btn_type_next {
+    grid-column: 3;
     justify-self: flex-end;
 }
 
