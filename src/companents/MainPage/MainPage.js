@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import fnsImageGrey from "../../images/fns_grey.svg";
+import fedresursImage from "../../images/fedresurs.png"
 import fnsImageBlue from "../../images/fns_blue.svg";
 
 function MainPage() {
@@ -18,10 +19,17 @@ function MainPage() {
                 <Link to={'/buisness'} className="main-page__link"><span className="main-page__span">перейти</span> &#10230;</Link>
             </article>
             <article className="main-page__article main-page__article_type_imageleft">
-                <h2 className="main-psge__title main-psge__title_type_imageleft">Узнать ИНН</h2>
-                <h3 className="main-page__subtitle main-page__subtitle_type_imageleft">данные ФНС</h3>
+                <h2 className="main-psge__title main-psge__title_type_imageleft">Банкроты</h2>
+                <h3 className="main-page__subtitle main-page__subtitle_type_imageleft">данные Единого федерального ресурса</h3>
                 <p className="main-page__text main-psge__text_type_imageleft">Сервис предоставляет возможность...</p>
-                <img src={fnsImageBlue} alt="Лого ФНС" className="main-page__image main-page__image_type_imageleft" />
+                <img src={fedresursImage} alt="Лого ФНС" className="main-page__image main-page__image_type_imageleft" />
+                <Link to={'/bankrupts'} className="main-page__link"><span className="main-page__span">перейти</span> &#10230;</Link>
+            </article>
+            <article className="main-page__article">
+                <h2 className="main-psge__title">Узнать ИНН</h2>
+                <h3 className="main-page__subtitle">данные ФНС</h3>
+                <p className="main-page__text">Сервис предоставляет возможность...</p>
+                <img src={fnsImageBlue} alt="Лого ФНС" className="main-page__image" />
                 <Link to={'/inn'} className="main-page__link"><span className="main-page__span">перейти</span> &#10230;</Link>
             </article>
         </section>
