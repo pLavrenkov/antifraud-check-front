@@ -5,6 +5,7 @@
     justify-content: space-between;
     align-items: center;
     height: 100%;
+    padding-bottom: 50px;
 }
 
 .searchfilter__formset {
@@ -17,7 +18,7 @@
 .searchfilter__label {
     margin-right: 10px;
     color: #6e6e6e;
-    font-size: 14px;
+    font-size: 12px;
 }
 
 .searchfilter__reset-btn {
@@ -44,7 +45,7 @@
     color: #D3D3D3;
     border: none;
     border-bottom: #6e6e6e solid 2px;
-    font-size: 14px;
+    font-size: 12px;
 }
 
 .searchfilter__option:checked {

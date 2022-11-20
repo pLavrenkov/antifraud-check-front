@@ -53,6 +53,11 @@
     justify-self: center;
 }
 
+.cardlist__btn_type_middle:hover {
+    cursor: default;
+    opacity: .7;
+}
+
 .cardlist__btn_type_next {
     grid-column: 3;
     justify-self: flex-end;
@@ -86,5 +91,27 @@
 
     .cardlist__title {
         max-width: 295px;
+    }
+
+    .cardlist__btn-box {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(3, 1fr);
+    }
+
+    .cardlist__btn_type_back {
+        grid-column: 1;
+        grid-row: 1;
+        justify-self: center;
+    }
+
+    .cardlist__btn_type_middle {
+        grid-column: 1;
+        grid-row: 2;
+    }
+
+    .cardlist__btn_type_next {
+        grid-column: 1;
+        grid-row: 3;
+        justify-self: center;
     }
 }

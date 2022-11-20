@@ -1,11 +1,11 @@
 import * as constants from '../../utils/constants';
 
-function CardBankruptsCmp({ name, inn, region, date, status, data, lastcase }) {
+function CardBankruptsCmp({ name, inn, region, status, data}) {
 
     const handleClick = () => {
 
     }
-console.log(status);
+console.log(data);
     return (
         <section onClick={handleClick} className="card">
             <h3 className={data.isActive ? "card__title" : "card__title card__title_type_nonactive"}>{name}</h3>
@@ -13,11 +13,11 @@ console.log(status);
             <p className="card__field card__field_type_nowrap card__field_type_marcked card__field_type_region">{region}</p>
             <p className="card__field card__field_type_nowrap card__field_type_marcked card__field_type_date">{
                 `${
-                    constants.formatDate(data.statusUpdateDate) ? constants.formatDate(data.statusUpdateDate) : constants.formatDate(data.lastLegalCase.status.updateDate)
+                    data.statusUpdateDate ? constants.formatDate(data.statusUpdateDate) : data.lastLegalCase.status && data.lastLegalCase.status.updateDate ? constants.formatDate(data.lastLegalCase.status.updateDate) : ''
                 }${
-                    (constants.formatDate(data.statusUpdateDate) || constants.formatDate(data.lastLegalCase.status.updateDate)) && '. '
+                    (data.statusUpdateDate || (data.lastLegalCase.status && data.lastLegalCase.status.updateDate)) && '. '
                 }${
-                    data.status ? data.status : data.lastLegalCase.status.description
+                    data.status ? data.status : data.lastLegalCase.status && data.lastLegalCase.status.description ? data.lastLegalCase.status.description : ''
                 }`
             }</p>
         </section>

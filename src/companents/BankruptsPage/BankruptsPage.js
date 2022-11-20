@@ -60,7 +60,6 @@ function BancruptsPage() {
                 })
         }
         sessionStorage.getItem("bankruptsreq") && handleRequest(request, offset, limit, isActive, region);
-
     }, []);
 
     const handleRegionSubmit = (region) => {
@@ -89,7 +88,6 @@ function BancruptsPage() {
     return (
         <section className="bankruptspage">
             <h1 className="bankruptspage__title">БАНКРОТЫ</h1>
-            <SearchForm onSubmit={handleSubmit} request={request} message={serverMessage} />
             <SearchFilter
                 onRegion={handleRegionSubmit}
                 onCaseType={handleCaseTypeSubmit}
@@ -97,7 +95,10 @@ function BancruptsPage() {
                 resetType={handleResetType}
                 resetRegion={handleResetRegion}
                 type={isActive}
+
             />
+            <SearchForm onSubmit={handleSubmit} request={request} message={serverMessage} />
+
             {
                 cmpBankrupts.pageData && cmpBankrupts.pageData.length > 0 ?
                     <CardListBankrupts
@@ -106,9 +107,27 @@ function BancruptsPage() {
                         total={cmpBankrupts.total}
                         offset={offset}
                         limit={limit}
+                        request={request}
+                        region={region}
+                        typecase={isActive}
                     />
                     :
                     <p className="trans-buisness__nth-found">{request && 'Юридические лица и предприниматели: результаты не найдены'}</p>
+            }
+            {
+                prsBankrupts.pageData && prsBankrupts.pageData.length > 0 ?
+                    <CardListBankrupts
+                        listname={"Физические лица"}
+                        cards={prsBankrupts.pageData}
+                        total={prsBankrupts.total}
+                        offset={offset}
+                        limit={limit}
+                        request={request}
+                        region={region}
+                        typecase={isActive}
+                    />
+                    :
+                    <p className="trans-buisness__nth-found">{request && 'Физические лица: результаты не найдены'}</p>
             }
             <LoaderAnimation isOpen={isLoaderOpen} />
         </section>
