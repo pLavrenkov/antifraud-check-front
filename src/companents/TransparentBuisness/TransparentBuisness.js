@@ -78,9 +78,11 @@ function TransparentBuisness() {
                 handleRequest(sessionStorage.getItem("trbuisreq"));
             console.log("сработал sessionStorage");
             console.log(!sessionStorage.getItem("trbuisreq").includes("окружение"));
-        } else {
+        } else  if (localStorage.getItem("reqData")) {
             setResAllData(JSON.parse(localStorage.getItem("reqData")));
             console.log("сработал localStorage");
+        } else {
+            setResAllData({});
         }
     }, [])
 

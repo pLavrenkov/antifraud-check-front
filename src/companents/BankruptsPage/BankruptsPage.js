@@ -60,6 +60,7 @@ function BancruptsPage() {
                 })
         }
         sessionStorage.getItem("bankruptsreq") && handleRequest(request, offset, limit, isActive, region);
+        Api.BankruptsCookieApi();
     }, []);
 
     const handleRegionSubmit = (region) => {

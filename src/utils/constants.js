@@ -79,8 +79,9 @@ export const urlBankrupts = 'https://bankrot.fedresurs.ru/bankrupts';
 export const urlBankruptsEntity = 'https://bankrot.fedresurs.ru/backend/prsnbankrupts';
 export const urlBankruptsPerson = 'https://bankrot.fedresurs.ru/backend/cmpbankrupts';
 export const urlBankruptsPrs = 'http://localhost:3002/bankrupts/prsnbankrupts';
-export const urlBankruptsCmp = 'http://localhost:3002/bankrupts/cmpbankrupts'
-export const urlBankruptsRegions = 'http://localhost:3002/bankrupts/regions'
+export const urlBankruptsCmp = 'http://localhost:3002/bankrupts/cmpbankrupts';
+export const urlBankruptsRegions = 'http://localhost:3002/bankrupts/regions';
+export const uslBankruptsCookie = 'https://localhost:3003/bankrupts/cookie';
 
 // форматирование адреса из ЕГРЮЛ
 export const formatAddress = (address) => {

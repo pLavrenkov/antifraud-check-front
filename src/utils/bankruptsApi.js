@@ -94,3 +94,21 @@ export const BankruptsRegionApi = () => {
             }
         })
 }
+
+export const BankruptsCookieApi = () => {
+    return fetch(constants.uslBankruptsCookie, {
+        method: 'GET',
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+            "Accept": "*/*",
+        },
+    })
+        .then((res) => {
+            if (res.ok) {
+                return res.json();
+            } else {
+                throw new Error('запрос на банкротство обработан с ошибкой');
+            }
+        })
+}
+
